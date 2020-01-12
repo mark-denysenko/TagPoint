@@ -12,6 +12,10 @@ const routes: Routes = [
             {
                 path: "",
                 loadChildren: () => import("./views/login/login.module").then((x) => x.AppLoginModule)
+            },
+            {
+                path: "register",
+                loadChildren: () => import("./views/register/register.module").then((x) => x.AppRegisterModule)
             }
         ]
     },

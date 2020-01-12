@@ -31,6 +31,16 @@ export class AppUserService {
         return this.http.get<UserModel>(`Users/${id}`);
     }
 
+    register(signInModel: SignInModel): void {
+        this.http
+            .post<TokenModel>(`Users/SignIn`, signInModel)
+            .subscribe((tokenModel) => {
+                if (!tokenModel || !tokenModel.token) { return; }
+                this.appTokenService.set(tokenModel.token);
+                this.router.navigate(["/main/home"]);
+            });
+    }
+
     signIn(signInModel: SignInModel): void {
         this.http
             .post<TokenModel>(`Users/SignIn`, signInModel)

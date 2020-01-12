@@ -1,3 +1,11 @@
+@import 'variables';
+
+// @import "uik";
+// @import "../node_modules/uikit/src/scss/variables-theme.scss";
+// @import "../node_modules/uikit/src/scss/mixins-theme.scss";
+// @import "../node_modules/uikit/src/scss/uikit-theme.scss";
+// @import "../node_modules/uikit/src/scss/uikit.scss";
+
 app-layout, app-layout-main {
     display: flex;
     flex-direction: column;
@@ -5,17 +13,17 @@ app-layout, app-layout-main {
 }
 
 app-header {
-    background-color: #0A69b7;
+    background-color: $main-theme-color;
     padding: 1rem;
 }
 
 app-header * {
-    color: #FFF;
+    color: $main-background-color;
     margin: 0;
 }
 
 main {
-    background-color: #FFF;
+    background-color: $main-background-color;
     flex: auto;
     padding: 1rem !important;
 }

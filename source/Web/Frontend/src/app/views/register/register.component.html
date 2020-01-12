@@ -10,8 +10,7 @@
                 <app-input-password formControlName="password" text="Password"></app-input-password>
             </div>
             <div class="uk-margin uk-text-center">
-                <app-button text="Sign in" [disabled]="form.invalid" (click)="signIn()"></app-button>
-                <app-button text="Register" routerLink="/register" class="uk-margin-left"></app-button>
+                <app-button text="Register" [disabled]="form.invalid" (click)="register()"></app-button>
             </div>
         </fieldset>
     </form>

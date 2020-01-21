@@ -1,7 +1,7 @@
 
 // 1. Your custom variables and variable overwrites.
 @import 'variables';
-//@import 'theme';
+@import 'theme';
 
 // 2. Import default variables and available mixins.
 @import "../../node_modules/uikit/src/scss/variables-theme.scss";

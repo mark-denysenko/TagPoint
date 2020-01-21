@@ -3,7 +3,13 @@ import { Component, OnInit } from '@angular/core';
 interface Location {
   latitude: number;
   longitude: number;
+  zoom: number;
   mapType?: string;
+}
+
+interface Marker {
+  latitude: number;
+  longitude: number;
 }
 
 @Component({
@@ -13,14 +19,16 @@ interface Location {
 })
 export class CustomMapComponent implements OnInit {
   public location?: Location;
+  public markers: Marker[] = [{ latitude: 50.4547,  longitude: 30.5238 }];
 
   constructor() { }
 
   ngOnInit() {
     this.location = {
-      latitude: -28.68352,
-      longitude: -147.20785,
-      mapType: "satelite"
+      latitude: 50.4547,
+      longitude: 30.5238,
+      mapType: "satelite",
+      zoom: 10
     };
   }
 

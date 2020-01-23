@@ -1,7 +1,7 @@
 using DotNetCore.Extensions;
 using DotNetCore.Objects;
 using DotNetCore.Security;
-using DotNetCoreArchitecture.CrossCutting.Resources;
+using CrossCutting.Resources;
 using DotNetCoreArchitecture.Model;
 using System;
 using System.Collections.Generic;

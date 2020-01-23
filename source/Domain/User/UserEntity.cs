@@ -1,5 +1,6 @@
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Model;
+using Model;
 using System.Collections.Generic;
 
 namespace DotNetCoreArchitecture.Domain
@@ -13,7 +14,10 @@ namespace DotNetCoreArchitecture.Domain
             Email email,
             SignIn signIn,
             Roles roles,
-            Status status
+            Status status,
+            Gender gender,
+            string about,
+            string phoneNumber
         )
         {
             Id = id;
@@ -22,6 +26,9 @@ namespace DotNetCoreArchitecture.Domain
             SignIn = signIn;
             Roles = roles;
             Status = status;
+            Gender = gender;
+            About = about;
+            PhoneNumber = phoneNumber;
         }
 
         public UserEntity(long id)
@@ -30,6 +37,7 @@ namespace DotNetCoreArchitecture.Domain
         }
 
         public FullName FullName { get; private set; }
+        public Gender? Gender { get; private set; }
 
         public Email Email { get; private set; }
 
@@ -38,6 +46,8 @@ namespace DotNetCoreArchitecture.Domain
         public Roles Roles { get; private set; }
 
         public Status Status { get; private set; }
+        public string About { get; private set; }
+        public string PhoneNumber { get; private set; }
 
         public ICollection<UserLogEntity> UsersLogs { get; private set; }
 

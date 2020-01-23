@@ -19,7 +19,7 @@ namespace DotNetCoreArchitecture.Web
             _userApplicationService = userApplicationService;
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> AddAsync(AddUserModel addUserModel)
         {
             return Result(await _userApplicationService.AddAsync(addUserModel));

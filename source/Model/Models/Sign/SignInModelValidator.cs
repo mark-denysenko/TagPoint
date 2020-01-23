@@ -1,5 +1,5 @@
 using DotNetCore.Validation;
-using DotNetCoreArchitecture.CrossCutting.Resources;
+using CrossCutting.Resources;
 using FluentValidation;
 
 namespace DotNetCoreArchitecture.Model

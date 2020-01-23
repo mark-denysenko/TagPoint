@@ -10,8 +10,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class AppRegisterComponent implements OnInit {
 
   form = this.formBuilder.group({
+    username: ["Username", Validators.required],
     login: ["admin", Validators.required],
-    password: ["admin", Validators.required]
+    password: ["admin", Validators.required],
+    email: ["admin@email.com", Validators.required],
+    phone: ["", Validators.pattern('')],
+    gender: [null],
+    country: [],
+
 });
 
   constructor(
@@ -22,7 +28,7 @@ export class AppRegisterComponent implements OnInit {
   }
 
   public register(): void {
-    this.appUserService.signIn(this.form.value);
+    this.appUserService.register(this.form.value);
   }
 
 }

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { AppTokenService } from "../core/services/token.service";
-import { SignInModel } from "../models/signIn.model";
+import { SignInModel, RegisterModel } from "../models/signIn.model";
 import { TokenModel } from "../models/token.model";
 import { AddUserModel } from "../models/user/add.user.model";
 import { UpdateUserModel } from "../models/user/update.user.model";
@@ -31,9 +31,9 @@ export class AppUserService {
         return this.http.get<UserModel>(`Users/${id}`);
     }
 
-    register(signInModel: SignInModel): void {
+    register(signInModel: RegisterModel): void {
         this.http
-            .post<TokenModel>(`Users/SignIn`, signInModel)
+            .post<TokenModel>(`Users/Register`, signInModel)
             .subscribe((tokenModel) => {
                 if (!tokenModel || !tokenModel.token) { return; }
                 this.appTokenService.set(tokenModel.token);

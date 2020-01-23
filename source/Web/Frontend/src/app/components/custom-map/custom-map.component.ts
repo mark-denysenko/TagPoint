@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Location {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-  mapType?: string;
-}
-
 interface Marker {
   latitude: number;
   longitude: number;
@@ -18,18 +11,29 @@ interface Marker {
   styleUrls: ['./custom-map.component.scss']
 })
 export class CustomMapComponent implements OnInit {
-  public location?: Location;
-  public markers: Marker[] = [{ latitude: 50.4547,  longitude: 30.5238 }];
+  public initialPlace?: Marker;
+  public currentMarker?: Marker;
+  public markers: Marker[] = [];
 
   constructor() { }
 
   ngOnInit() {
-    this.location = {
+    this.initialPlace = {
       latitude: 50.4547,
-      longitude: 30.5238,
-      mapType: "satelite",
-      zoom: 10
+      longitude: 30.5238
     };
+
+    this.currentMarker = this.initialPlace;
+    this.markers = [this.initialPlace];
+  }
+
+  public handleMapClick(event: any): void {
+    this.currentMarker = {
+      latitude: event.coords.lat,
+      longitude: event.coords.lng
+    };
+    console.log('event click', event);
+    
   }
 
 }

@@ -27,6 +27,9 @@ namespace DotNetCoreArchitecture.Domain
                     addUserModel.SignIn.Salt
                 ),
                 addUserModel.Roles,
+                default,
+                default,
+                default,
                 default
             );
         }

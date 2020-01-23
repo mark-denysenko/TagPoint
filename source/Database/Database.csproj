@@ -6,7 +6,7 @@
         <PackageReference Include="DotNetCore.EntityFrameworkCore" Version="10.3.0" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Domain\DotNetCoreArchitecture.Domain.csproj" />
-        <ProjectReference Include="..\Model\DotNetCoreArchitecture.Model.csproj" />
+        <ProjectReference Include="..\Domain\Domain.csproj" />
+        <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 </Project>

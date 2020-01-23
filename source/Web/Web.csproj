@@ -8,9 +8,11 @@
     <ItemGroup>
         <PackageReference Include="DotNetCore.AspNetCore" Version="10.3.0" />
         <PackageReference Include="DotNetCore.IoC" Version="10.3.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Application\DotNetCoreArchitecture.Application.csproj" />
-        <ProjectReference Include="..\Database\DotNetCoreArchitecture.Database.csproj" />
+        <ProjectReference Include="..\Application\Application.csproj" />
+        <ProjectReference Include="..\Database\Database.csproj" />
     </ItemGroup>
 </Project>

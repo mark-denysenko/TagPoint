@@ -3,6 +3,9 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Model\DotNetCoreArchitecture.Model.csproj" />
+        <PackageReference Include="DotNetCore.Security" Version="10.3.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
 </Project>

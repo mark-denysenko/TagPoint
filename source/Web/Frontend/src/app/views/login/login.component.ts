@@ -15,6 +15,6 @@ export class AppLoginComponent {
     }
 
     signIn() {
-        this.appUserService.register(this.form.value);
+        this.appUserService.signIn(this.form.value);
     }
 }

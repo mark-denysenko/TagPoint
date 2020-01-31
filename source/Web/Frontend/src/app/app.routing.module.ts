@@ -46,7 +46,7 @@ const routes: Routes = [
             }
         ]
     },
-    { path: "**", redirectTo: "" }
+    { path: "**", redirectTo: "main/map" }
 ];
 
 @NgModule({

@@ -37,7 +37,7 @@ export class AppUserService {
             .subscribe((tokenModel) => {
                 if (!tokenModel || !tokenModel.token) { return; }
                 this.appTokenService.set(tokenModel.token);
-                this.router.navigate(["/main/home"]);
+                this.router.navigate(["/main/map"]);
             });
     }
 
@@ -47,7 +47,7 @@ export class AppUserService {
             .subscribe((tokenModel) => {
                 if (!tokenModel || !tokenModel.token) { return; }
                 this.appTokenService.set(tokenModel.token);
-                this.router.navigate(["/main/home"]);
+                this.router.navigate(["/main/map"]);
             });
     }
 

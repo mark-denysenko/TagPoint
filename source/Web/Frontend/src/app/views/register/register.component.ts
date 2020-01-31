@@ -15,8 +15,8 @@ export class AppRegisterComponent implements OnInit {
     password: ["admin", Validators.required],
     email: ["admin@email.com", Validators.required],
     phone: ["", Validators.pattern('')],
-    gender: [null],
-    country: [],
+    gender: [null, Validators.required],
+    country: [null, Validators.required],
 
 });
 

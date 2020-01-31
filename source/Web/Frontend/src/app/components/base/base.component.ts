@@ -10,6 +10,7 @@ export abstract class AppBaseComponent<TValue> implements ControlValueAccessor {
     @Input() text = "";
 
     private onChange!: (value: TValue) => void;
+    //private onTouch!: (value: TValue) => void;
 
     private VALUE!: TValue;
 
@@ -34,7 +35,15 @@ export abstract class AppBaseComponent<TValue> implements ControlValueAccessor {
     // tslint:disable-next-line: no-empty
     registerOnTouched(_: () => void) { }
 
+    // registerOnTouched(fn: any) {
+    //     this.onTouch = fn;
+    // }
+
     writeValue(value: TValue) {
         this.value = value;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
     }
 }

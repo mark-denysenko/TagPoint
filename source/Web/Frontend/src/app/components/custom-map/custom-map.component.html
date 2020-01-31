@@ -2,11 +2,30 @@
     [latitude]="initialPlace?.latitude" 
     [longitude]="initialPlace?.longitude" 
     [zoom]="10"
+    [backgroundColor]="'black'"
+    (centerChange)="handleMapClick($event)"
     (mapClick)="handleMapClick($event)">
-    <agm-marker id="marker selected" [latitude]="currentMarker?.latitude" [longitude]="currentMarker?.longitude"></agm-marker>
+    <agm-marker
+        [zIndex]="100"
+        [latitude]="currentMarker?.latitude"
+        [longitude]="currentMarker?.longitude">
+    </agm-marker>
     <agm-marker
         *ngFor="let marker of markers"
         [latitude]="marker.latitude"
-        [longitude]="marker.longitude">
+        [longitude]="marker.longitude"
+        [label]="marker.label"
+        [opacity]="0.5"
+        (markerClick)="selectMarker($event, infoWindow)">
+        <agm-info-window #infoWindow>            
+        </agm-info-window>
     </agm-marker>
 </agm-map>
+
+<!-- [iconUrl] ="
+  {
+    url: m.isClicked ? './assets/images/car.svg' : './assets/images/bike.svg',
+    scaledSize: {
+        width: 40,
+        height: 60
+    } -->

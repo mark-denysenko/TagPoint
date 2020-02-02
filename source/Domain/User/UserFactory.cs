@@ -1,4 +1,5 @@
 using DotNetCoreArchitecture.Model;
+using Model;
 
 namespace DotNetCoreArchitecture.Domain
 {
@@ -27,10 +28,10 @@ namespace DotNetCoreArchitecture.Domain
                     addUserModel.SignIn.Salt
                 ),
                 addUserModel.Roles,
-                default,
-                default,
-                default,
-                default
+                Status.Active,
+                Gender.Male,
+                "",
+                ""
             );
         }
     }

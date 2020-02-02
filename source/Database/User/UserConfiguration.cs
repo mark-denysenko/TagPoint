@@ -15,8 +15,9 @@ namespace DotNetCoreArchitecture.Database
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.Roles).IsRequired();
             builder.Property(x => x.Status).IsRequired();
-            builder.Property(x => x.About).HasMaxLength(255);
-            builder.Property(x => x.PhoneNumber).HasMaxLength(20);
+
+            //builder.Property(x => x.About).HasMaxLength(255);
+            //builder.Property(x => x.PhoneNumber).HasMaxLength(20);
 
             builder.OwnsOne(x => x.FullName, y =>
             {

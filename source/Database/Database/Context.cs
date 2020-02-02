@@ -7,6 +7,7 @@ namespace DotNetCoreArchitecture.Database
     {
         public Context(DbContextOptions options) : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

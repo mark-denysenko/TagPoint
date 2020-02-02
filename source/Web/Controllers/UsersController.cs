@@ -19,6 +19,7 @@ namespace DotNetCoreArchitecture.Web
             _userApplicationService = userApplicationService;
         }
 
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> AddAsync(AddUserModel addUserModel)
         {

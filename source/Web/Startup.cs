@@ -19,7 +19,7 @@ namespace DotNetCoreArchitecture.Web
             application.UseResponseCaching();
             application.UseStaticFiles();
             application.UseEndpoints(endpoints => endpoints.MapControllers());
-            application.UseSpa();
+            //application.UseSpa();
         }
 
         public void ConfigureServices(IServiceCollection services)

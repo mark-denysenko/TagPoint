@@ -2,16 +2,16 @@
     <form [formGroup]="form">
         <fieldset class="uk-fieldset">
             <div class="uk-margin">
-                <app-label for="login" text="Login"></app-label>
+                <app-label for="login" text="Логін"></app-label>
                 <app-input-text formControlName="login" text="Login" [autofocus]="true"></app-input-text>
             </div>
             <div class="uk-margin">
-                <app-label for="password" text="Password"></app-label>
+                <app-label for="password" text="Парооль"></app-label>
                 <app-input-password formControlName="password" text="Password"></app-input-password>
             </div>
             <div class="uk-margin uk-text-center">
-                <app-button text="Sign in" [disabled]="form.invalid" (click)="signIn()"></app-button>
-                <app-button text="Register" routerLink="/register" class="uk-margin-left"></app-button>
+                <app-button text="Увійти" [disabled]="form.invalid" (click)="signIn()"></app-button>
+                <app-button text="Зареєструватися" routerLink="/register" class="uk-margin-left"></app-button>
             </div>
         </fieldset>
     </form>

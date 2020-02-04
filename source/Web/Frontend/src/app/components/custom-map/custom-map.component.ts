@@ -38,6 +38,10 @@ export class CustomMapComponent implements OnInit {
     }
   }
 
+  public handleCenterChange(event: any): void {
+    
+  }
+
   public selectMarker(event: any, infoWindow: any): void {
     this.previousIW = this.currentIW;
     this.currentIW = infoWindow;

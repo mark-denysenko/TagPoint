@@ -3,7 +3,7 @@
     [longitude]="initialPlace?.longitude" 
     [zoom]="10"
     [backgroundColor]="'black'"
-    (centerChange)="handleMapClick($event)"
+    (centerChange)="handleCenterChange($event)"
     (mapClick)="handleMapClick($event)">
     <agm-marker
         [zIndex]="100"

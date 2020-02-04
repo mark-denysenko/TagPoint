@@ -1,13 +1,12 @@
 {
-    "profiles": {
-        "Run": {
-            "commandName": "Project",
-            "launchBrowser": true,
-            "applicationUrl": "https://localhost:8090",
-            "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_HTTPS_PORT": "8090"
-            }
-        }
+  "profiles": {
+    "Run": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_HTTPS_PORT": "8090",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:8090"
     }
+  }
 }

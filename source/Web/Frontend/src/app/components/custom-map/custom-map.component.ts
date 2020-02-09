@@ -39,7 +39,7 @@ export class CustomMapComponent implements OnInit {
   }
 
   public handleCenterChange(event: any): void {
-    
+    console.log('event', event);
   }
 
   public selectMarker(event: any, infoWindow: any): void {

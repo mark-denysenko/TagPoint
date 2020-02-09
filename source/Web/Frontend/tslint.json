@@ -1,5 +1,5 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warning",
     "linterOptions": {
         "exclude": [
             "node_modules/**"

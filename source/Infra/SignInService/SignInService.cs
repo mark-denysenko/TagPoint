@@ -26,11 +26,13 @@ namespace DotNetCoreArchitecture.Infra
 
         public SignInModel CreateSignIn(SignInModel signInModel)
         {
-            signInModel.Salt = Guid.NewGuid().ToString();
-
-            signInModel.Password = _hashService.Create(signInModel.Password, signInModel.Salt);
-
-            return signInModel;
+            var salt = Guid.NewGuid().ToString();
+            return new SignInModel
+            {
+                Login = signInModel.Login,
+                Salt = salt,
+                Password = _hashService.Create(signInModel.Password, salt)
+            };
         }
 
         public TokenModel CreateToken(SignedInModel signedInModel)

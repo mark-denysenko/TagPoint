@@ -23,7 +23,9 @@ namespace DotNetCoreArchitecture.Web
         [HttpPost("Register")]
         public async Task<IActionResult> AddAsync(AddUserModel addUserModel)
         {
-            return Result(await _userApplicationService.AddAsync(addUserModel));
+            var signIn = addUserModel.SignIn;
+            await _userApplicationService.AddAsync(addUserModel);
+            return Result(await _userApplicationService.SignInAsync(signIn));
         }
 
         [AuthorizeEnum(Roles.Admin)]

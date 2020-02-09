@@ -136,7 +136,7 @@ namespace DotNetCoreArchitecture.Application
                 return Result.Success();
             }
 
-            userEntity.ChangeFullName(updateUserModel.FullName.Name, updateUserModel.FullName.Surname);
+            userEntity.ChangeUsername(updateUserModel.Username);
 
             userEntity.ChangeEmail(updateUserModel.Email);
 

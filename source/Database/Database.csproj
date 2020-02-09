@@ -9,10 +9,4 @@
         <ProjectReference Include="..\Domain\Domain.csproj" />
         <ProjectReference Include="..\Model\Model.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Country\" />
-      <Folder Include="Point\" />
-      <Folder Include="Vote\" />
-      <Folder Include="Post\" />
-    </ItemGroup>
 </Project>

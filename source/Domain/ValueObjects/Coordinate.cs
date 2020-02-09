@@ -5,6 +5,10 @@ using System.Text;
 
 namespace Domain.ValueObjects
 {
+    /// <summary>
+    /// Should be replaced by special spatial data
+    /// Microsoft.EntityFrameworkCore.SqlServer (PostgreSQL | InMemory)
+    /// </summary>
     public class Coordinate : ValueObject
     {
         public double Altitude { get; set; }

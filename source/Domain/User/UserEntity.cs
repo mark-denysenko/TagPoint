@@ -10,18 +10,18 @@ namespace DotNetCoreArchitecture.Domain
         public UserEntity
         (
             long id,
-            FullName fullName,
+            string username,
             Email email,
             SignIn signIn,
             Roles roles,
             Status status,
             Gender gender,
-            string about,
-            string phoneNumber
+            string phoneNumber,
+            string about = null
         )
         {
             Id = id;
-            FullName = fullName;
+            Username = username;
             Email = email;
             SignIn = signIn;
             Roles = roles;
@@ -36,7 +36,8 @@ namespace DotNetCoreArchitecture.Domain
             Id = id;
         }
 
-        public FullName FullName { get; private set; }
+        public string Username { get; private set; }
+
         public Gender? Gender { get; private set; }
 
         public Email Email { get; private set; }
@@ -62,9 +63,9 @@ namespace DotNetCoreArchitecture.Domain
             Email = new Email(address);
         }
 
-        public void ChangeFullName(string name, string surname)
+        public void ChangeUsername(string username)
         {
-            FullName = new FullName(name, surname);
+            Username = username;
         }
 
         public void Inactivate()

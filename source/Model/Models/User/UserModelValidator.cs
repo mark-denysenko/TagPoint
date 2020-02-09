@@ -7,9 +7,7 @@ namespace DotNetCoreArchitecture.Model
     {
         protected UserModelValidator()
         {
-            RuleFor(x => x.FullName).NotEmpty();
-            RuleFor(x => x.FullName.Name).NotEmpty();
-            RuleFor(x => x.FullName.Surname).NotEmpty();
+            RuleFor(x => x.Username).NotEmpty();
             RuleFor(x => x.Email).NotEmpty();
         }
     }

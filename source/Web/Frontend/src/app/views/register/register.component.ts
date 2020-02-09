@@ -15,7 +15,7 @@ export class AppRegisterComponent implements OnInit {
       login: ["admin", Validators.required],
       password: ["admin", Validators.required],
     }),
-    email: ["admin@email.com", Validators.required],
+    email: ["admin@email.com", [Validators.required, Validators.email]],
     phone: ["", Validators.pattern('')],
     gender: [null, Validators.required],
     country: [null, Validators.required]
@@ -23,6 +23,7 @@ export class AppRegisterComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    //private readonly validationService: AppValidationService,
     private readonly appUserService: AppUserService) { }
 
   ngOnInit() {
@@ -31,10 +32,6 @@ export class AppRegisterComponent implements OnInit {
   public register(): void {
     this.appUserService.register({
       ...this.form.value,
-      fullName: {
-        name: this.form.value.username,
-        surname: this.form.value.username
-      },
       roles: 1 //Roles.User
     });
   }

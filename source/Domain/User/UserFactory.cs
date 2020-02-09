@@ -15,11 +15,7 @@ namespace DotNetCoreArchitecture.Domain
             return new UserEntity
             (
                 addUserModel.Id,
-                new FullName
-                (
-                    addUserModel.FullName.Name,
-                    addUserModel.FullName.Surname
-                ),
+                addUserModel.Username,
                 new Email(addUserModel.Email),
                 new SignIn
                 (
@@ -30,8 +26,8 @@ namespace DotNetCoreArchitecture.Domain
                 addUserModel.Roles,
                 Status.Active,
                 Gender.Male,
-                "",
-                ""
+                addUserModel.Phone,
+                addUserModel.About
             );
         }
     }

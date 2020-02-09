@@ -1,3 +1,4 @@
+using Database.Country;
 using DotNetCoreArchitecture.Domain;
 using DotNetCoreArchitecture.Model;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace DotNetCoreArchitecture.Database
         public static void Seed(this ModelBuilder builder)
         {
             builder.SeedUsers();
+            builder.SeedCountries();
         }
 
         private static void SeedUsers(this ModelBuilder builder)
@@ -18,15 +20,9 @@ namespace DotNetCoreArchitecture.Database
                 x.HasData(new
                 {
                     Id = 1L,
+                    Username = "Administrator",
                     Roles = Roles.User | Roles.Admin,
                     Status = Status.Active
-                });
-
-                x.OwnsOne(y => y.FullName).HasData(new
-                {
-                    UserEntityId = 1L,
-                    Name = "Administrator",
-                    Surname = "Administrator"
                 });
 
                 x.OwnsOne(y => y.Email).HasData(new

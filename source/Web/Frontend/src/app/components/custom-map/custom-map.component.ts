@@ -1,11 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AgmInfoWindow } from '@agm/core';
-
-interface Marker {
-  latitude: number;
-  longitude: number;
-  label?: string;
-}
 
 @Component({
   selector: 'app-custom-map',
@@ -16,6 +10,8 @@ export class CustomMapComponent implements OnInit {
   public initialPlace?: Marker;
   public currentMarker?: Marker;
   @Input() public markers: Marker[] = [];
+
+  @Output() public selectMarker = new EventEmitter<Marker>();
 
   private currentIW: AgmInfoWindow | null = null;
   private previousIW: AgmInfoWindow | null = null;
@@ -42,13 +38,15 @@ export class CustomMapComponent implements OnInit {
     console.log('event', event);
   }
 
-  public selectMarker(event: any, infoWindow: any): void {
+  public onMarkerSelect(event: any, infoWindow: any, marker: Marker): void {
     this.previousIW = this.currentIW;
     this.currentIW = infoWindow;
 
     if (this.previousIW) {
       this.previousIW.close();
     }
+
+    this.selectMarker.emit(marker);
 
     console.log('event click', event);
     console.log('infoWindow', infoWindow);
@@ -64,8 +62,8 @@ export class CustomMapComponent implements OnInit {
         }
         this.currentMarker = this.initialPlace;
         this.markers = [
-          { latitude: this.initialPlace.latitude + 0.01, longitude: this.initialPlace.longitude + 0.01},
-          { latitude: this.initialPlace.latitude - 0.01, longitude: this.initialPlace.longitude - 0.01},
+          { id: 222, latitude: this.initialPlace.latitude + 0.01, longitude: this.initialPlace.longitude + 0.01},
+          { id: 333, latitude: this.initialPlace.latitude - 0.01, longitude: this.initialPlace.longitude - 0.01},
         ];
       });
 

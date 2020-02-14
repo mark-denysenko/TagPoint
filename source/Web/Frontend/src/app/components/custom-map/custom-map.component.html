@@ -16,7 +16,7 @@
         [longitude]="marker.longitude"
         [label]="marker.label"
         [opacity]="0.5"
-        (markerClick)="selectMarker($event, infoWindow)">
+        (markerClick)="onMarkerSelect($event, infoWindow, marker)">
         <agm-info-window #infoWindow>            
         </agm-info-window>
     </agm-marker>

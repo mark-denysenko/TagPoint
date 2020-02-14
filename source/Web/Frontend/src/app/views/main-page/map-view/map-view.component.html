@@ -1,4 +1,8 @@
-<div class="map">
-    <app-custom-map></app-custom-map>
+<div class="map uk-margin">
+    <app-custom-map
+        (selectMarker)="handleMarkerSelect($event)">
+    </app-custom-map>
 </div>
-<app-post-creator></app-post-creator>
+<app-post-creator
+    (sendPost)="handleSendPost($event)">
+</app-post-creator>

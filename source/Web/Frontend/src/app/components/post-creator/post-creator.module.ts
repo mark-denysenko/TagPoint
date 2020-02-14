@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostCreatorComponent } from './post-creator.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -8,7 +9,9 @@ import { PostCreatorComponent } from './post-creator.component';
   declarations: [PostCreatorComponent],
   exports: [PostCreatorComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PostCreatorModule { }

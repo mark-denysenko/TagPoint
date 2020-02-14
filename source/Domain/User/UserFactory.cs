@@ -30,5 +30,21 @@ namespace DotNetCoreArchitecture.Domain
                 addUserModel.About
             );
         }
+
+        public static UserEntity Create(UserModel userModel)
+        {
+            return new UserEntity
+            (
+                userModel.Id,
+                userModel.Username,
+                new Email(userModel.Email),
+                default,
+                userModel.Roles,
+                Status.Active,
+                Gender.Male,
+                userModel.Phone,
+                userModel.About
+            );
+        }
     }
 }

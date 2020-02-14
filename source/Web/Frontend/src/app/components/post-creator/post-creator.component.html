@@ -1,2 +1,12 @@
-<input type="text" />
-<button>Post</button>
+<div class="uk-margin">
+    <textarea 
+        class="uk-textarea uk-form-width-large" 
+        rows="5"
+        [formControl]="text"
+        placeholder="Опис">
+    </textarea>
+</div>
+<div class="uk-margin">
+    <button class="uk-button uk-button-default uk-margin-small-right" (click)="handleSendPost()">Відправити</button>
+    <span class="uk-icon-link uk-icon-button pointer" uk-icon="icon: image"></span>
+</div>

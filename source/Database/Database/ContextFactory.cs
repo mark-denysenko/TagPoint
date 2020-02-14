@@ -9,7 +9,8 @@ namespace DotNetCoreArchitecture.Database
         {
             var builder = new DbContextOptionsBuilder<Context>();
 
-            builder.UseSqlServer(@"Server=DESKTOP-LANBNAJ\SQLEXPRESS;Database=TagPoint;Integrated Security=False;Persist Security Info=True;Trusted_Connection=True;MultipleActiveResultSets=True;");
+            builder.UseSqlServer(@"Server=DESKTOP-LANBNAJ\SQLEXPRESS;Database=TagPoint;Integrated Security=False;Persist Security Info=True;Trusted_Connection=True;MultipleActiveResultSets=True;",
+                x => x.UseNetTopologySuite());
 
             return new Context(builder.Options);
         }

@@ -1,3 +1,4 @@
+using Application.Post;
 using DotNetCore.AspNetCore;
 using DotNetCore.IoC;
 using DotNetCoreArchitecture.Application;
@@ -17,6 +18,7 @@ namespace DotNetCoreArchitecture.Web
         public static void AddClassesMatchingInterfaces(this IServiceCollection services)
         {
             services.AddClassesMatchingInterfaces(typeof(IUserApplicationService).Assembly);
+            services.AddClassesMatchingInterfaces(typeof(IPostApplicationService).Assembly);
             services.AddClassesMatchingInterfaces(typeof(IUnitOfWork).Assembly);
             services.AddClassesMatchingInterfaces(typeof(ISignInService).Assembly);
         }

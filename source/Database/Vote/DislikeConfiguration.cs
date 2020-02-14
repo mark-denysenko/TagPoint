@@ -13,13 +13,23 @@ namespace Database.Vote
         {
             builder.ToTable("Dislikes");
 
-            builder.HasNoKey();
+            //builder.HasNoKey();
 
-            //builder.HasAlternateKey(dislike
+            builder.HasAlternateKey(dislike => new[] { dislike.User.Id, dislike.Post.Id }).HasName("IX_MultipleColumns");
+
+            //builder.HasIndex(dislike
             //    => new
             //    {
             //        UserId = dislike.User.Id,
             //        PostId = dislike.Post.Id
+            //    }).IsUnique();
+
+
+            //builder.HasAlternateKey(dislike
+            //    => new
+            //    {
+            //        dislike.User,
+            //        dislike.Post
             //    });
         }
     }

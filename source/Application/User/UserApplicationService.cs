@@ -1,3 +1,4 @@
+using Database.Country;
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Database;
 using DotNetCoreArchitecture.Domain;
@@ -14,19 +15,22 @@ namespace DotNetCoreArchitecture.Application
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserLogApplicationService _userLogApplicationService;
         private readonly IUserRepository _userRepository;
+        private readonly ICountryRepository _countryRepository;
 
         public UserApplicationService
         (
             ISignInService signInService,
             IUnitOfWork unitOfWork,
             IUserLogApplicationService userLogApplicationService,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            ICountryRepository countryRepository
         )
         {
             _signInService = signInService;
             _unitOfWork = unitOfWork;
             _userLogApplicationService = userLogApplicationService;
             _userRepository = userRepository;
+            _countryRepository = countryRepository;
         }
 
         public async Task<IDataResult<long>> AddAsync(AddUserModel addUserModel)
@@ -41,10 +45,11 @@ namespace DotNetCoreArchitecture.Application
             addUserModel.SignIn = _signInService.CreateSignIn(addUserModel.SignIn);
 
             var userEntity = UserFactory.Create(addUserModel);
-
             userEntity.Add();
-
             await _userRepository.AddAsync(userEntity);
+
+            var country = _countryRepository.FirstOrDefault(country => country.Id == addUserModel.CountryId);
+            country.AddUser(userEntity);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -58,32 +63,6 @@ namespace DotNetCoreArchitecture.Application
             await _unitOfWork.SaveChangesAsync();
 
             return Result.Success();
-        }
-
-        public async Task InactivateAsync(long id)
-        {
-            var userEntity = UserFactory.Create(id);
-
-            userEntity.Inactivate();
-
-            await _userRepository.UpdateStatusAsync(userEntity);
-
-            await _unitOfWork.SaveChangesAsync();
-        }
-
-        public async Task<PagedList<UserModel>> ListAsync(PagedListParameters parameters)
-        {
-            return await _userRepository.ListAsync<UserModel>(parameters);
-        }
-
-        public async Task<IEnumerable<UserModel>> ListAsync()
-        {
-            return await _userRepository.ListAsync<UserModel>();
-        }
-
-        public async Task<UserModel> SelectAsync(long id)
-        {
-            return await _userRepository.SelectAsync<UserModel>(id);
         }
 
         public async Task<IDataResult<TokenModel>> SignInAsync(SignInModel signInModel)
@@ -146,5 +125,32 @@ namespace DotNetCoreArchitecture.Application
 
             return Result.Success();
         }
+
+        public async Task InactivateAsync(long id)
+        {
+            var userEntity = UserFactory.Create(id);
+
+            userEntity.Inactivate();
+
+            await _userRepository.UpdateStatusAsync(userEntity);
+
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<PagedList<UserModel>> ListAsync(PagedListParameters parameters)
+        {
+            return await _userRepository.ListAsync<UserModel>(parameters);
+        }
+
+        public async Task<IEnumerable<UserModel>> ListAsync()
+        {
+            return await _userRepository.ListAsync<UserModel>();
+        }
+
+        public async Task<UserModel> SelectAsync(long id)
+        {
+            return await _userRepository.SelectAsync<UserModel>(id);
+        }
+
     }
 }

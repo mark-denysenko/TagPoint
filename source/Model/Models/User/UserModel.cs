@@ -1,3 +1,6 @@
+using Model;
+using Model.Models;
+
 namespace DotNetCoreArchitecture.Model
 {
     public class UserModel
@@ -12,6 +15,10 @@ namespace DotNetCoreArchitecture.Model
 
         public string About { get; set; }
 
+        public Gender Gender { get; set; }
+
         public Roles Roles { get; set; }
+
+        public int CountryId { get; set; }
     }
 }

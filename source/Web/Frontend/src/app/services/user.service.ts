@@ -1,13 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { environment } from "src/environments/environment";
 import { AppTokenService } from "../core/services/token.service";
-import { SignInModel, RegisterModel } from "../models/signIn.model";
+import { RegisterModel, SignInModel } from "../models/signIn.model";
 import { TokenModel } from "../models/token.model";
 import { AddUserModel } from "../models/user/add.user.model";
 import { UpdateUserModel } from "../models/user/update.user.model";
 import { UserModel } from "../models/user/user.model";
-import { environment } from "src/environments/environment";
 
 const apiUrl = environment.apiBaseUrl;
 

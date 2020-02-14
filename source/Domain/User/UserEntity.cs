@@ -1,3 +1,7 @@
+using Domain.Country;
+using Domain.Point;
+using Domain.Post;
+using Domain.Vote;
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Model;
 using Model;
@@ -37,20 +41,20 @@ namespace DotNetCoreArchitecture.Domain
         }
 
         public string Username { get; private set; }
-
-        public Gender? Gender { get; private set; }
-
+        public Gender Gender { get; private set; }
         public Email Email { get; private set; }
-
         public SignIn SignIn { get; private set; }
-
         public Roles Roles { get; private set; }
-
         public Status Status { get; private set; }
         public string About { get; private set; }
         public string PhoneNumber { get; private set; }
+        public CountryEntity Country { get; private set; }
 
         public ICollection<UserLogEntity> UsersLogs { get; private set; }
+        public ICollection<PointEntity> Points { get; private set; }
+        public ICollection<PostEntity> Posts { get; private set; }
+        public ICollection<DislikeEntity> Dislikes { get; private set; }
+        public ICollection<LikeEntity> Likes { get; private set; }
 
         public void Add()
         {

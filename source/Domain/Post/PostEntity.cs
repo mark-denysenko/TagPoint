@@ -1,4 +1,5 @@
 using Domain.Point;
+using DotNetCore.Objects;
 using DotNetCoreArchitecture.Domain;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,8 @@ using System.Text;
 
 namespace Domain.Post
 {
-    public class PostEntity
+    public class PostEntity : Entity
     {
-        public long Id { get; set; }
         public string Message { get; set; }
         public DateTime PostDate { get; set; }
         public UserEntity User { get; set; }

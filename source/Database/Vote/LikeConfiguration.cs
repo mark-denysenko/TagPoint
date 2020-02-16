@@ -13,22 +13,7 @@ namespace Database.Vote
         {
             builder.ToTable("Likes");
 
-            builder.HasNoKey();
-
-            //builder.HasIndex(dislike
-            //    => new
-            //    {
-            //        UserId = dislike.User.Id,
-            //        PostId = dislike.Post.Id
-            //    })
-            //    .IsUnique();
-
-            //builder.HasAlternateKey(dislike
-            //    => new
-            //    {
-            //        UserId = dislike.User.Id,
-            //        PostId = dislike.Post.Id
-            //    });
+            builder.HasKey(dislike => new { dislike.UserId, dislike.PostId }).HasName("COMBINE_PK_LIKE");
         }
     }
 }

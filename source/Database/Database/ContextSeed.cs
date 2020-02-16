@@ -2,10 +2,11 @@ using Database.Country;
 using DotNetCoreArchitecture.Domain;
 using DotNetCoreArchitecture.Model;
 using Microsoft.EntityFrameworkCore;
+using Model;
 
 namespace DotNetCoreArchitecture.Database
 {
-    public static class ContextSeed
+    internal static class ContextSeed
     {
         public static void Seed(this ModelBuilder builder)
         {
@@ -22,6 +23,7 @@ namespace DotNetCoreArchitecture.Database
                     Id = 1L,
                     Username = "Administrator",
                     Roles = Roles.User | Roles.Admin,
+                    Gender = Gender.Male,
                     Status = Status.Active
                 });
 

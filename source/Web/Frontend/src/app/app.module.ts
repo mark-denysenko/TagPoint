@@ -5,6 +5,8 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing.module";
 import { AppErrorHandler } from "./core/handlers/error.handler";
 import { AppHttpInterceptor } from "./core/interceptors/http.interceptor";
+import { DirectivesModule } from "./core/directives/directives.module";
+import { APP_BASE_HREF } from "@angular/common";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -12,11 +14,13 @@ import { AppHttpInterceptor } from "./core/interceptors/http.interceptor";
     imports: [
         BrowserModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        DirectivesModule
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
-        { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+        { provide: APP_BASE_HREF, useValue: '/' }
     ]
 })
 export class AppModule { }

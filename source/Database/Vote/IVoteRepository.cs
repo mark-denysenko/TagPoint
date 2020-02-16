@@ -6,8 +6,7 @@ using System.Text;
 
 namespace Database.Vote
 {
-    public interface IVoteRepository : IRelationalRepository<LikeEntity>,
-        IRelationalRepository<DislikeEntity>
+    public interface IVoteRepository : IRelationalRepository<LikeEntity>, IRelationalRepository<DislikeEntity>
     {
     }
 }

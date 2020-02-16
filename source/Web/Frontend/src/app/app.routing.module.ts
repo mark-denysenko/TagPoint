@@ -10,13 +10,14 @@ const routes: Routes = [
         component: AppLayoutComponent,
         children: [
             {
-                path: "",
+                path: "login",
                 loadChildren: () => import("./views/login/login.module").then((x) => x.AppLoginModule)
             },
             {
                 path: "register",
                 loadChildren: () => import("./views/register/register.module").then((x) => x.AppRegisterModule)
-            }
+            },
+            { path: "", redirectTo: "login", pathMatch: 'full' }
         ]
     },
     {

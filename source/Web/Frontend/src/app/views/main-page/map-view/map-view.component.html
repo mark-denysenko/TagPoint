@@ -3,6 +3,13 @@
         (selectMarker)="handleMarkerSelect($event)">
     </app-custom-map>
 </div>
-<app-post-creator
-    (sendPost)="handleSendPost($event)">
-</app-post-creator>
+<div class="creation-area">
+    <div class="left">
+        <app-post-creator
+            (sendPost)="handleSendPost($event)">
+        </app-post-creator>
+    </div>
+    <div class="right">
+        <app-marker-info [marker]="selectedMarker"></app-marker-info>
+    </div>
+</div>

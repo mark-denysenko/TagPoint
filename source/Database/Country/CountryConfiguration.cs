@@ -18,7 +18,7 @@ namespace Database.Country
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
 
             builder.Property(x => x.Country).IsRequired().HasMaxLength(128);
-            builder.Property(x => x.CountryCode).IsRequired().HasMaxLength(5);
+            //builder.Property(x => x.CountryCode).IsRequired().HasMaxLength(5);
         }
     }
 }

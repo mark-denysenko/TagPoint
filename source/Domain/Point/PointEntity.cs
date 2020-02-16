@@ -1,4 +1,6 @@
+using Domain.Post;
 using Domain.ValueObjects;
+using DotNetCore.Objects;
 using DotNetCoreArchitecture.Domain;
 using System;
 using System.Collections.Generic;
@@ -6,12 +8,17 @@ using System.Text;
 
 namespace Domain.Point
 {
-    public class PointEntity
+    public class PointEntity : Entity
     {
-        public long Id { get; set; }
-
         public Coordinate Coordinate { get; set; }
 
         public UserEntity User { get; set; }
+
+        public ICollection<PostEntity> Posts { get; private set; }
+
+        public void AddPost(PostEntity newPost)
+        {
+            Posts.Add(newPost);
+        }
     }
 }

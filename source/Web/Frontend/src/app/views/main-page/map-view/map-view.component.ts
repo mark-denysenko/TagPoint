@@ -8,7 +8,7 @@ import { AppPostService } from 'src/app/services/post.service';
 })
 export class MapViewComponent implements OnInit {
 
-  public selectedMarker: Marker = {latitude: 0, longitude: 0};
+  public selectedMarker: Marker | null = null;
 
   constructor(private readonly postService: AppPostService) { }
 
@@ -20,6 +20,10 @@ export class MapViewComponent implements OnInit {
   }
 
   public handleSendPost(message: string): void {
+    if(!this.selectedMarker) {
+      return;
+    }
+
     const post = { message, marker: this.selectedMarker, id: 0 };
     this.postService.add(post).subscribe(id => post.id = id);
   }

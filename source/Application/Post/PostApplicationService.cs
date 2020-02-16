@@ -34,30 +34,32 @@ namespace Application.Post
 
         public async Task<IDataResult<long>> CreatePostAsync(PostModel post)
         {
-            var point = new PointEntity
-            {
-                Coordinate = new Domain.ValueObjects.Coordinate
-                {
-                    Latitude = post.Marker.Latitude,
-                    Longitude = post.Marker.Longitude
-                }
-            };
-
-            if (post.Marker.Id == default)
-            {
-                await _pointRepository.AddAsync(point);
-            }
-
             var user = _userRepository.FirstOrDefault(u => u.Id == post.UserId);
+
+            PointEntity point = await _pointRepository.FirstOrDefaultAsync(p => p.Id == post.Marker.Id);
+            if (point is null)
+            {
+                point = new PointEntity
+                {
+                    Coordinate = new Domain.ValueObjects.Coordinate
+                    {
+                        Latitude = post.Marker.Latitude,
+                        Longitude = post.Marker.Longitude
+                    }
+                };
+                await _pointRepository.AddAsync(point);
+                point.User = user;
+            }
 
             var newPost = new PostEntity
             {
                 Message = post.Message,
-                Point = point,
-                //User = user
+                Point = point
             };
 
             await _postRepository.AddAsync(newPost);
+            newPost.User = user;
+
             await _unitOfWork.SaveChangesAsync();
 
             return DataResult<long>.Success(newPost.Id);

@@ -1,4 +1,6 @@
+using Domain.ValueObjects;
 using DotNetCore.Objects;
+using Model.Models.Map;
 using Model.Models.Post;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,6 @@ namespace Application.Post
         Task<IDataResult<long>> CreatePostAsync(PostModel post);
         Task<IDataResult<PostModel>> GetPostAsync(int id);
         Task<IResult> DeletePostAsync(int id);
-        Task<IResult> GetPostsNearAsync();
+        Task<IDataResult<IEnumerable<MarkerModel>>> GetPostsNearAsync(Coordinate center, double radius);
     }
 }

@@ -35,6 +35,18 @@ namespace Web.Controllers
             return Result(await _postApplicationService.GetPostAsync(id));
         }
 
+        [HttpGet("{latitude}/{longitude}/{radius}")]
+        public async Task<IActionResult> Get(double latitude, double longitude, double radius)
+        {
+            return Result(await _postApplicationService.GetPostsNearAsync(
+                new Domain.ValueObjects.Coordinate
+                {
+                    Latitude = latitude,
+                    Longitude = longitude
+                },
+                radius));
+        }
+
         // POST api/<controller>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]PostModel post)

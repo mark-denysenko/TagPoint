@@ -2,12 +2,15 @@ using Database.Point;
 using Database.Post;
 using Domain.Point;
 using Domain.Post;
+using Domain.ValueObjects;
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Database;
 using DotNetCoreArchitecture.Domain;
+using Model.Models.Map;
 using Model.Models.Post;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +44,7 @@ namespace Application.Post
             {
                 point = new PointEntity
                 {
-                    Coordinate = new Domain.ValueObjects.Coordinate
+                    Coordinate = new Coordinate
                     {
                         Latitude = post.Marker.Latitude,
                         Longitude = post.Marker.Longitude
@@ -75,9 +78,24 @@ namespace Application.Post
             throw new NotImplementedException();
         }
 
-        public Task<IResult> GetPostsNearAsync()
+        public async Task<IDataResult<IEnumerable<MarkerModel>>> GetPostsNearAsync(Coordinate center, double radius)
         {
-            throw new NotImplementedException();
+            var markersInRadius = await _pointRepository.GetPointsInRadius(center, radius);
+
+            return DataResult<IEnumerable<MarkerModel>>.Success(markersInRadius.Select(m =>
+                new MarkerModel
+                {
+                    Id = m.Id,
+                    Latitude = m.Coordinate.Latitude,
+                    Longitude = m.Coordinate.Longitude,
+                    Posts = m.Posts.Select(p =>
+                        new PostModel
+                        {
+                            Id = p.Id,
+                            Message = p.Message,
+                            //UserId = p.User.Id
+                        })
+                }));
         }
     }
 }

@@ -23,7 +23,7 @@ export class CustomMapComponent implements OnInit {
   }
 
   public handleMapClick(event: any): void {
-    console.log('event click', event);
+    //console.log('event click', event);
     this.currentMarker = {
       latitude: event.coords.lat,
       longitude: event.coords.lng
@@ -47,9 +47,6 @@ export class CustomMapComponent implements OnInit {
     }
 
     this.selectMarker.emit(marker);
-
-    console.log('event click', event);
-    console.log('infoWindow', infoWindow);
   }
 
   private setCurrentPosition(): void {

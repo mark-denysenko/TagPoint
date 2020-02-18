@@ -1,3 +1,4 @@
+using Model.Models.Post;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +11,7 @@ namespace Model.Models.Map
         public double Altitude { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+        public IEnumerable<PostModel> Posts { get; set; }
     }
 }

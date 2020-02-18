@@ -9,14 +9,18 @@ import { AppPostService } from 'src/app/services/post.service';
 export class MapViewComponent implements OnInit {
 
   public selectedMarker: Marker | null = null;
+  public markersOnMap: MarkerWithPosts[] = [];
 
   constructor(private readonly postService: AppPostService) { }
 
   ngOnInit() {
+
   }
 
   public handleMarkerSelect(marker: Marker): void {
     this.selectedMarker = marker;
+    
+    this.postService.getMarkersWithPostsInRadius(marker, 5.0).subscribe(response => this.markersOnMap = response);
   }
 
   public handleSendPost(message: string): void {

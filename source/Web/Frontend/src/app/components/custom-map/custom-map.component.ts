@@ -9,9 +9,13 @@ import { AgmInfoWindow } from '@agm/core';
 export class CustomMapComponent implements OnInit {
   public initialPlace?: Marker;
   public currentMarker?: Marker;
-  @Input() public markers: Marker[] = [];
+
+  @Input() public zoom!: number;
+  @Input() public markers!: MarkerWithPosts[];
 
   @Output() public selectMarker = new EventEmitter<Marker>();
+  @Output() public centerChange = new EventEmitter<Coordinate>();
+  @Output() public zoomChange = new EventEmitter<number>();
 
   private currentIW: AgmInfoWindow | null = null;
   private previousIW: AgmInfoWindow | null = null;
@@ -28,25 +32,38 @@ export class CustomMapComponent implements OnInit {
       latitude: event.coords.lat,
       longitude: event.coords.lng
     };
+    this.selectMarker.emit(this.currentMarker);
     
     if (this.currentIW) {
       this.currentIW.close();
     }
   }
 
-  public handleCenterChange(event: any): void {
-    console.log('event', event);
+  public handleCenterChange({ lng, lat }: any): void {
+    console.log('handleCenterChange', event);
+    this.centerChange.emit({ longitude: lng, latitude: lat });
+  }
+
+  public handleZoomChange(zoom: number): void {
+    this.zoomChange.emit(zoom);
   }
 
   public onMarkerSelect(event: any, infoWindow: any, marker: Marker): void {
     this.previousIW = this.currentIW;
     this.currentIW = infoWindow;
 
+    console.log('onMarkerSelect,', event);
+    
+
     if (this.previousIW) {
       this.previousIW.close();
     }
 
     this.selectMarker.emit(marker);
+  }
+
+  public trackById(_index: any, item: Marker): number | undefined {
+    return item.id;
   }
 
   private setCurrentPosition(): void {
@@ -58,10 +75,6 @@ export class CustomMapComponent implements OnInit {
             longitude
         }
         this.currentMarker = this.initialPlace;
-        this.markers = [
-          { id: 222, latitude: this.initialPlace.latitude + 0.01, longitude: this.initialPlace.longitude + 0.01},
-          { id: 333, latitude: this.initialPlace.latitude - 0.01, longitude: this.initialPlace.longitude - 0.01},
-        ];
       });
 
     } else {

@@ -1,5 +1,9 @@
 <div class="map uk-margin">
     <app-custom-map
+        [markers]="markersOnMap"
+        [zoom]="mapZoom$ | async"
+        (centerChange)="handleCenterChange($event)"
+        (zoomChange)="handleZoomChange($event)"
         (selectMarker)="handleMarkerSelect($event)">
     </app-custom-map>
 </div>

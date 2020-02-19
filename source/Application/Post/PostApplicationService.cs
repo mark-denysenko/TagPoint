@@ -39,7 +39,7 @@ namespace Application.Post
         {
             var user = _userRepository.FirstOrDefault(u => u.Id == post.UserId);
 
-            PointEntity point = await _pointRepository.FirstOrDefaultAsync(p => p.Id == post.Marker.Id);
+            PointEntity point = await _pointRepository.FirstOrDefaultWhereIncludeAsync(p => p.Id == post.Marker.Id, p => p.Posts);
             if (point is null)
             {
                 point = new PointEntity
@@ -56,11 +56,11 @@ namespace Application.Post
 
             var newPost = new PostEntity
             {
-                Message = post.Message,
-                Point = point
+                Message = post.Message
             };
 
             await _postRepository.AddAsync(newPost);
+            newPost.Point = point;
             newPost.User = user;
 
             await _unitOfWork.SaveChangesAsync();

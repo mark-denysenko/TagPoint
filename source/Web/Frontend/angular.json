@@ -20,7 +20,8 @@
             "tsConfig": "tsconfig.json",
             "vendorChunk": true,
             "assets": [
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

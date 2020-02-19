@@ -23,6 +23,9 @@ namespace Database.Point
                 coord.Property(x => x.Latitude).HasColumnName(nameof(PointEntity.Coordinate.Latitude)).IsRequired();
                 coord.Property(x => x.Longitude).HasColumnName(nameof(PointEntity.Coordinate.Longitude)).IsRequired();
             });
+
+            //builder.HasMany(p => p.Posts).WithOne(p => p.Point).HasForeignKey(p => p.PointId).OnDelete(DeleteBehavior.Cascade);
+            //builder.HasOne(p => p.User).WithMany(p => p.Points).HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -1,8 +1,9 @@
 <agm-map 
     [latitude]="initialPlace?.latitude" 
     [longitude]="initialPlace?.longitude" 
-    [zoom]="10"
+    [zoom]="zoom"
     [backgroundColor]="'black'"
+    (zoomChange)="handleZoomChange($event)"
     (centerChange)="handleCenterChange($event)"
     (mapClick)="handleMapClick($event)">
     <agm-marker
@@ -10,28 +11,34 @@
         [latitude]="currentMarker?.latitude"
         [longitude]="currentMarker?.longitude">
     </agm-marker>
+
     <agm-marker
-        *ngFor="let marker of markers"
-        [latitude]="marker.latitude"
-        [longitude]="marker.longitude"
-        [label]="marker.label"
-        [opacity]="0.5"
-        (markerClick)="onMarkerSelect($event, infoWindow, marker)">
-        <agm-info-window #infoWindow>            
-        </agm-info-window>
+      *ngFor="let marker of markers; trackBy: trackById"
+      [latitude]="marker.latitude"
+      [longitude]="marker.longitude"
+      [label]="marker.label"
+      [opacity]="0.5"
+      (markerClick)="onMarkerSelect($event, infoWindow, marker)">
+      <agm-info-window #infoWindow>
+        <div fxLayout="column" fxLayoutAlign="space-between" class="message-container">
+          <span class="message" *ngFor="let post of marker.posts">{{ post.message }}</span>        
+        </div>
+      </agm-info-window>
     </agm-marker>
 
-    <agm-circle [latitude]="currentMarker?.latitude + 0.003" [longitude]="currentMarker?.longitude" 
-      [radius]="5000"
+    <!-- <agm-circle 
+      [latitude]="currentMarker?.latitude + 0.003" 
+      [longitude]="currentMarker?.longitude" 
+      [radius]="500"
       [fillColor]="'red'"
       [circleDraggable]="true"
       [editable]="true">
-    </agm-circle>
+    </agm-circle> -->
 </agm-map>
 
 <!-- [iconUrl] ="
   {
-    url: m.isClicked ? './assets/images/car.svg' : './assets/images/bike.svg',
+    url: '../../../assets/icons/selected-marker.png',
     scaledSize: {
         width: 40,
         height: 60

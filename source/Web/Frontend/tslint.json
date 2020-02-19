@@ -60,7 +60,6 @@
         ],
         "no-attribute-decorator": true,
         "no-conflicting-lifecycle": true,
-        "no-console": false,
         "no-forward-ref": true,
         "no-host-metadata-property": true,
         "no-implicit-dependencies": [
@@ -86,7 +85,6 @@
         "no-queries-metadata-property": true,
         "no-redundant-jsdoc": true,
         "no-submodule-imports": false,
-        "no-unused-css": true,
         "object-literal-sort-keys": false,
         "pipe-naming": [
             "camelCase",

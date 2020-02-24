@@ -2,6 +2,8 @@
     <app-custom-map
         [markers]="markersOnMap"
         [zoom]="mapZoom$ | async"
+        [currentMarker]="selectedMarker"
+        [initialPlace]="initialPlace"
         (centerChange)="handleCenterChange($event)"
         (zoomChange)="handleZoomChange($event)"
         (selectMarker)="handleMarkerSelect($event)">

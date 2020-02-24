@@ -78,7 +78,7 @@ namespace Application.Post
             throw new NotImplementedException();
         }
 
-        public async Task<IDataResult<IEnumerable<MarkerModel>>> GetPostsNearAsync(Coordinate center, double radius)
+        public async Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius)
         {
             var markersInRadius = await _pointRepository.GetPointsInRadius(center, radius);
 
@@ -93,7 +93,7 @@ namespace Application.Post
                         {
                             Id = p.Id,
                             Message = p.Message,
-                            //UserId = p.User.Id
+                            //UserId = p.UserId
                         })
                 }));
         }

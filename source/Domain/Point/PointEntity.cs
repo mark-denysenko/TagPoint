@@ -13,6 +13,7 @@ namespace Domain.Point
         public Coordinate Coordinate { get; set; }
 
         public UserEntity User { get; set; }
+        public long UserId { get; set; }
 
         public ICollection<PostEntity> Posts { get; private set; }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppPostService } from 'src/app/services/post.service';
 import { BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map-view',
@@ -12,6 +12,7 @@ export class MapViewComponent implements OnInit {
 
   public selectedMarker: Marker | null = null;
   public markersOnMap: MarkerWithPosts[] = [];
+  public initialPlace!: Marker;
 
   public mapCenter$ = new BehaviorSubject<Coordinate>(null);
   public mapZoom$ = new BehaviorSubject<number>(10);
@@ -19,7 +20,10 @@ export class MapViewComponent implements OnInit {
   constructor(private readonly postService: AppPostService) { }
 
   ngOnInit() {
+    this.setCurrentPosition();
+
     this.mapCenter$.pipe(
+      filter(Boolean),
       debounceTime(400)
     ).subscribe((center: Coordinate) => {
       this.postService.getMarkersWithPostsInRadius(center, 5.0).subscribe(response => {
@@ -46,7 +50,25 @@ export class MapViewComponent implements OnInit {
     }
 
     const post = { message, marker: this.selectedMarker, id: 0 };
-    this.postService.add(post).subscribe(id => post.id = id);
+    this.postService.add(post).subscribe(markers => {
+      this.selectedMarker = markers[0];
+      this.markersOnMap = [...this.markersOnMap, ...markers];
+    });
+  }
+
+  private setCurrentPosition(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords
+        this.initialPlace = position.coords;
+        this.handleMarkerSelect({ latitude, longitude });
+        this.mapCenter$.next({latitude, longitude});
+      });
+
+    } else {
+      // AppModalService
+      alert("Geolocation is not supported by this browser, please use google chrome.");
+    }
   }
 
 }

@@ -10,8 +10,8 @@ const apiUrl = environment.apiBaseUrl;
 export class AppPostService {
     constructor(private readonly http: HttpClient) {}
 
-    public add(addPostModel: AddPostModel): Observable<number> {
-        return this.http.post<number>(`${apiUrl}Post`, addPostModel);
+    public add(addPostModel: AddPostModel): Observable<Marker[]> {
+        return this.http.post<Marker[]>(`${apiUrl}Post`, addPostModel);
     }
 
     public getMarkersWithPostsInRadius(center: Coordinate, radius: number): Observable<Marker[]> {

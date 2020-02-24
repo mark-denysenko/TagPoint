@@ -18,7 +18,9 @@ namespace Database.Point
         public async Task<IEnumerable<PointEntity>> GetPointsInRadius(Coordinate center, double radius)
         {
             return await ListWhereIncludeAsync(point
-                => (Math.Pow(point.Coordinate.Latitude - center.Latitude, 2) + Math.Pow(point.Coordinate.Longitude - center.Longitude, 2)) < (radius * radius), p => p.Posts, m => m.User);
+                => (Math.Pow(point.Coordinate.Latitude - center.Latitude, 2) + Math.Pow(point.Coordinate.Longitude - center.Longitude, 2)) < (radius * radius),
+                p => p.Posts,
+                m => m.User);
         }
     }
 }

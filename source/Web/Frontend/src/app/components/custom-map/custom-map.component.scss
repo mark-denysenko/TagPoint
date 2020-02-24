@@ -12,6 +12,8 @@ agm-map {
 }
 
 ::ng-deep .gm-style {
+    //cursor: url('./../../../assets/map-cursor.cur') !important;
+
     a {
         img {
             visibility: hidden;

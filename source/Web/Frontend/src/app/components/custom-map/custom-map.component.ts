@@ -7,9 +7,8 @@ import { AgmInfoWindow } from '@agm/core';
   styleUrls: ['./custom-map.component.scss']
 })
 export class CustomMapComponent implements OnInit {
-  public initialPlace?: Marker;
-  public currentMarker?: Marker;
-
+  @Input() public initialPlace?: Marker;
+  @Input() public currentMarker?: Marker;
   @Input() public zoom!: number;
   @Input() public markers!: MarkerWithPosts[];
 
@@ -23,7 +22,6 @@ export class CustomMapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.setCurrentPosition();
   }
 
   public handleMapClick(event: any): void {
@@ -65,21 +63,4 @@ export class CustomMapComponent implements OnInit {
   public trackById(_index: any, item: Marker): number | undefined {
     return item.id;
   }
-
-  private setCurrentPosition(): void {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords
-        this.initialPlace = {
-            latitude,
-            longitude
-        }
-        this.currentMarker = this.initialPlace;
-      });
-
-    } else {
-      alert("Geolocation is not supported by this browser, please use google chrome.");
-    }
-  }
-
 }

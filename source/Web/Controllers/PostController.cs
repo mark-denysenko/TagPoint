@@ -38,7 +38,7 @@ namespace Web.Controllers
         [HttpGet("{latitude}/{longitude}/{radius}")]
         public async Task<IActionResult> Get(double latitude, double longitude, double radius)
         {
-            return Result(await _postApplicationService.GetPostsNearAsync(
+            return Result(await _postApplicationService.GetMarkerWithPostsNearAsync(
                 new Domain.ValueObjects.Coordinate
                 {
                     Latitude = latitude,
@@ -52,7 +52,14 @@ namespace Web.Controllers
         public async Task<IActionResult> Post([FromBody]PostModel post)
         {
             post.UserId = UserModel.Id;
-            return Result(await _postApplicationService.CreatePostAsync(post));
+            await _postApplicationService.CreatePostAsync(post);
+            return Result(await _postApplicationService.GetMarkerWithPostsNearAsync(
+                new Domain.ValueObjects.Coordinate
+                {
+                    Latitude = post.Marker.Latitude,
+                    Longitude = post.Marker.Longitude
+                },
+                0.0001));
         }
 
         //// PUT api/<controller>/5

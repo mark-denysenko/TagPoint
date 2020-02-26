@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppPostService } from 'src/app/services/post.service';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
+import { Coordinate, MarkerWithPosts } from 'src/typing';
 
 @Component({
   selector: 'app-map-view',
@@ -14,7 +15,7 @@ export class MapViewComponent implements OnInit {
   public markersOnMap: MarkerWithPosts[] = [];
   public initialPlace!: Marker;
 
-  public mapCenter$ = new BehaviorSubject<Coordinate>(null);
+  public mapCenter$ = new BehaviorSubject<Coordinate>({ latitude: 0, longitude: 0});
   public mapZoom$ = new BehaviorSubject<number>(10);
 
   constructor(private readonly postService: AppPostService) { }
@@ -23,7 +24,7 @@ export class MapViewComponent implements OnInit {
     this.setCurrentPosition();
 
     this.mapCenter$.pipe(
-      filter(Boolean),
+      filter(c => !!c),
       debounceTime(400)
     ).subscribe((center: Coordinate) => {
       this.postService.getMarkersWithPostsInRadius(center, 5.0).subscribe(response => {
@@ -33,7 +34,9 @@ export class MapViewComponent implements OnInit {
   }
 
   public handleMarkerSelect(marker: Marker): void {
-    this.selectedMarker = marker;    
+    this.selectedMarker = marker;
+    console.log('mam', marker);
+       
   }
 
   public handleCenterChange(coordinate: Coordinate): void {

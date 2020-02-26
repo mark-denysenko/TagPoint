@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { AddPostModel } from "../models/post/add.post.model";
 import { Observable } from "rxjs";
+import { MarkerWithPosts, Coordinate } from "src/typing";
 
 const apiUrl = environment.apiBaseUrl;
 
@@ -10,11 +11,11 @@ const apiUrl = environment.apiBaseUrl;
 export class AppPostService {
     constructor(private readonly http: HttpClient) {}
 
-    public add(addPostModel: AddPostModel): Observable<Marker[]> {
-        return this.http.post<Marker[]>(`${apiUrl}Post`, addPostModel);
+    public add(addPostModel: AddPostModel): Observable<MarkerWithPosts[]> {
+        return this.http.post<MarkerWithPosts[]>(`${apiUrl}Post`, addPostModel);
     }
 
-    public getMarkersWithPostsInRadius(center: Coordinate, radius: number): Observable<Marker[]> {
-        return this.http.get<Marker[]>(`${apiUrl}Post/${center.latitude}/${center.longitude}/${radius}`);
+    public getMarkersWithPostsInRadius(center: Coordinate, radius: number): Observable<MarkerWithPosts[]> {
+        return this.http.get<MarkerWithPosts[]>(`${apiUrl}Post/${center.latitude}/${center.longitude}/${radius}`);
     }
 }

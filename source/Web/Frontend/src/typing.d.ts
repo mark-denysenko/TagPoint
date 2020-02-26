@@ -8,3 +8,13 @@ export enum Gender {
     Male = 0,
     Female = 1
 }
+
+interface Coordinate {
+    latitude: number,
+    longitude: number,
+    //altitude: number
+}
+
+interface MarkerWithPosts extends Marker {
+    posts: PostModel[];
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AgmInfoWindow } from '@agm/core';
+import { Coordinate, MarkerWithPosts } from 'src/typing';
 
 @Component({
   selector: 'app-custom-map',
@@ -25,12 +26,10 @@ export class CustomMapComponent implements OnInit {
   }
 
   public handleMapClick(event: any): void {
-    //console.log('event click', event);
-    this.currentMarker = {
+    this.selectMarker.emit({
       latitude: event.coords.lat,
       longitude: event.coords.lng
-    };
-    this.selectMarker.emit(this.currentMarker);
+    });
     
     if (this.currentIW) {
       this.currentIW.close();
@@ -38,7 +37,6 @@ export class CustomMapComponent implements OnInit {
   }
 
   public handleCenterChange({ lng, lat }: any): void {
-    console.log('handleCenterChange', event);
     this.centerChange.emit({ longitude: lng, latitude: lat });
   }
 

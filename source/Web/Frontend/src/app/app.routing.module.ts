@@ -42,6 +42,10 @@ const routes: Routes = [
                 loadChildren: () => import("./views/main/list/list.module").then((x) => x.AppListModule)
             },
             {
+                path: "profile",
+                loadChildren: () => import("./views/profile/profile.module").then((x) => x.ProfileModule)
+            },
+            {
                 path: "map",
                 loadChildren: () => import("./views/main-page/main-page.module").then((x) => x.MainPageModule)
             }

@@ -4,6 +4,10 @@ export class SignInModel {
 }
 
 export class RegisterModel {
-    login!: string;
-    password!: string;
+    username!: string;
+    signIn!: SignInModel;
+    email!: string;
+    phone!: string;
+    gender!: number;
+    country!: number;
 }

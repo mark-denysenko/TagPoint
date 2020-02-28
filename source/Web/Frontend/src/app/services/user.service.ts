@@ -8,6 +8,7 @@ import { TokenModel } from "../models/token.model";
 import { AddUserModel } from "../models/user/add.user.model";
 import { UpdateUserModel } from "../models/user/update.user.model";
 import { UserModel } from "../models/user/user.model";
+import { Observable } from "rxjs";
 
 const apiUrl = environment.apiBaseUrl;
 
@@ -65,5 +66,26 @@ export class AppUserService {
 
     update(updateUserModel: UpdateUserModel) {
         return this.http.put(`Users/${updateUserModel.id}`, updateUserModel);
+    }
+
+    public getProfile(): Observable<any> {
+        return this.http.get<any>(`${apiUrl}Users/Profile`);
+    }
+
+    public uploadAvatar(avatar: any): Observable<any> {
+        const formData = new FormData();
+        formData.append('file', avatar, avatar.name);
+
+        return this.http.post<any>(`${apiUrl}Users/SetAvatar`, formData);
+        
+        // this.http.post('https://localhost:5001/api/upload', formData, {reportProgress: true, observe: 'events'})
+        // .subscribe(event => {
+        //   if (event.type === HttpEventType.UploadProgress)
+        //     this.progress = Math.round(100 * event.loaded / event.total);
+        //   else if (event.type === HttpEventType.Response) {
+        //     this.message = 'Upload success.';
+        //     this.onUploadFinished.emit(event.body);
+        //   }
+        // });
     }
 }

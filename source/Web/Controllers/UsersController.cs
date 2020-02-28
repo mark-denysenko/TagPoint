@@ -28,6 +28,22 @@ namespace DotNetCoreArchitecture.Web
             return Result(await _userApplicationService.SignInAsync(signIn));
         }
 
+        [HttpGet("Profile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            return Result(await _userApplicationService.GetAsync(UserModel.Id));
+        }
+
+        [HttpPost("SetAvatar")]
+        public async Task<IActionResult> AddAvatarToUserAsync()
+        {
+            var avatar = ControllerContext.HttpContext.Request.Files()[0];
+
+            await _userApplicationService.SetAvatarAsync(UserModel.Id, avatar);
+
+            return Result(await _userApplicationService.GetAsync(UserModel.Id));
+        }
+
         [AuthorizeEnum(Roles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(long id)

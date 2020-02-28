@@ -1,10 +1,25 @@
 <div class="uk-card uk-card-default uk-card-body">
-    <div class="uk-margin">
-        <span>Name</span>
-        <span>Admin</span>
+    <div class="left-side">
+        Avatar
+        <input type="file" #file placeholder="Choose file" (change)="handleUploadAvatar(file.files)" style="display:none;">
+        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
     </div>
-    <div class="uk-margin">
-        <span>Phone</span>
-        <span>12321231231</span>
+    <div class="right-side">
+        <div class="uk-margin">
+            <span>Name:</span>
+            <span>{{ user.username }}</span>
+        </div>
+        <div class="uk-margin">
+            <span>Country:</span>
+            <span>{{ user.country }}</span>
+        </div>
+        <div class="uk-margin">
+            <span>Gender:</span>
+            <span>{{ user.gender }}</span>
+        </div>
+        <div class="uk-margin">
+            <span>Phone:</span>
+            <span>{{ user.phone }}</span>
+        </div>
     </div>
 </div>

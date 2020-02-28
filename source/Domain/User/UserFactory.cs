@@ -25,7 +25,7 @@ namespace DotNetCoreArchitecture.Domain
                 ),
                 addUserModel.Roles,
                 Status.Active,
-                Gender.Male,
+                addUserModel.Gender,
                 addUserModel.Phone,
                 addUserModel.About
             );

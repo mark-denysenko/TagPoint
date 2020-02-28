@@ -1,3 +1,6 @@
 <div class="uk-flex uk-flex-center">
-    <app-user-profile></app-user-profile>
+    <app-user-profile 
+        [user]="userProfile"
+        (uploadAvatar)="uploadAvatar($event)">
+    </app-user-profile>
 </div>

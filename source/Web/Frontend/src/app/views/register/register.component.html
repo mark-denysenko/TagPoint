@@ -25,11 +25,11 @@
             </div>
             <div class="uk-margin">
                 <app-label for="gender" text="Стать"></app-label>
-                <app-dropdown formControlName="gender" [options]="['Male', 'Female']"></app-dropdown>
+                <app-dropdown formControlName="gender" [options]="dropdownGenders"></app-dropdown>
             </div>
             <div class="uk-margin">
                 <app-label for="country" text="Країна"></app-label>
-                <app-dropdown formControlName="country" [options]="['Ukraine', 'England']"></app-dropdown>
+                <app-dropdown formControlName="country" [options]="dropdownCountries"></app-dropdown>
             </div>
             <div class="uk-margin uk-text-center">
 				<app-button text="Зареєструватися" [disabled]="form.invalid" (click)="register()"></app-button>

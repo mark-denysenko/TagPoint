@@ -1,5 +1,6 @@
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Model;
+using Model.Models.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,7 +8,9 @@ namespace DotNetCoreArchitecture.Application
 {
     public interface IUserApplicationService
     {
+        Task<IDataResult<ProfileModel>> GetAsync(long id);
         Task<IDataResult<long>> AddAsync(AddUserModel addUserModel);
+        Task<IResult> SetAvatarAsync(long userId, BinaryFile avatar);
 
         Task<IResult> DeleteAsync(long id);
 

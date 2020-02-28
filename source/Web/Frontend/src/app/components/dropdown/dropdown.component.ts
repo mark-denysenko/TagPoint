@@ -17,7 +17,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class AppDropdownComponent extends AppBaseComponent<any> implements OnInit {
 
   @Input() public options: any[] = [];
-  @Input() defaultText = '';
+  @Input() public defaultText = '';
   @Input() public displayField: string | null = null;
   @Output() public changeOption = new EventEmitter<any>();
 
@@ -28,7 +28,9 @@ export class AppDropdownComponent extends AppBaseComponent<any> implements OnIni
   }
 
   public change($event: any): void {
-    this.value = $event.target.value;
+    console.log('EVE', $event);
+    this.value = this.options.find(o => 
+      (this.displayField ? o[this.displayField] : o) === $event.target.value);
     this.changeOption.emit(this.value);
   }
 

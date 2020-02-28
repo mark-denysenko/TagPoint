@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppUserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  public userProfile: any;
+
+  constructor(private readonly appUserService: AppUserService) { }
 
   ngOnInit() {
+    this.appUserService.getProfile().subscribe(profile => this.userProfile = profile);
+  }
+
+  public uploadAvatar(avatar: any): void {
+    this.appUserService.uploadAvatar(avatar).subscribe(_ => _);
   }
 
 }

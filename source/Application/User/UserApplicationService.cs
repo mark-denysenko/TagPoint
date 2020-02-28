@@ -1,9 +1,12 @@
 using Database.Country;
+using Database.User;
+using Domain.User;
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Database;
 using DotNetCoreArchitecture.Domain;
 using DotNetCoreArchitecture.Infra;
 using DotNetCoreArchitecture.Model;
+using Model.Models.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,6 +19,7 @@ namespace DotNetCoreArchitecture.Application
         private readonly IUserLogApplicationService _userLogApplicationService;
         private readonly IUserRepository _userRepository;
         private readonly ICountryRepository _countryRepository;
+        private readonly IUserAvatarRepository _userAvatarRepository;
 
         public UserApplicationService
         (
@@ -23,7 +27,8 @@ namespace DotNetCoreArchitecture.Application
             IUnitOfWork unitOfWork,
             IUserLogApplicationService userLogApplicationService,
             IUserRepository userRepository,
-            ICountryRepository countryRepository
+            ICountryRepository countryRepository,
+            IUserAvatarRepository userAvatarRepository
         )
         {
             _signInService = signInService;
@@ -31,6 +36,7 @@ namespace DotNetCoreArchitecture.Application
             _userLogApplicationService = userLogApplicationService;
             _userRepository = userRepository;
             _countryRepository = countryRepository;
+            _userAvatarRepository = userAvatarRepository;
         }
 
         public async Task<IDataResult<long>> AddAsync(AddUserModel addUserModel)
@@ -49,11 +55,29 @@ namespace DotNetCoreArchitecture.Application
             await _userRepository.AddAsync(userEntity);
 
             var country = _countryRepository.FirstOrDefault(country => country.Id == addUserModel.CountryId);
-            country.AddUser(userEntity);
+            userEntity.Country = country;
 
             await _unitOfWork.SaveChangesAsync();
 
             return DataResult<long>.Success(userEntity.Id);
+        }
+
+        public async Task<IResult> SetAvatarAsync(long userId, BinaryFile avatar)
+        {
+            var user = await _userRepository.FirstOrDefaultAsync(u => u.Id == userId);
+            var newAvatar = new UserAvatarEntity
+            {
+                Filename = avatar.Name,
+                Avatar = avatar.Bytes
+            };
+
+            await _userAvatarRepository.DeleteAsync(avatar => avatar.UserId == userId);
+            user.Avatar = newAvatar;
+            await _userRepository.UpdateAsync(user.Id, user);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
         }
 
         public async Task<IResult> DeleteAsync(long id)
@@ -150,6 +174,22 @@ namespace DotNetCoreArchitecture.Application
         public async Task<UserModel> SelectAsync(long id)
         {
             return await _userRepository.SelectAsync<UserModel>(id);
+        }
+
+        public async Task<IDataResult<ProfileModel>> GetAsync(long id)
+        {
+            var user = await _userRepository.FirstOrDefaultWhereIncludeAsync(u => u.Id == id,
+                u => u.Country,
+                u => u.Avatar);
+
+            return DataResult<ProfileModel>.Success(new ProfileModel
+            {
+               Id = user.Id,
+               Username = user.Username,
+               Gender = user.Gender,
+               Country = user.Country?.Country,
+               Avatar = user.Avatar?.Avatar
+            });
         }
 
     }

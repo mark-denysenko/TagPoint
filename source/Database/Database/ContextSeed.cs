@@ -1,3 +1,4 @@
+using Database.Contact;
 using Database.Country;
 using DotNetCoreArchitecture.Domain;
 using DotNetCoreArchitecture.Model;
@@ -12,6 +13,7 @@ namespace DotNetCoreArchitecture.Database
         {
             builder.SeedUsers();
             builder.SeedCountries();
+            builder.SeedContactTypes();
         }
 
         private static void SeedUsers(this ModelBuilder builder)

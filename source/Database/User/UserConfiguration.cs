@@ -20,6 +20,8 @@ namespace DotNetCoreArchitecture.Database
             builder.Property(x => x.About).HasMaxLength(255);
             builder.Property(x => x.PhoneNumber).HasMaxLength(20);
 
+            builder.Property(x => x.RegisterDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
+
             builder.OwnsOne(x => x.Email, y =>
             {
                 y.Property(x => x.Address).HasColumnName(nameof(UserEntity.Email)).IsRequired().HasMaxLength(300);
@@ -35,6 +37,7 @@ namespace DotNetCoreArchitecture.Database
             });
 
             builder.HasMany(x => x.UsersLogs).WithOne(x => x.User).HasForeignKey(x => x.UserId);
+            //builder.HasOne(x => x.Avatar).WithOne(x => x.User);
         }
     }
 }

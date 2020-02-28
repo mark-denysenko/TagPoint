@@ -8,8 +8,8 @@ namespace DotNetCoreArchitecture.Database
         public Context(DbContextOptions options) : base(options)
         {
             //Database.EnsureDeleted();
-            //Database.EnsureCreated();
-            Database.Migrate();
+            Database.EnsureCreated();
+            //Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -26,14 +26,6 @@ const routes: Routes = [
         canActivate: [AppRouteGuard],
         children: [
             {
-                path: "files",
-                loadChildren: () => import("./views/main/files/files.module").then((x) => x.AppFilesModule)
-            },
-            {
-                path: "form",
-                loadChildren: () => import("./views/main/form/form.module").then((x) => x.AppFormModule)
-            },
-            {
                 path: "home",
                 loadChildren: () => import("./views/main/home/home.module").then((x) => x.AppHomeModule)
             },

@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public uploadAvatar(avatar: any): void {
-    this.appUserService.uploadAvatar(avatar).subscribe(_ => _);
+    this.appUserService.uploadAvatar(avatar).subscribe(profile => this.userProfile = profile);
   }
 
 }

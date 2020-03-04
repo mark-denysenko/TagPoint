@@ -25,7 +25,7 @@ namespace Database.Country
 
             int id = 1;
             var countriesList = new List<CountryEntity>(200);
-            foreach(var culture in cultureInfos)
+            foreach (var culture in cultureInfos)
             {
                 RegionInfo regionInfo = new RegionInfo(culture.LCID);
                 if (countriesList.All(country => country.Country != regionInfo.DisplayName))

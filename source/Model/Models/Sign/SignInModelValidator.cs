@@ -1,5 +1,4 @@
 using DotNetCore.Validation;
-using CrossCutting.Resources;
 using FluentValidation;
 
 namespace DotNetCoreArchitecture.Model
@@ -8,7 +7,7 @@ namespace DotNetCoreArchitecture.Model
     {
         public SignInModelValidator()
         {
-            WithMessage(Texts.LoginPasswordInvalid);
+            WithMessage("Login or password is invalid.");
             RuleFor(x => x.Login).NotEmpty();
             RuleFor(x => x.Password).NotEmpty();
         }

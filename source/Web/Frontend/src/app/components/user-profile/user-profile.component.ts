@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class UserProfileComponent implements OnInit {
 
   @Input() user: any;
+  @Input() isEditable: boolean = false;
   @Output() uploadAvatar = new EventEmitter<any>();
 
   constructor() { }

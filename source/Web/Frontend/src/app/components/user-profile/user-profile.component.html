@@ -1,25 +1,29 @@
 <div class="uk-card uk-card-default uk-card-body">
     <div class="left-side">
-        Avatar
-        <input type="file" #file placeholder="Choose file" (change)="handleUploadAvatar(file.files)" style="display:none;">
+        <div class="js-upload uk-padding-small uk-padding-remove-left" uk-form-custom>
+            <input type="file" #input  (change)="handleUploadAvatar(input.files)">
+            <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
+        </div>
+        <img src="{{'data:image/jpg;base64,' + user?.avatar}}" width="100" height="50" alt="avatar">
+        <input type="file" accept="image/jpeg,image/png,image/gif" #file placeholder="Choose file" (change)="handleUploadAvatar(file.files)" style="display:none;">
         <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
     </div>
     <div class="right-side">
         <div class="uk-margin">
             <span>Name:</span>
-            <span>{{ user.username }}</span>
+            <span>{{ user?.username }}</span>
         </div>
         <div class="uk-margin">
             <span>Country:</span>
-            <span>{{ user.country }}</span>
+            <span>{{ user?.country }}</span>
         </div>
         <div class="uk-margin">
             <span>Gender:</span>
-            <span>{{ user.gender }}</span>
+            <span>{{ user?.gender }}</span>
         </div>
         <div class="uk-margin">
             <span>Phone:</span>
-            <span>{{ user.phone }}</span>
+            <span>{{ user?.phone }}</span>
         </div>
     </div>
 </div>

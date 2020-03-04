@@ -1,7 +1,6 @@
 using DotNetCore.Extensions;
 using DotNetCore.Objects;
 using DotNetCore.Security;
-using CrossCutting.Resources;
 using DotNetCoreArchitecture.Model;
 using System;
 using System.Collections.Generic;
@@ -52,14 +51,14 @@ namespace DotNetCoreArchitecture.Infra
         {
             if (signedInModel == default || signInModel == default)
             {
-                return Result.Fail(Texts.LoginPasswordInvalid);
+                return Result.Fail("Login or password is invalid.");
             }
 
             var password = _hashService.Create(signInModel.Password, signedInModel.SignIn.Salt);
 
             if (signedInModel.SignIn.Password != password)
             {
-                return Result.Fail(Texts.LoginPasswordInvalid);
+                return Result.Fail("Login or password is invalid.");
             }
 
             return Result.Success();

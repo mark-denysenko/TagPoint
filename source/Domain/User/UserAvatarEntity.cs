@@ -12,5 +12,6 @@ namespace Domain.User
         public byte[] Avatar { get; set; }
         public UserEntity User { get; set; }
         public long UserId { get; set; }
+        public DateTime UploadedTime { get; set; }
     }
 }

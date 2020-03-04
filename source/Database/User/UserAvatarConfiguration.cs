@@ -17,6 +17,8 @@ namespace Database.User
 
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.HasOne(x => x.User).WithOne(x => x.Avatar);
+
+            builder.Property(x => x.UploadedTime).HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }

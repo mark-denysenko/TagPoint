@@ -68,14 +68,18 @@ namespace Application.Post
             return DataResult<long>.Success(newPost.Id);
         }
 
-        public Task<IResult> DeletePostAsync(int id)
+        public async Task<IResult> DeletePostAsync(int id)
         {
-            throw new NotImplementedException();
+            await _postRepository.DeleteAsync(id);
+
+            return Result.Success();
         }
 
-        public Task<IDataResult<PostModel>> GetPostAsync(int id)
+        public async Task<IDataResult<PostModel>> GetPostAsync(int id)
         {
-            throw new NotImplementedException();
+            var post = await _postRepository.SelectAsync(id);
+
+            return DataResult<PostModel>.Success(CreatePostModel(post));
         }
 
         public async Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius)
@@ -88,14 +92,18 @@ namespace Application.Post
                     Id = m.Id,
                     Latitude = m.Coordinate.Latitude,
                     Longitude = m.Coordinate.Longitude,
-                    Posts = m.Posts.Select(p =>
-                        new PostModel
-                        {
-                            Id = p.Id,
-                            Message = p.Message,
-                            //UserId = p.UserId
-                        })
+                    Posts = m.Posts.Select(CreatePostModel)
                 }));
+        }
+
+        private PostModel CreatePostModel(PostEntity post)
+        {
+            return new PostModel
+            {
+                Id = post.Id,
+                Message = post.Message,
+                //UserId = p.UserId
+            };
         }
     }
 }

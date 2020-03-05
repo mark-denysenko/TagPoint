@@ -1,17 +1,13 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { Cacheable } from "ngx-cacheable";
+import { AppPostService } from "src/app/services/post.service";
 
 @Component({ selector: "app-list", templateUrl: "./list.component.html" })
 export class AppListComponent {
-    list: any;
+    public userPosts: any[] = [];
 
-    constructor(private readonly http: HttpClient) {
-        this.get().subscribe((list: any) => this.list = list);
+    constructor(private readonly postService: AppPostService) {
+        this.postService.getUserPosts().subscribe(posts => this.userPosts = posts);
     }
 
-    @Cacheable()
-    get() {
-        return this.http.get("https://jsonplaceholder.typicode.com/users");
-    }
 }

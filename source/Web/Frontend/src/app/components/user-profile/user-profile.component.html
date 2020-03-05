@@ -1,26 +1,34 @@
-<div class="uk-card uk-card-default uk-card-body uk-flex">
-    <div class="uk-width-1-2 uk-align-center">
+<div class="uk-card uk-card-default uk-card-body uk-flex uk-width-xlarge">
+    <div class="uk-width-1-3 uk-align-center">
 
-        <div class="uk-padding-small pointer uk-align-center" uk-form-custom>
-            <input type="file"  #input accept="image/jpeg,image/png,image/gif" (change)="handleUploadAvatar(input.files)">
-            <img 
+        <div class="pointer uk-align-center">
+            <input type="file" [ngStyle]="{'display': 'none'}" #input accept="image/jpeg,image/png,image/gif" (change)="handleUploadAvatar(input.files)">
+            <img (click)="input.click()"
                 class="uk-border-circle uk-align-center uk-height-max-small uk-overlay-hover avatar-image"
                 src="{{user?.avatar ? 'data:image/jpg;base64,' + user?.avatar : 'assets/default-avatar.png'}}" 
                 alt="avatar">
         </div>
     </div>
-    <div class="uk-width-1-2 uk-padding">
+    <div class="uk-width-2-3 uk-padding">
         <div class="uk-margin">
             <span><b>Ім'я:</b></span>
-            <span>{{ user?.username }}</span>
+            <span class="uk-margin-left">{{ user?.username }}</span>
         </div>
         <div class="uk-margin">
             <span><b>Країна:</b></span>
-            <span>{{ user?.country }}</span>
+            <span class="uk-margin-left">{{ user?.country }}</span>
         </div>
         <div class="uk-margin">
             <span><b>Стать:</b></span>
-            <span>{{ getGender(user?.gender) }}</span>
+            <span class="uk-margin-left">{{ getGender(user?.gender) }}</span>
+        </div>
+        <div class="uk-margin">
+            <span><b>Кількість записів:</b></span>
+            <span class="uk-margin-left">{{ user?.postsNumber }}</span>
+        </div>
+        <div class="uk-margin">
+            <span><b>Дата реєстрації:</b></span>
+            <span class="uk-margin-left">{{ user?.registrationDate | date: 'dd-MM-yyyy' }}</span>
         </div>
     </div>
 </div>

@@ -20,7 +20,7 @@ namespace DotNetCoreArchitecture.Database
             builder.Property(x => x.About).HasMaxLength(255);
             builder.Property(x => x.PhoneNumber).HasMaxLength(20);
 
-            builder.Property(x => x.RegisterDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
+            builder.Property(x => x.RegisterDate).IsRequired().HasDefaultValueSql("GETDATE()");
 
             builder.OwnsOne(x => x.Email, y =>
             {

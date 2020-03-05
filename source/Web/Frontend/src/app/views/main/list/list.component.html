@@ -3,20 +3,22 @@
 <table class="uk-table uk-table-responsive uk-table-divider uk-table-hover uk-table-small uk-table-striped">
     <thead>
         <tr>
-            <th class="uk-text-nowrap uk-text-center@m">Id</th>
-            <th class="uk-text-nowrap">Name</th>
-            <th class="uk-text-nowrap">Username</th>
-            <th class="uk-text-nowrap">Email</th>
-            <th class="uk-text-nowrap">Company</th>
+            <th class="uk-text-nowrap uk-text-center@m">Ідентифікатор запису</th>
+            <th class="uk-text-nowrap">Локація</th>
+            <th class="uk-text-nowrap">Запис</th>
+            <th class="uk-text-nowrap">Вподобайки</th>
+            <th class="uk-text-nowrap">Дизлайки</th>
+            <th class="uk-text-nowrap">Дата створення</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of list">
+        <tr *ngFor="let item of userPosts">
             <td class="uk-text-nowrap uk-text-center@m">{{ item?.id }}</td>
             <td class="uk-text-nowrap">{{ item?.name }}</td>
-            <td class="uk-text-nowrap">{{ item?.username }}</td>
-            <td class="uk-text-nowrap">{{ item?.email }}</td>
-            <td class="uk-text-nowrap">{{ item?.company?.name }}</td>
+            <td class="uk-text-nowrap">{{ item?.message }}</td>
+            <td class="uk-text-nowrap">{{ 1 }}</td>
+            <td class="uk-text-nowrap">{{ 1 }}</td>
+            <td class="uk-text-nowrap">{{ item?.creationDate | date:'HH:mm dd-MM-yyyy' }}</td>
         </tr>
     </tbody>
 </table>

@@ -17,7 +17,7 @@ namespace Database.Post
 
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.Message).IsRequired().HasMaxLength(1000);
-            builder.Property(x => x.PostDate).IsRequired().HasDefaultValueSql("GETUTCDATE()");
+            builder.Property(x => x.PostDate).IsRequired().HasDefaultValueSql("GETDATE()");
         }
     }
 }

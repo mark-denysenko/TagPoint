@@ -7,6 +7,8 @@ namespace Model.Models.User
 {
     public class ProfileModel : UserModel
     {
+        public int PostsNumber { get; set; }
+        public DateTime RegistrationDate { get; set; }
         public byte[] Avatar { get; set; }
         public string Country { get; set; }
     }

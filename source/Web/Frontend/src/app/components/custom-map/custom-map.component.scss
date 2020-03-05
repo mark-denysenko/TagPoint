@@ -24,3 +24,8 @@ agm-map {
 ::ng-deep .gmnoprint {
     visibility: hidden;
 }
+
+::ng-deep .selected-marker-container {
+    position: relative;
+    top: -50px;
+}

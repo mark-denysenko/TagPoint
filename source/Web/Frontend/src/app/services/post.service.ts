@@ -18,4 +18,8 @@ export class AppPostService {
     public getMarkersWithPostsInRadius(center: Coordinate, radius: number): Observable<MarkerWithPosts[]> {
         return this.http.get<MarkerWithPosts[]>(`${apiUrl}Post/${center.latitude}/${center.longitude}/${radius}`);
     }
+
+    public getUserPosts(): Observable<any[]> {
+        return this.http.get<any[]>(`${apiUrl}Post/My`);
+    }
 }

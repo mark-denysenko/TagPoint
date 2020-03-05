@@ -15,5 +15,6 @@ namespace Model.Models.Post
         public MarkerModel Marker { get; set; }
 
         public long UserId { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

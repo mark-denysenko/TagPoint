@@ -27,8 +27,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   public getGender(gender: number): string {
-    console.log('gender', gender);
-    
     if (gender == 0) {
       return 'Чоловік';
     } else if (gender == 1) {

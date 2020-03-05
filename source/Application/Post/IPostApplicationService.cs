@@ -15,5 +15,6 @@ namespace Application.Post
         Task<IDataResult<PostModel>> GetPostAsync(int id);
         Task<IResult> DeletePostAsync(int id);
         Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius);
+        Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId);
     }
 }

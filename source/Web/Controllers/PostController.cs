@@ -21,14 +21,12 @@ namespace Web.Controllers
             _postApplicationService = userApplicationService;
         }
 
-        // GET: api/<controller>
-        //[HttpGet]
-        //public async Task<IEnumerable<PostModel>> Get()
-        //{
-        //    return Result(await _postApplicationService.GetPostsNearAsync());
-        //}
+        [HttpGet("My")]
+        public async Task<IActionResult> Get()
+        {
+            return Result(await _postApplicationService.GetUserPosts(UserModel.Id));
+        }
 
-        // GET api/<controller>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -47,7 +45,6 @@ namespace Web.Controllers
                 radius));
         }
 
-        // POST api/<controller>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]PostModel post)
         {
@@ -68,7 +65,6 @@ namespace Web.Controllers
         //{
         //}
 
-        // DELETE api/<controller>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {

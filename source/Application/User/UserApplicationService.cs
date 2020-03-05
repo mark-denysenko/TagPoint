@@ -180,7 +180,8 @@ namespace DotNetCoreArchitecture.Application
         {
             var user = await _userRepository.FirstOrDefaultWhereIncludeAsync(u => u.Id == id,
                 u => u.Country,
-                u => u.Avatar);
+                u => u.Avatar,
+                user => user.Posts);
 
             return DataResult<ProfileModel>.Success(new ProfileModel
             {
@@ -188,7 +189,10 @@ namespace DotNetCoreArchitecture.Application
                Username = user.Username,
                Gender = user.Gender,
                Country = user.Country?.Country,
-               Avatar = user.Avatar?.Avatar
+               Avatar = user.Avatar?.Avatar,
+               CountryId = user.Country?.Id ?? 0,
+               RegistrationDate = user.RegisterDate,
+               PostsNumber = user.Posts.Count
             });
         }
 

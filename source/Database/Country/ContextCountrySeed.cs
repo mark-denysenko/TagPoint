@@ -19,27 +19,6 @@ namespace Database.Country
             });
         }
 
-        //private static IEnumerable<CountryEntity> GetCountryList()
-        //{
-        //    CultureInfo[] cultureInfos = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
-
-        //    int id = 1;
-        //    var countriesList = new List<CountryEntity>(200);
-        //    foreach (var culture in cultureInfos)
-        //    {
-        //        RegionInfo regionInfo = new RegionInfo(culture.LCID);
-        //        if (countriesList.All(country => country.Country != regionInfo.DisplayName))
-        //        {
-        //            countriesList.Add(new CountryEntity
-        //            {
-        //                Id = id++,
-        //                Country = regionInfo.DisplayName
-        //            });
-        //        }
-        //    }
-
-        //    return countriesList;
-        //}
         private static IEnumerable<CountryEntity> GetCountryList2()
         {
             int id = 1;

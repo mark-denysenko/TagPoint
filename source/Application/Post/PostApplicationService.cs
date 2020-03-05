@@ -96,12 +96,20 @@ namespace Application.Post
                 }));
         }
 
+        public async Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId)
+        {
+            var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId);
+
+            return DataResult<IEnumerable<PostModel>>.Success(posts.Select(CreatePostModel));
+        }
+
         private PostModel CreatePostModel(PostEntity post)
         {
             return new PostModel
             {
                 Id = post.Id,
                 Message = post.Message,
+                CreationDate = post.PostDate.ToUniversalTime()
                 //UserId = p.UserId
             };
         }

@@ -2,18 +2,6 @@
 
 This project is an example of architecture using new technologies and best practices.
 
-The goal is to share knowledge and use it as reference for new projects.
-
-Thanks for enjoying!
-
-## Build
-
-[![Build status](https://dev.azure.com/rafaelfgx/DotNetCoreArchitecture/_apis/build/status/DotNetCoreArchitecture)](https://dev.azure.com/rafaelfgx/DotNetCoreArchitecture/_apis/build/status/DotNetCoreArchitecture)
-
-## Code Analysis
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d1ea5b1f4b745488384c744cb00d51e)](https://www.codacy.com/app/rafaelfgx/DotNetCoreArchitecture?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rafaelfgx/DotNetCoreArchitecture&amp;utm_campaign=Badge_Grade)
-
 ## Technologies
 
 * [.NET Core 3.1](https://dotnet.microsoft.com/download)
@@ -201,60 +189,6 @@ Packages were created to make this architecture clean of common features for any
 ## Web
 
 ### Angular
-
-#### Component
-
-The **Component** class is responsible for being a small part of the application.
-
-It must be as simple and small as possible.
-
-```typescript
-@Component({ selector: "app-login", templateUrl: "./login.component.html" })
-export class AppLoginComponent {
-    form = this.formBuilder.group({
-        login: ["", Validators.required],
-        password: ["", Validators.required]
-    });
-
-    constructor(
-        private readonly formBuilder: FormBuilder,
-        private readonly appUserService: AppUserService) {
-    }
-
-    signIn() {
-        this.appUserService.signIn(this.form.value);
-    }
-}
-```
-
-```html
-<form [formGroup]="form">
-    <fieldset>
-        <div>
-            <app-label for="login" text="Login"></app-label>
-            <app-input-text formControlName="login" text="Login" [autofocus]="true"></app-input-text>
-        </div>
-        <div>
-            <app-label for="password" text="Password"></app-label>
-            <app-input-password formControlName="password" text="Password"></app-input-password>
-        </div>
-        <div>
-            <app-button text="Sign in" [disabled]="form.invalid" (click)="signIn()"></app-button>
-        </div>
-    </fieldset>
-</form>
-```
-
-#### Model
-
-The **Model** class is responsible for containing a set of data.
-
-```typescript
-export class SignInModel {
-    login!: string;
-    password!: string;
-}
-```
 
 #### Service
 
@@ -530,12 +464,6 @@ public class UsersController : BaseController
     public async Task<IActionResult> ListAsync()
     {
         return Result(await _userApplicationService.ListAsync());
-    }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> SelectAsync(long id)
-    {
-        return Result(await _userApplicationService.SelectAsync(id));
     }
 
     [AllowAnonymous]
@@ -877,19 +805,6 @@ public sealed class SignInModelValidator : Validator<SignInModel>
         RuleFor(x => x.Login).NotEmpty();
         RuleFor(x => x.Password).NotEmpty();
     }
-}
-```
-
-#### Enum
-
-The **Enum** is responsible for being a set of named integer constants.
-
-```csharp
-public enum Status
-{
-    None = 0,
-    Active = 1,
-    Inactive = 2
 }
 ```
 

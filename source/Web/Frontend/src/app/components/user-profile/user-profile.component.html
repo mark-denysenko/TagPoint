@@ -1,29 +1,26 @@
-<div class="uk-card uk-card-default uk-card-body">
-    <div class="left-side">
-        <div class="js-upload uk-padding-small uk-padding-remove-left" uk-form-custom>
-            <input type="file" #input  (change)="handleUploadAvatar(input.files)">
-            <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
+<div class="uk-card uk-card-default uk-card-body uk-flex">
+    <div class="uk-width-1-2 uk-align-center">
+
+        <div class="uk-padding-small pointer uk-align-center" uk-form-custom>
+            <input type="file"  #input accept="image/jpeg,image/png,image/gif" (change)="handleUploadAvatar(input.files)">
+            <img 
+                class="uk-border-circle uk-align-center uk-height-max-small uk-overlay-hover avatar-image"
+                src="{{user?.avatar ? 'data:image/jpg;base64,' + user?.avatar : 'assets/default-avatar.png'}}" 
+                alt="avatar">
         </div>
-        <img src="{{'data:image/jpg;base64,' + user?.avatar}}" width="100" height="50" alt="avatar">
-        <input type="file" accept="image/jpeg,image/png,image/gif" #file placeholder="Choose file" (change)="handleUploadAvatar(file.files)" style="display:none;">
-        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
     </div>
-    <div class="right-side">
+    <div class="uk-width-1-2 uk-padding">
         <div class="uk-margin">
-            <span>Name:</span>
+            <span><b>Ім'я:</b></span>
             <span>{{ user?.username }}</span>
         </div>
         <div class="uk-margin">
-            <span>Country:</span>
+            <span><b>Країна:</b></span>
             <span>{{ user?.country }}</span>
         </div>
         <div class="uk-margin">
-            <span>Gender:</span>
-            <span>{{ user?.gender }}</span>
-        </div>
-        <div class="uk-margin">
-            <span>Phone:</span>
-            <span>{{ user?.phone }}</span>
+            <span><b>Стать:</b></span>
+            <span>{{ getGender(user?.gender) }}</span>
         </div>
     </div>
 </div>

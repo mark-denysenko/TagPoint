@@ -8,16 +8,25 @@ import { TokenModel } from "../models/token.model";
 import { AddUserModel } from "../models/user/add.user.model";
 import { UpdateUserModel } from "../models/user/update.user.model";
 import { UserModel } from "../models/user/user.model";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
+import { UserProfileModel } from "../models/user/user-profile.model";
+import { tap } from "rxjs/operators";
 
 const apiUrl = environment.apiBaseUrl;
 
 @Injectable({ providedIn: "root" })
 export class AppUserService {
+    public currentUser$: BehaviorSubject<UserProfileModel> = new BehaviorSubject<UserProfileModel>({} as UserProfileModel);
+
     constructor(
         private readonly http: HttpClient,
         private readonly router: Router,
         private readonly appTokenService: AppTokenService) { }
+
+    ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        this.getProfile().subscribe(user => this.currentUser$.next(user));
+    }
 
     add(addUserModel: AddUserModel) {
         return this.http.post<number>(`${apiUrl}Users`, addUserModel);
@@ -69,7 +78,7 @@ export class AppUserService {
     }
 
     public getProfile(): Observable<any> {
-        return this.http.get<any>(`${apiUrl}Users/Profile`);
+        return this.http.get<any>(`${apiUrl}Users/Profile`).pipe(tap(user => this.currentUser$.next(user)));
     }
 
     public uploadAvatar(avatar: any): Observable<any> {

@@ -4,6 +4,8 @@ using System.Text;
 
 /*
  *  Standard IP Lookup - look up the data behind an IP address
+ *
+ *  https://blog.bitscry.com/2018/06/07/user-geolocation-in-asp-net-core/
  *  
     http://api.ipstack.com/ 134.201.250.155 (|,158.234.22.02) | check 
     ? access_key = YOUR_ACCESS_KEY

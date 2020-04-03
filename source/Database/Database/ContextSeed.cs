@@ -1,5 +1,7 @@
 using Database.Contact;
 using Database.Country;
+using Database.Point;
+using Database.Post;
 using DotNetCoreArchitecture.Domain;
 using DotNetCoreArchitecture.Model;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +13,11 @@ namespace DotNetCoreArchitecture.Database
     {
         public static void Seed(this ModelBuilder builder)
         {
-            builder.SeedUsers();
             builder.SeedCountries();
+            builder.SeedUsers();
             builder.SeedContactTypes();
+            builder.SeedPoints();
+            builder.SeedPosts();
         }
 
         private static void SeedUsers(this ModelBuilder builder)
@@ -26,7 +30,8 @@ namespace DotNetCoreArchitecture.Database
                     Username = "Administrator",
                     Roles = Roles.User | Roles.Admin,
                     Gender = Gender.Male,
-                    Status = Status.Active
+                    Status = Status.Active,
+                    CountryId = 232
                 });
 
                 x.OwnsOne(y => y.Email).HasData(new

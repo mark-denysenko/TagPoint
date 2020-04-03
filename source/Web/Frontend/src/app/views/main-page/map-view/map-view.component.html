@@ -1,21 +1,32 @@
-<div class="map uk-margin">
-    <app-custom-map
-        [markers]="markersOnMap"
-        [zoom]="mapZoom$ | async"
-        [currentMarker]="selectedMarker"
-        [initialPlace]="initialPlace"
-        (centerChange)="handleCenterChange($event)"
-        (zoomChange)="handleZoomChange($event)"
-        (selectMarker)="handleMarkerSelect($event)">
-    </app-custom-map>
-</div>
-<div class="creation-area">
-    <div class="left">
-        <app-post-creator
-            (sendPost)="handleSendPost($event)">
-        </app-post-creator>
+<div class="" uk-grid>
+    <div class="uk-width-2-3">
+        <div class="map uk-margin">
+            <app-custom-map
+                [markers]="markersOnMap"
+                [zoom]="mapZoom$ | async"
+                [currentMarker]="selectedMarker"
+                [initialPlace]="initialPlace"
+                (centerChange)="handleCenterChange($event)"
+                (zoomChange)="handleZoomChange($event)"
+                (selectMarker)="handleMarkerSelect($event)">
+            </app-custom-map>
+        </div>
+        <div class="creation-area">
+            <div class="left">
+                <app-post-creator
+                    (sendPost)="handleSendPost($event)">
+                </app-post-creator>
+            </div>
+            <div class="right">
+                
+            </div>
+        </div>
     </div>
-    <div class="right">
-        
+    <div class="uk-width-1-3 overflow-auto posts-container uk-padding-small">
+        <div *ngFor="let post of selectedMarker?.posts" 
+            class="uk-card uk-card-default uk-card-body uk-margin">
+            {{ post.message }}
+        </div>
+        <div class="uk-text-center" *ngIf="!selectedMarker?.posts">Тут ще не має записів</div>
     </div>
 </div>

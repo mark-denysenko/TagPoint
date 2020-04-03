@@ -1,7 +1,14 @@
 .map {
-    height: 65%;
+    height: 380px;
 }
 
 .creation-area {
     display: flex;
+}
+
+.posts-container {
+    max-height: 560px;
+    .post-card {
+
+    }
 }

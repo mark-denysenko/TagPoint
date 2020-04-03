@@ -44,12 +44,9 @@ export class CustomMapComponent implements OnInit {
     this.zoomChange.emit(zoom);
   }
 
-  public onMarkerSelect(event: any, infoWindow: any, marker: Marker): void {
+  public onMarkerSelect(event: any, infoWindow: AgmInfoWindow, marker: Marker): void {
     this.previousIW = this.currentIW;
     this.currentIW = infoWindow;
-
-    console.log('onMarkerSelect,', event);
-    
 
     if (this.previousIW) {
       this.previousIW.close();

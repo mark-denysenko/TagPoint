@@ -13,6 +13,9 @@ import { MarkerInfoModule } from '../marker-info/marker-info.module';
     MarkerInfoModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAsc-CRI5KjV2xe1H7rhM6Cp68I69n18rA',//environment.keys.gmap,
+      // from documentation - uk (Ukrainian)
+      language: 'uk',
+      region: 'ua',
       libraries: ["places", "geometry"] //, "geocoding"
     })
   ],

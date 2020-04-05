@@ -35,8 +35,14 @@ export class MapViewComponent implements OnInit {
 
   public handleMarkerSelect(marker: Marker): void {
     this.selectedMarker = marker;
-    console.log('mam', marker);
-       
+  }
+
+  public handleLikePost(post: any): void {
+
+  }
+
+  public handleDeletePost(post: any): void {
+    
   }
 
   public handleCenterChange(coordinate: Coordinate): void {

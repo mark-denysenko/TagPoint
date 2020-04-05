@@ -24,8 +24,17 @@
     </div>
     <div class="uk-width-1-3 overflow-auto posts-container uk-padding-small">
         <div *ngFor="let post of selectedMarker?.posts" 
-            class="uk-card uk-card-default uk-card-body uk-margin">
-            {{ post.message }}
+            class="uk-card uk-card-default uk-card-body uk-margin uk-card-small">
+            <div class="uk-margin">
+                <span class="uk-align-right pointer" style="color: red;" uk-icon="close" (click)="handleDeletePost(post)"></span>
+                <span>
+                    {{ post.message }}
+                </span>
+            </div>
+            <div class="uk-flex uk-flex-between">
+                <span style="font-size: 10px;">{{ post.creationDate | date: 'dd-MM-yyyy' }}</span>
+                <span class="pointer" style="color: red;" [ngStyle]="{'fill': post.liked ? 'red' : 'transparent'}" uk-icon="heart" (click)="handleLikePost(post)"></span>
+            </div>
         </div>
         <div class="uk-text-center" *ngIf="!selectedMarker?.posts">Тут ще не має записів</div>
     </div>

@@ -42,7 +42,8 @@ namespace Web.Controllers
                     Latitude = latitude,
                     Longitude = longitude
                 },
-                radius));
+                radius,
+                UserModel.Id));
         }
 
         [HttpPost]
@@ -56,7 +57,8 @@ namespace Web.Controllers
                     Latitude = post.Marker.Latitude,
                     Longitude = post.Marker.Longitude
                 },
-                0.0001));
+                0.0001,
+                UserModel.Id));
         }
 
         //// PUT api/<controller>/5
@@ -69,6 +71,12 @@ namespace Web.Controllers
         public async Task Delete(int id)
         {
             await _postApplicationService.DeletePostAsync(id);
+        }
+
+        [HttpPost("toggleLike")]
+        public async Task<int> ToggleLike([FromBody] VoteModel vote)
+        {
+            return await _postApplicationService.ToggleLikePostAync(vote.PostId, UserModel.Id);
         }
     }
 }

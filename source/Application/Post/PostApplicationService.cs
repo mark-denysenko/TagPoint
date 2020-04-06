@@ -1,5 +1,6 @@
 using Database.Point;
 using Database.Post;
+using Database.Vote;
 using Domain.Point;
 using Domain.Post;
 using Domain.ValueObjects;
@@ -22,17 +23,20 @@ namespace Application.Post
         private readonly IPostRepository _postRepository;
         private readonly IPointRepository _pointRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ILikeRepository _likesRepository;
 
         public PostApplicationService(
             IUnitOfWork unitOfWork,
             IPostRepository postRepository,
             IPointRepository pointRepository,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            ILikeRepository likesRepository)
         {
             _unitOfWork = unitOfWork;
             _postRepository = postRepository;
             _pointRepository = pointRepository;
             _userRepository = userRepository;
+            _likesRepository = likesRepository;
         }
 
         public async Task<IDataResult<long>> CreatePostAsync(PostModel post)
@@ -68,23 +72,42 @@ namespace Application.Post
             return DataResult<long>.Success(newPost.Id);
         }
 
-        public async Task<IResult> DeletePostAsync(int id)
+        public async Task<IResult> DeletePostAsync(long id)
         {
+            var post = await _postRepository.FirstOrDefaultWhereIncludeAsync(p => p.Id == id, post => post.Point);
             await _postRepository.DeleteAsync(id);
+            await _unitOfWork.SaveChangesAsync();
+
+            var point = await _pointRepository.FirstOrDefaultWhereIncludeAsync(p => p.Id == post.Point.Id, p => p.Posts);
+            if (!point.Posts.Any())
+            {
+                await _pointRepository.DeleteAsync(post.Point.Id);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
 
             return Result.Success();
         }
 
-        public async Task<IDataResult<PostModel>> GetPostAsync(int id)
+        public async Task<IDataResult<PostModel>> GetPostAsync(long id)
         {
-            var post = await _postRepository.SelectAsync(id);
+            var post = await _postRepository.SingleOrDefaultWhereIncludeAsync(p => p.Id == id, p => p.User);
 
             return DataResult<PostModel>.Success(CreatePostModel(post));
         }
 
-        public async Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius)
+        public async Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius, long userId)
         {
             var markersInRadius = await _pointRepository.GetPointsInRadius(center, radius);
+
+            var postsIds = markersInRadius.SelectMany(m => m.Posts.Select(p => p.Id)).ToList();
+            var posts = await _postRepository.ListWhereIncludeAsync(p => postsIds.Contains(p.Id), p => p.Point, p => p.User, p => p.Likes);
+            var usersIds = posts.Select(p => p.User.Id);
+            var users = await _userRepository.ListWhereIncludeAsync(u => usersIds.Contains(u.Id), u => u.Avatar);
+            foreach (var post in posts)
+            {
+                post.User = users.First(u => u.Id == post.User.Id);
+            }
 
             return DataResult<IEnumerable<MarkerModel>>.Success(markersInRadius.Select(m =>
                 new MarkerModel
@@ -92,15 +115,52 @@ namespace Application.Post
                     Id = m.Id,
                     Latitude = m.Coordinate.Latitude,
                     Longitude = m.Coordinate.Longitude,
-                    Posts = m.Posts.Select(CreatePostModel)
+                    Posts = posts.Where(p => p.Point.Id == m.Id)
+                        .Select(p =>
+                        {
+                            var returnPost = CreatePostModel(p);
+                            returnPost.Liked = p.Likes.Any(like => like.UserId == userId);
+                            returnPost.TimesLiked = p.Likes.Count;
+                            returnPost.Editable = p.User.Id == userId;
+
+                            return returnPost;
+                        })
                 }));
         }
 
         public async Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId)
         {
-            var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId);
+            var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId, p => p.User, p => p.User.Avatar);
 
             return DataResult<IEnumerable<PostModel>>.Success(posts.Select(CreatePostModel));
+        }
+
+        public async Task<int> ToggleLikePostAync(long postId, long userId)
+        {
+            var user = await _userRepository.SingleOrDefaultWhereIncludeAsync(u => u.Id == userId, u => u.Likes);
+            var post = await _postRepository.SingleOrDefaultWhereIncludeAsync(p => p.Id == postId, p => p.Likes);
+
+            var like = post.Likes.FirstOrDefault(like => like.UserId == userId);
+            if (like is null)
+            {
+                like = new Domain.Vote.LikeEntity
+                {
+                    PostId = postId,
+                    UserId = userId,
+                };
+                await _likesRepository.AddAsync(like);
+                post.Likes.Add(like);
+                user.Likes.Add(like);
+            }
+            else
+            {
+                _likesRepository.Remove(postId, userId);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
+            post = await _postRepository.SingleOrDefaultWhereIncludeAsync(p => p.Id == postId, p => p.Likes);
+
+            return post.Likes.Count;
         }
 
         private PostModel CreatePostModel(PostEntity post)
@@ -109,8 +169,10 @@ namespace Application.Post
             {
                 Id = post.Id,
                 Message = post.Message,
-                CreationDate = post.PostDate.ToUniversalTime()
-                //UserId = p.UserId
+                CreationDate = post.PostDate.ToUniversalTime(),
+                UserId = post.User.Id,
+                Username = post.User.Username,
+                UserAvatar = post.User.Avatar?.Avatar
             };
         }
     }

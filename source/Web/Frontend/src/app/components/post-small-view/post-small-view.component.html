@@ -1,1 +1,25 @@
-<p>post-small-view works!</p>
+<div class="uk-card uk-card-default uk-card-body uk-margin uk-card-small">
+    <div class="uk-margin">
+        <div *ngIf="post.editable" class="pointer" style="color: red; float: right;" uk-icon="close" (click)="handleDeletePost(post)"></div>
+        <div class="uk-flex" style="align-items: center;">
+            <img class="uk-border-circle uk-height-max-small avatar-image"
+                src="{{post.userAvatar ? 'data:image/jpg;base64,' + post.userAvatar : 'assets/default-avatar.png'}}">
+            <div class="uk-text-large uk-margin-left">{{ post.username }}</div>
+        </div>
+        <div class="uk-margin uk-text-middle">
+            {{ post.message }}
+        </div>
+    </div>
+    <div>
+        <div style="font-size: 12px;">
+            {{ post.creationDate | date: 'dd-MM-yyyy' }}
+            <span class="pointer" 
+                uk-icon="heart" 
+                style="color: red; float: right;" 
+                [class.liked]="post.liked" 
+                (click)="handleLikePost(post)">
+                {{ post.timesLiked }}
+            </span>
+        </div>
+    </div>
+</div>

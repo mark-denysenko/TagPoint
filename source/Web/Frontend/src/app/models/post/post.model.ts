@@ -3,4 +3,5 @@ export class PostModel {
     message!: string;
     marker!: Marker;
     userId!: number;
+    username!: string;
 }

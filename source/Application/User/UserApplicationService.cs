@@ -195,6 +195,5 @@ namespace DotNetCoreArchitecture.Application
                PostsNumber = user.Posts.Count
             });
         }
-
     }
 }

@@ -57,10 +57,6 @@ export class AppRegisterComponent implements OnInit {
       countryId: !!country ? country.id : null
     };
 
-    console.log('rerer', mappedForm);
-    console.log('asdad', this.form);
-    
-
     this.appUserService.register(mappedForm);
   }
 

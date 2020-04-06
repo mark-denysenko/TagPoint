@@ -12,9 +12,11 @@ namespace Application.Post
     public interface IPostApplicationService
     {
         Task<IDataResult<long>> CreatePostAsync(PostModel post);
-        Task<IDataResult<PostModel>> GetPostAsync(int id);
-        Task<IResult> DeletePostAsync(int id);
-        Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius);
+        Task<IDataResult<PostModel>> GetPostAsync(long id);
+        Task<IResult> DeletePostAsync(long id);
+        Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius, long userId);
         Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId);
+        Task<int> ToggleLikePostAync(long postId, long userId);
+
     }
 }

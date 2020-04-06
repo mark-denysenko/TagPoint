@@ -29,7 +29,7 @@ export class CustomMapComponent implements OnInit {
     this.selectMarker.emit({
       latitude: event.coords.lat,
       longitude: event.coords.lng
-    });
+    } as Marker);
     
     if (this.currentIW) {
       this.currentIW.close();

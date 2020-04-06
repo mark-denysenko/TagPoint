@@ -1,13 +1,17 @@
-<div class="uk-margin">
-    <textarea 
-        class="uk-textarea" 
-        rows="3"
-        [formControl]="text"
-        placeholder="Опис">
-    </textarea>
-</div>
-<div class="uk-margin">
-    <button class="uk-button uk-button-default uk-margin-small-right" (click)="handleSendPost()">Відправити</button>
-    <span class="uk-icon-link uk-icon-button pointer" uk-icon="icon: image"></span>
+<div uk-grid>
+    <div class="uk-margin uk-width-3-4 uk-flex" fxLayout="column" fxLayoutAlign="space-between">
+        <app-input-text class="uk-margin" text="Місце" [formControl]="address"></app-input-text>
+        <!-- <input type="text" class="uk-input" class="uk-margin"> -->
+        <textarea 
+            class="uk-textarea" 
+            rows="3"
+            [formControl]="text"
+            placeholder="Опис">
+        </textarea>
+    </div>
+    <div class="uk-margin uk-width-1-4 uk-flex uk-flex-column-reverse">
+        <!-- <span class="uk-icon-link uk-icon-button pointer" uk-icon="icon: image"></span> -->
+        <button class="uk-button uk-button-default uk-margin-small-right" (click)="handleSendPost()">Відправити</button>
+    </div>
 </div>
 <!-- (keydown.enter)="handleSendPost()" -->

@@ -17,7 +17,7 @@ namespace Database.Post
                 {
                     Id = 1L,
                     PointId = 1L,
-                    UserId = 1L,
+                    UserId = 2L,
                     Message = "Один з найкращих навчальних закладів України! Дуже пишаюся своє альма-матер."
                 });
 
@@ -26,7 +26,7 @@ namespace Database.Post
                 {
                     Id = 2L,
                     PointId = 2L,
-                    UserId = 1L,
+                    UserId = 3L,
                     Message = "Гуртожиток для студентів КПІ різних факультетів. Одна з трьох так званих \"книжок\". Не найсприятливіші умови для проживання, але обирати не доводиться."
                 });
 
@@ -35,7 +35,7 @@ namespace Database.Post
                 {
                     Id = 3L,
                     PointId = 3L,
-                    UserId = 1L,
+                    UserId = 4L,
                     Message = "Одне з найвідоміших місць для відпочинку студентів! Але потрібно бути обережним з відпочинком та не втрачати голову! Дівчатам краще не ходити тут вночі! Бережіть себе!"
                 });
 
@@ -44,7 +44,7 @@ namespace Database.Post
                 {
                     Id = 4L,
                     PointId = 4L,
-                    UserId = 1L,
+                    UserId = 2L,
                     Message = "Рідне місто! Завжди залишає тільки теплі враження та допомгає відпочити!"
                 });
 
@@ -53,7 +53,7 @@ namespace Database.Post
                 {
                     Id = 5L,
                     PointId = 5L,
-                    UserId = 1L,
+                    UserId = 3L,
                     Message = "Колоритне місто біля Чорного моря. Дуже смачна риба та пиво!"
                 });
 
@@ -62,7 +62,7 @@ namespace Database.Post
                 {
                     Id = 6L,
                     PointId = 6L,
-                    UserId = 1L,
+                    UserId = 4L,
                     Message = "Мабуть єдине місце у світі, що наскрізь пропахло кавоя та шоколадом. Обожнюю!"
                 });
 
@@ -71,7 +71,7 @@ namespace Database.Post
                 {
                     Id = 7L,
                     PointId = 7L,
-                    UserId = 1L,
+                    UserId = 2L,
                     Message = "За старою легендою, ось тут на дні розташовні скарби піратів, що грабували королів ..."
                 });
 
@@ -81,7 +81,7 @@ namespace Database.Post
                 {
                     Id = 8L,
                     PointId = 4L,
-                    UserId = 1L,
+                    UserId = 3L,
                     Message = "Тут готують найсмачніші галушки!!!"
                 });
             });

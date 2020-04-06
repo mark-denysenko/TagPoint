@@ -9,12 +9,15 @@ namespace Model.Models.Post
     public class PostModel
     {
         public long Id { get; set; }
-
         public string Message { get; set; }
-
-        public MarkerModel Marker { get; set; }
-
-        public long UserId { get; set; }
+        public string Address { get; set; }
         public DateTime CreationDate { get; set; }
+        public MarkerModel Marker { get; set; }
+        public bool Liked { get; set; }
+        public int TimesLiked { get; set; }
+        public bool Editable { get; set; }
+        public long UserId { get; set; }
+        public string Username { get; set; }
+        public byte[] UserAvatar { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace Database.User
             builder.HasOne(x => x.User).WithOne(x => x.Avatar);
 
             builder.Property(x => x.UploadedTime).HasDefaultValueSql("GETDATE()");
+
+            builder.HasIndex(x => x.UserId).IsUnique();
         }
     }
 }

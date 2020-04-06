@@ -28,7 +28,6 @@ export class AppDropdownComponent extends AppBaseComponent<any> implements OnIni
   }
 
   public change($event: any): void {
-    console.log('EVE', $event);
     this.value = this.options.find(o => 
       (this.displayField ? o[this.displayField] : o) === $event.target.value);
     this.changeOption.emit(this.value);

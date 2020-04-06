@@ -1,4 +1,5 @@
 using Domain.Point;
+using Domain.Vote;
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Domain;
 using System;
@@ -13,5 +14,6 @@ namespace Domain.Post
         public DateTime PostDate { get; set; }
         public UserEntity User { get; set; }
         public PointEntity Point { get; set; }
+        public ICollection<LikeEntity> Likes { get; set; }
     }
 }

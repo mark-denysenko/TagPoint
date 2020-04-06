@@ -37,14 +37,6 @@ export class MapViewComponent implements OnInit {
     this.selectedMarker = marker;
   }
 
-  public handleLikePost(post: any): void {
-
-  }
-
-  public handleDeletePost(post: any): void {
-    
-  }
-
   public handleCenterChange(coordinate: Coordinate): void {
     this.mapCenter$.next(coordinate);
   }
@@ -65,12 +57,27 @@ export class MapViewComponent implements OnInit {
     });
   }
 
+  public handleDeletePost(post: any): void {
+    this.postService.deletePost(post.id)
+      .subscribe(_ => {
+        this.markersOnMap.forEach(m => m.posts = m.posts.filter(p => p.id !== post.id));
+        this.markersOnMap = this.markersOnMap.filter(m => m.posts.length);
+      });
+  }
+
+  public handleToggleLikePost(post: any): void {
+    this.postService.toggleLike(post.id)
+      .subscribe(timesLiked => 
+        this.markersOnMap.forEach(m => m.posts = m.posts.map(p => p.id === post.id ? { ...p, liked: !p.liked, timesLiked } : p)))
+  }
+
   private setCurrentPosition(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords
         this.initialPlace = position.coords;
-        this.handleMarkerSelect({ latitude, longitude });
+        
+        this.handleMarkerSelect({ latitude, longitude } as Marker);
         this.mapCenter$.next({latitude, longitude});
       });
 

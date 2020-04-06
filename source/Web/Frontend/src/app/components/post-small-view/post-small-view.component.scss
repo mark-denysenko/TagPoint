@@ -1,0 +1,12 @@
+.avatar-image {
+    width: 40px;
+    height: 40px;
+}
+
+::ng-deep .liked {
+    svg {
+        path {
+            fill: red;
+        }
+    }
+}

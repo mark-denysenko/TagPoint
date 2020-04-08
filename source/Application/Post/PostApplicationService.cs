@@ -130,7 +130,7 @@ namespace Application.Post
 
         public async Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId)
         {
-            var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId, p => p.User, p => p.User.Avatar);
+            var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId, p => p.User, p => p.User, p => p.Likes);
 
             return DataResult<IEnumerable<PostModel>>.Success(posts.Select(CreatePostModel));
         }
@@ -170,6 +170,7 @@ namespace Application.Post
                 Id = post.Id,
                 Message = post.Message,
                 CreationDate = post.PostDate.ToUniversalTime(),
+                TimesLiked = post.Likes.Count,
                 UserId = post.User.Id,
                 Username = post.User.Username,
                 UserAvatar = post.User.Avatar?.Avatar

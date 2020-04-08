@@ -15,8 +15,6 @@ export class PostSmallViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('ppp', this.post);
-    
   }
 
   public handleDeletePost(): void {

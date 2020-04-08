@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 // import { Gender } from 'src/typing';
 
 @Component({
@@ -6,15 +7,34 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnChanges {
 
   @Input() user: any;
   @Input() isEditable: boolean = false;
   @Output() uploadAvatar = new EventEmitter<any>();
 
-  constructor() { }
+  public userForm = this.formBuilder.group({
+    username: [null, Validators.required],
+    email: [null, [Validators.required, Validators.email]],
+    phone: [null, Validators.pattern('')],
+    gender: [null, Validators.required],
+    country: [null, Validators.required]
+  });
 
-  ngOnInit() {
+  public changePasswordForm = this.formBuilder.group({
+    oldPassword: [null, Validators.required],
+    newPassword: [null, Validators.required]
+  });
+
+  constructor(private readonly formBuilder: FormBuilder) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.user){
+      this.userForm.patchValue({ ...changes.user.currentValue});
+    }
+  }
+
+  ngOnInit() {    
   }
 
   public handleUploadAvatar(files: any): void {
@@ -34,6 +54,14 @@ export class UserProfileComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  public saveChanges(): void {
+
+  }
+
+  public changePassword(): void {
+    
   }
 
 }

@@ -12,6 +12,7 @@ namespace Database.Post
         {
             builder.Entity<PostEntity>(x =>
             {
+
                 // KPI
                 x.HasData(new
                 {
@@ -83,6 +84,15 @@ namespace Database.Post
                     PointId = 4L,
                     UserId = 3L,
                     Message = "Тут готують найсмачніші галушки!!!"
+                });
+
+                // hostel 20
+                x.HasData(new
+                {
+                    Id = 9L,
+                    PointId = 2L,
+                    UserId = 1L,
+                    Message = "Живу у цьому гуртожитку вже достатньо довго і можу скзазати, що умови спартанські ..."
                 });
             });
         }

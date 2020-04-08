@@ -17,7 +17,8 @@ namespace Database.User
                 x.HasData(new
                 {
                     Id = 1L,
-                    Username = "Administrator",
+                    Username = "Денисенко Марк",
+                    PhoneNumber = "0501231231",
                     Roles = Roles.User | Roles.Admin,
                     Gender = Gender.Male,
                     Status = Status.Active,
@@ -26,12 +27,12 @@ namespace Database.User
                 x.OwnsOne(y => y.Email).HasData(new
                 {
                     UserEntityId = 1L,
-                    Address = "administrator@administrator.com"
+                    Address = "mark@administrator.com"
                 });
                 x.OwnsOne(y => y.SignIn).HasData(new
                 {
                     UserEntityId = 1L,
-                    Login = "admin",
+                    Login = "mark",
                     Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
                     Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
                 });
@@ -39,8 +40,9 @@ namespace Database.User
                 x.HasData(new
                 {
                     Id = 2L,
-                    Username = "Олена",
-                    Roles = Roles.User | Roles.Admin,
+                    Username = "Шатровський Андрій",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
                     CountryId = 232
@@ -48,12 +50,12 @@ namespace Database.User
                 x.OwnsOne(y => y.Email).HasData(new
                 {
                     UserEntityId = 2L,
-                    Address = "olena@olena.com"
+                    Address = "shatrik@ua.com"
                 });
                 x.OwnsOne(y => y.SignIn).HasData(new
                 {
                     UserEntityId = 2L,
-                    Login = "olena",
+                    Login = "shatrik",
                     Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
                     Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
                 });
@@ -61,8 +63,9 @@ namespace Database.User
                 x.HasData(new
                 {
                     Id = 3L,
-                    Username = "Василь",
-                    Roles = Roles.User | Roles.Admin,
+                    Username = "Кушка Михайло",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
                     CountryId = 232
@@ -70,12 +73,12 @@ namespace Database.User
                 x.OwnsOne(y => y.Email).HasData(new
                 {
                     UserEntityId = 3L,
-                    Address = "vasyl@vasyl.com"
+                    Address = "kushka@ua.com"
                 });
                 x.OwnsOne(y => y.SignIn).HasData(new
                 {
                     UserEntityId = 3L,
-                    Login = "vasyl",
+                    Login = "kushka",
                     Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
                     Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
                 });
@@ -83,8 +86,9 @@ namespace Database.User
                 x.HasData(new
                 {
                     Id = 4L,
-                    Username = "Петро",
-                    Roles = Roles.User | Roles.Admin,
+                    Username = "Недашківський Євген",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
                     CountryId = 232
@@ -92,12 +96,35 @@ namespace Database.User
                 x.OwnsOne(y => y.Email).HasData(new
                 {
                     UserEntityId = 4L,
-                    Address = "petro@petro.com"
+                    Address = "yevhen@ua.com"
                 });
                 x.OwnsOne(y => y.SignIn).HasData(new
                 {
                     UserEntityId = 4L,
-                    Login = "petro",
+                    Login = "yevhen",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
+
+                x.HasData(new
+                {
+                    Id = 5L,
+                    Username = "Шаверський Іван",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Male,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 5L,
+                    Address = "ivan@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 5L,
+                    Login = "ivan",
                     Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
                     Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
                 });

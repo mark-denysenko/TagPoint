@@ -187,6 +187,9 @@ namespace DotNetCoreArchitecture.Application
             {
                Id = user.Id,
                Username = user.Username,
+               Email = user.Email.Address,
+               Phone = user.PhoneNumber,
+               About = user.About,
                Gender = user.Gender,
                Country = user.Country?.Country,
                Avatar = user.Avatar?.Avatar,

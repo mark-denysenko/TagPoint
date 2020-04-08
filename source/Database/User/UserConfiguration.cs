@@ -17,8 +17,8 @@ namespace DotNetCoreArchitecture.Database
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.Username).IsRequired().HasMaxLength(100);
 
-            builder.Property(x => x.About).HasMaxLength(255);
-            builder.Property(x => x.PhoneNumber).HasMaxLength(20);
+            builder.Property(x => x.About).HasMaxLength(255).HasDefaultValue(string.Empty);
+            builder.Property(x => x.PhoneNumber).HasMaxLength(20).HasDefaultValue(string.Empty);
 
             builder.Property(x => x.RegisterDate).IsRequired().HasDefaultValueSql("GETDATE()");
 

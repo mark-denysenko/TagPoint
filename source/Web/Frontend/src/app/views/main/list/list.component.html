@@ -1,22 +1,20 @@
 <table class="uk-table uk-table-responsive uk-table-divider uk-table-hover uk-table-small uk-table-striped">
     <thead>
         <tr>
-            <th class="uk-text-center@m">Ідентифікатор запису</th>
+            <!-- <th class="uk-text-center@m">Ідентифікатор запису</th> -->
             <th class="">Локація</th>
             <th class="">Запис</th>
             <th class="">Вподобайки</th>
-            <th class="">Дизлайки</th>
             <th class="">Дата створення</th>
             <th class="" style="width: 20px;"></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of userPosts">
-            <td class="uk-text-center@m">{{ item?.id }}</td>
+            <!-- <td class="uk-text-center@m">{{ item?.id }}</td> -->
             <td class="">{{ item?.name }}</td>
             <td class="">{{ item?.message }}</td>
-            <td class="">{{ 0 }}</td>
-            <td class="">{{ 0 }}</td>
+            <td class="">{{ item?.timesLiked }}</td>
             <td class="">{{ item?.creationDate | date:'HH:mm dd-MM-yyyy' }}</td>
             <td class=""><span class="pointer" style="color: red;" uk-icon="close"></span></td>
         </tr>

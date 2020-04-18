@@ -2,6 +2,8 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AppListComponent } from "./list.component";
+import { AppInputTextModule } from "src/app/components/input/text/text.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 const routes: Routes = [
     { path: "", component: AppListComponent }
@@ -11,7 +13,10 @@ const routes: Routes = [
     declarations: [AppListComponent],
     imports: [
         CommonModule,
-        RouterModule.forChild(routes)
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(routes),
+        AppInputTextModule
     ],
     exports: [RouterModule]
 })

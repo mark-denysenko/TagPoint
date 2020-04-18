@@ -51,14 +51,14 @@ namespace DotNetCoreArchitecture.Infra
         {
             if (signedInModel == default || signInModel == default)
             {
-                return Result.Fail("Login or password is invalid.");
+                return Result.Fail("Логін або пароль введено не вірно.");
             }
 
             var password = _hashService.Create(signInModel.Password, signedInModel.SignIn.Salt);
 
             if (signedInModel.SignIn.Password != password)
             {
-                return Result.Fail("Login or password is invalid.");
+                return Result.Fail("Логін або пароль введено не вірно.");
             }
 
             return Result.Success();

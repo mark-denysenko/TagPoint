@@ -17,7 +17,7 @@
             "./src/typings.d.ts"
         ],
         "types": [
-            "googlemaps"
+            //"googlemaps"
         ]
     },
     "angularCompilerOptions": {

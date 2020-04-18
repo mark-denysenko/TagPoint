@@ -30,7 +30,7 @@ namespace DotNetCoreArchitecture.Domain
             Username = username;
             Email = email;
             SignIn = signIn;
-            Roles = Roles.User;// roles;
+            Roles = roles;
             Status = status;
             Gender = gender;
             About = about;
@@ -74,6 +74,24 @@ namespace DotNetCoreArchitecture.Domain
         public void ChangeUsername(string username)
         {
             Username = username;
+        }
+
+        public void ChangePhone(string phone)
+        {
+            PhoneNumber = phone ?? string.Empty;
+        }
+        public void ChangeAbout(string about)
+        {
+            About = about ?? string.Empty;
+        }
+
+        public void ChangeGender(Gender gender)
+        {
+            Gender = gender;
+        }
+        public void ChangeSignIn(SignIn signIn)
+        {
+            SignIn = signIn;
         }
 
         public void Inactivate()

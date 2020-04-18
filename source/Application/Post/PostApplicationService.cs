@@ -60,7 +60,8 @@ namespace Application.Post
 
             var newPost = new PostEntity
             {
-                Message = post.Message
+                Message = post.Message,
+                Location = post.Location
             };
 
             await _postRepository.AddAsync(newPost);
@@ -128,11 +129,34 @@ namespace Application.Post
                 }));
         }
 
-        public async Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId)
+        public async Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId, PostsRequest postsRequest)
         {
             var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId, p => p.User, p => p.User, p => p.Likes);
 
-            return DataResult<IEnumerable<PostModel>>.Success(posts.Select(CreatePostModel));
+            var postsResult = posts.Select(CreatePostModel);
+
+            if (postsRequest.OrderByDateAsc.HasValue)
+            {
+                postsResult = postsRequest.OrderByDateAsc.Value
+                    ? postsResult.OrderBy(p => p.CreationDate)
+                    : postsResult.OrderByDescending(p => p.CreationDate);
+            }
+
+            if (postsRequest.OrderByLikesAsc.HasValue)
+            {
+                postsResult = postsRequest.OrderByLikesAsc.Value
+                    ? postsResult.OrderBy(p => p.Liked)
+                    : postsResult.OrderByDescending(p => p.Liked);
+            }
+
+            if (!string.IsNullOrWhiteSpace(postsRequest.Keyword))
+            {
+                postsResult = postsResult.Where(p => p.Message.Contains(postsRequest.Keyword)
+                    || p.Location.Contains(postsRequest.Keyword)
+                    || p.TimesLiked.ToString().Contains(postsRequest.Keyword));
+            }
+
+            return DataResult<IEnumerable<PostModel>>.Success(postsResult);
         }
 
         public async Task<int> ToggleLikePostAync(long postId, long userId)
@@ -169,6 +193,7 @@ namespace Application.Post
             {
                 Id = post.Id,
                 Message = post.Message,
+                Location = post.Location,
                 CreationDate = post.PostDate.ToUniversalTime(),
                 TimesLiked = post.Likes.Count,
                 UserId = post.User.Id,

@@ -1,5 +1,6 @@
 using Database.Country;
 using Database.User;
+using Domain.Country;
 using Domain.User;
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Database;
@@ -140,11 +141,13 @@ namespace DotNetCoreArchitecture.Application
             }
 
             userEntity.ChangeUsername(updateUserModel.Username);
-
             userEntity.ChangeEmail(updateUserModel.Email);
+            userEntity.ChangePhone(updateUserModel.Phone);
+            userEntity.ChangeGender(updateUserModel.Gender);
+            userEntity.ChangeAbout(updateUserModel.About);
+            userEntity.Country = _countryRepository.FirstOrDefault(country => country.Id == updateUserModel.CountryId);
 
             await _userRepository.UpdateAsync(userEntity.Id, userEntity);
-
             await _unitOfWork.SaveChangesAsync();
 
             return Result.Success();
@@ -197,6 +200,44 @@ namespace DotNetCoreArchitecture.Application
                RegistrationDate = user.RegisterDate,
                PostsNumber = user.Posts.Count
             });
+        }
+
+        public async Task<IResult> UpdatePasswordAsync(UserChangePassword updateUserModel)
+        {
+            var user = await _userRepository.SelectAsync(updateUserModel.UserId);
+            var signedInModel = await _userRepository.SignInAsync(new SignInModel
+            {
+                Login = user.SignIn.Login
+            });
+
+            var validation = _signInService.Validate(signedInModel, new SignInModel
+            {
+                Login = user.SignIn.Login,
+                Password = updateUserModel.OldPassword
+            });
+
+            if (validation.Failed)
+            {
+                return Result.Fail("Старий пароль введено не вірно!");
+            }
+
+            var newSignInModel = _signInService.CreateSignIn(new SignInModel
+            {
+                Login = user.SignIn.Login,
+                Password = updateUserModel.NewPassword
+            });
+            user.ChangeSignIn(new SignIn
+                (
+                    newSignInModel.Login,
+                    newSignInModel.Password,
+                    newSignInModel.Salt
+                ));
+
+            await _userRepository.UpdateAsync(user.Id, user);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
         }
     }
 }

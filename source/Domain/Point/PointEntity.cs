@@ -14,6 +14,7 @@ namespace Domain.Point
 
         public UserEntity User { get; set; }
         public long UserId { get; set; }
+        public DateTime Created { get; set; }
 
         public ICollection<PostEntity> Posts { get; private set; }
 

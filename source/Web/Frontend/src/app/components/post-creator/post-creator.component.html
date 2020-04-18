@@ -1,6 +1,17 @@
 <div uk-grid>
     <div class="uk-margin uk-width-3-4 uk-flex" fxLayout="column" fxLayoutAlign="space-between">
-        <app-input-text class="uk-margin" text="Місце" [formControl]="address"></app-input-text>
+        <!-- <app-input-text class="uk-margin" text="Місце" [formControl]="location"></app-input-text> -->
+        <div class="uk-inline">
+            <input #addressInput class="uk-input uk-margin" placeholder="Місце" [formControl]="location">
+            <div uk-dropdown="mode: hover" class="uk-overlay">
+                <div *ngFor="let location of suggestedLocations$ | async" 
+                    class="pointer" 
+                    (click)="selectLocation(location, dropdown)">
+                    {{ location }}
+                </div>
+                <div *ngIf="!addressesNear.length">Місць поруч не знайдено</div>
+            </div>
+        </div>
         <!-- <input type="text" class="uk-input" class="uk-margin"> -->
         <textarea 
             class="uk-textarea" 
@@ -12,6 +23,12 @@
     <div class="uk-margin uk-width-1-4 uk-flex uk-flex-column-reverse">
         <!-- <span class="uk-icon-link uk-icon-button pointer" uk-icon="icon: image"></span> -->
         <button class="uk-button uk-button-default uk-margin-small-right" (click)="handleSendPost()">Відправити</button>
+        <input class="uk-input uk-margin" placeholder="тег">
+        <div style="display: flex;">
+            <span class="uk-label uk-label-warning">краса</span>
+            <span class="uk-label uk-label-warning">краєвид</span>
+        </div>
+
     </div>
 </div>
 <!-- (keydown.enter)="handleSendPost()" -->

@@ -1,13 +1,36 @@
-import { Component } from "@angular/core";
-import { Cacheable } from "ngx-cacheable";
+import { Component, OnInit } from "@angular/core";
 import { AppPostService } from "src/app/services/post.service";
+import { AppModalService } from "src/app/core/services/modal.service";
+import { FormControl } from "@angular/forms";
+import { debounceTime } from "rxjs/operators";
 
-@Component({ selector: "app-list", templateUrl: "./list.component.html" })
-export class AppListComponent {
+@Component({ 
+    selector: "app-list", 
+    templateUrl: "./list.component.html",
+    styleUrls: ['./list.component.scss'] 
+})
+export class AppListComponent implements OnInit {
     public userPosts: any[] = [];
+    public keyword!: FormControl;
 
-    constructor(private readonly postService: AppPostService) {
-        this.postService.getUserPosts().subscribe(posts => this.userPosts = posts);
+    constructor(private readonly postService: AppPostService, private readonly modalService: AppModalService) {
     }
 
+    ngOnInit(): void {
+        this.keyword = new FormControl('');
+        this.keyword.valueChanges
+            .pipe(debounceTime(800))
+            .subscribe(status => this.getPosts());
+        this.getPosts();
+    }
+
+    public deletePost(post: any): void {
+        this.postService.deletePost(post.id).subscribe(_ => {
+            this.userPosts = this.userPosts.filter(p => p.id !== post.id);
+        });
+    }
+
+    public getPosts(): void {
+        this.postService.getUserPosts(this.keyword.value).subscribe(posts => this.userPosts = posts);
+    }
 }

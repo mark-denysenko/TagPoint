@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppLabelModule } from '../label/label.module';
 import { AppInputPasswordModule } from '../input/password/password.module';
 import { AppInputTextModule } from '../input/text/text.module';
+import { AppDropdownModule } from '../dropdown/dropdown.module';
 
 
 
@@ -17,6 +18,7 @@ import { AppInputTextModule } from '../input/text/text.module';
     AppInputPasswordModule,
     AppLabelModule,
     ReactiveFormsModule,
+    AppDropdownModule
   ]
 })
 export class UserProfileModule { }

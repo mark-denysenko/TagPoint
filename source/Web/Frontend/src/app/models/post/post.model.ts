@@ -1,7 +1,7 @@
 export class PostModel {
     id!: number;
     message!: string;
-    address!: string;
+    location!: string;
     marker!: Marker;
     userId!: number;
     username!: string;

@@ -45,12 +45,12 @@ export class MapViewComponent implements OnInit {
     this.mapZoom$.next(zoom);
   }
 
-  public handleSendPost(message: string): void {
+  public handleSendPost({ message, location }: {message: string, location: string}): void {
     if(!this.selectedMarker) {
       return;
     }
 
-    const post = { message, marker: this.selectedMarker, id: 0 };
+    const post = { message, location, marker: this.selectedMarker, id: 0 };
     this.postService.add(post).subscribe(markers => {
       this.selectedMarker = markers[0];
       this.markersOnMap = [...this.markersOnMap, ...markers];

@@ -1,6 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
+import { AppUserService } from 'src/app/services/user.service';
+import { AppModalService } from 'src/app/core/services/modal.service';
+import { Country } from 'src/typing';
+import { GeolocationService } from 'src/app/services/geolocation.service';
 // import { Gender } from 'src/typing';
+
+declare let UIkit: any;
 
 @Component({
   selector: 'app-user-profile',
@@ -26,15 +32,32 @@ export class UserProfileComponent implements OnInit, OnChanges {
     newPassword: [null, Validators.required]
   });
 
-  constructor(private readonly formBuilder: FormBuilder) { }
+  public countries: Country[] = [];
+  public genders: any[] = [{ gender: 'Чоловік', value: 0 }, { gender: 'Жінка', value: 1 }];
+
+  public get dropdownCountries(): string[] {
+    return this.countries.map(c => c.country);
+  }
+
+  public get dropdownGenders(): string[] {
+    return this.genders.map(c => c.gender);
+  }
+
+  constructor(private readonly formBuilder: FormBuilder,
+    private readonly appUserService: AppUserService, 
+    private readonly modalService: AppModalService,
+    private readonly geolocationService: GeolocationService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes.user){
-      this.userForm.patchValue({ ...changes.user.currentValue});
+      const newValue = changes.user.currentValue;
+      this.userForm.patchValue({ ...newValue, gender: this.getGender(newValue.gender)}, { emitEvent: false });
+      this.userForm.markAsPristine();
     }
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.geolocationService.getCountries().subscribe(res => this.countries = res);
   }
 
   public handleUploadAvatar(files: any): void {
@@ -47,21 +70,24 @@ export class UserProfileComponent implements OnInit, OnChanges {
   }
 
   public getGender(gender: number): string {
-    if (gender == 0) {
-      return 'Чоловік';
-    } else if (gender == 1) {
-      return 'Жінка';
-    } else {
-      return '';
-    }
+    const _gender = this.genders.find(g => g.value == gender);
+    return _gender ? _gender.gender : '';
   }
 
   public saveChanges(): void {
-
+    var updatedUser = {...this.user, ...this.userForm.value };
+    this.appUserService.update({ 
+      ...updatedUser,
+      countryId: this.countries.find(c => c.country === updatedUser.country)!.id,
+      gender: this.genders.find(g => g.gender === updatedUser.gender).value
+     }).subscribe(_ => this.modalService.successfullySavedNotification());
   }
 
   public changePassword(): void {
-    
+    const { oldPassword, newPassword } = this.changePasswordForm.value;
+
+    this.appUserService.changePassword(this.user.id, oldPassword, newPassword)
+      .subscribe(_ => this.modalService.successfullySavedNotification());
   }
 
 }

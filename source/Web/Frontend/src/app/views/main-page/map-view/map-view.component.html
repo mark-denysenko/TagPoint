@@ -13,6 +13,7 @@
         </div>
         <div >
             <app-post-creator
+                [place]="selectedMarker"
                 (sendPost)="handleSendPost($event)">
             </app-post-creator>
         </div>

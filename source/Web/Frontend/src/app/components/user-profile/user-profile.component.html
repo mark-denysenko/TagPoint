@@ -1,5 +1,5 @@
-<div class="uk-card uk-card-default uk-card-body uk-flex uk-width-xlarge" style="min-width: 700px;">
-    <div class="uk-width-2-5">
+<div class="uk-flex" style="min-width: 900px;">
+    <div class="uk-width-1-2 uk-flex uk-flex-column" style="justify-content: space-evenly;">
 
         <div class="pointer uk-align-center">
             <input type="file" [ngStyle]="{'display': 'none'}" #input accept="image/jpeg,image/png,image/gif" (change)="handleUploadAvatar(input.files)">
@@ -23,7 +23,7 @@
             </button>
         </div>
     </div>
-    <div class="uk-width-3-5">
+    <div class="uk-width-1-2">
         <form [formGroup]="userForm">
             <fieldset class="uk-fieldset">
                 <div class="uk-margin">
@@ -39,20 +39,20 @@
                     <app-input-text formControlName="phone" [autofocus]="true"></app-input-text>
                 </div>
                 <div class="uk-margin">
-                    <span><b>Країна:</b></span>
-                    <span class="uk-margin-left">{{ user?.country }}</span>
+                    <b><app-label for="country" text="Країна"></app-label></b>
+                    <app-dropdown formControlName="country" [options]="dropdownCountries"></app-dropdown>
                 </div>
                 <div class="uk-margin">
-                    <span><b>Стать:</b></span>
-                    <span class="uk-margin-left">{{ getGender(user?.gender) }}</span>
-                </div>
-                <div class="uk-margin">
-                    <span><b>Кількість записів:</b></span>
-                    <span class="uk-margin-left">{{ user?.postsNumber }}</span>
+                    <b><app-label for="gender" text="Стать"></app-label></b>
+                    <app-dropdown formControlName="gender" [options]="dropdownGenders"></app-dropdown>
                 </div>
                 <div class="uk-margin">
                     <span><b>Дата реєстрації:</b></span>
                     <span class="uk-margin-left">{{ user?.registrationDate | date: 'dd-MM-yyyy' }}</span>
+                </div>
+                <div class="uk-margin">
+                    <span><b>Створено записів:</b></span>
+                    <span class="uk-margin-left">{{ user?.postsNumber }}</span>
                 </div>
             </fieldset>
         </form>
@@ -78,7 +78,12 @@
             </fieldset>
         </form>
         <p class="uk-text-right">
-            <button class="uk-button uk-button-primary uk-modal-close" [disabled]="changePasswordForm.invalid" type="button" (click)="changePassword()">Зберегти</button>
+            <button class="uk-button uk-button-primary uk-modal-close" 
+                [disabled]="changePasswordForm.invalid" 
+                type="button"
+                (click)="changePassword()">
+                Зберегти
+            </button>
         </p>
     </div>
 </div>

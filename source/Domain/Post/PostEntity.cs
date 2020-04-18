@@ -11,6 +11,7 @@ namespace Domain.Post
     public class PostEntity : Entity
     {
         public string Message { get; set; }
+        public string Location { get; set; }
         public DateTime PostDate { get; set; }
         public UserEntity User { get; set; }
         public PointEntity Point { get; set; }

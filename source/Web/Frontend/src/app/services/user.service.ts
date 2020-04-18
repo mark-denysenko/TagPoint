@@ -74,7 +74,13 @@ export class AppUserService {
     }
 
     update(updateUserModel: UpdateUserModel) {
-        return this.http.put(`Users/${updateUserModel.id}`, updateUserModel);
+        console.log(updateUserModel);
+        
+        return this.http.put(`${apiUrl}Users/${updateUserModel.id}`, updateUserModel);
+    }
+
+    public changePassword(userId: number, oldPassword: string, newPassword: string): Observable<any> {
+        return this.http.post<any>(`${apiUrl}Users/ChangePassword`, {userId, oldPassword, newPassword});
     }
 
     public getProfile(): Observable<any> {

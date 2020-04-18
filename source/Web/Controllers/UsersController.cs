@@ -4,6 +4,7 @@ using DotNetCoreArchitecture.Application;
 using DotNetCoreArchitecture.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Model.Models.User;
 using System.Threading.Tasks;
 
 namespace DotNetCoreArchitecture.Web
@@ -91,7 +92,21 @@ namespace DotNetCoreArchitecture.Web
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(UpdateUserModel updateUserModel)
         {
-            return Result(await _userApplicationService.UpdateAsync(updateUserModel));
+            await _userApplicationService.UpdateAsync(updateUserModel);
+            return Ok();
+        }
+
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> UpdatePasswordAsync(UserChangePassword changePasswordModel)
+        {
+            var result = await _userApplicationService.UpdatePasswordAsync(changePasswordModel);
+
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return Result(result);
         }
     }
 }

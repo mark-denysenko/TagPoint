@@ -128,6 +128,121 @@ namespace Database.User
                     Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
                     Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
                 });
+
+                x.HasData(new
+                {
+                    Id = 6L,
+                    Username = "Шатровський Андрій",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Male,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 6L,
+                    Address = "anedertaker@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 6L,
+                    Login = "anedertaker",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
+
+                x.HasData(new
+                {
+                    Id = 7L,
+                    Username = "Денисенко Софія",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Female,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 7L,
+                    Address = "sofa@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 7L,
+                    Login = "sofa",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
+
+                x.HasData(new
+                {
+                    Id = 8L,
+                    Username = "Денисенко Таня",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Female,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 8L,
+                    Address = "tanya@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 8L,
+                    Login = "tanya",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
+
+                x.HasData(new
+                {
+                    Id = 9L,
+                    Username = "Денисенко Олександр",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Male,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 9L,
+                    Address = "alex@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 9L,
+                    Login = "alex",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
+
+                x.HasData(new
+                {
+                    Id = 10L,
+                    Username = "Денисенко Віктор",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Male,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 10L,
+                    Address = "victor@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 10L,
+                    Login = "victor",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
             });
         }
     }

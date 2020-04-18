@@ -27,5 +27,6 @@ namespace DotNetCoreArchitecture.Application
         Task SignOutAsync(SignOutModel signOutModel);
 
         Task<IResult> UpdateAsync(UpdateUserModel updateUserModel);
+        Task<IResult> UpdatePasswordAsync(UserChangePassword updateUserModel);
     }
 }

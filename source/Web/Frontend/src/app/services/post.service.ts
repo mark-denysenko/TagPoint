@@ -19,8 +19,22 @@ export class AppPostService {
         return this.http.get<MarkerWithPosts[]>(`${apiUrl}Post/${center.latitude}/${center.longitude}/${radius}`);
     }
 
-    public getUserPosts(): Observable<any[]> {
-        return this.http.get<any[]>(`${apiUrl}Post/My`);
+    public getUserPosts(keyword: string | null = null, orderByDateAsc: boolean | null = null, orderByLikesAsc: boolean | null = null): Observable<any[]> {
+        let request = `${apiUrl}Post/My?`;
+
+        if (orderByDateAsc !== null) {
+            request += ('orderByDateAsc=' + orderByDateAsc + '&');
+        }
+
+        if (orderByLikesAsc !== null) {
+            request += ('orderByLikesAsc=' + orderByLikesAsc + '&');
+        }
+
+        if (keyword !== null) {
+            request += 'keyword=' + keyword;
+        }
+
+        return this.http.get<any[]>(request);
     }
 
     public deletePost(postId: number): Observable<any> {

@@ -1,39 +1,52 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, NgZone, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AppInputTextComponent } from '../input/text/text.component';
-import { MapsAPILoader } from '@agm/core';
-import { google } from '@agm/core/services/google-maps-types';
+import { MapsAPILoader, GeocoderResult, GeocoderStatus } from '@agm/core';
+import { Observable } from 'rxjs';
+import { GoogleapiService } from 'src/app/services/googleapi.service';
+import { distinctUntilChanged, map } from 'rxjs/operators';
+
+declare var google: any;
 
 @Component({
   selector: 'app-post-creator',
   templateUrl: './post-creator.component.html',
   styleUrls: ['./post-creator.component.scss']
 })
-export class PostCreatorComponent implements OnInit {
+export class PostCreatorComponent implements OnInit, OnChanges {
 
+  @Input() place!: Marker;
   public text: FormControl;
-  public address: FormControl;
+  public location: FormControl;
 
-  private geoCoder : any;
+  public addressesNear: string[] = [];
+  public suggestedLocations$!: Observable<string[]>;
 
-  @ViewChild(AppInputTextComponent, {static: true}) addressRef!: AppInputTextComponent;
-
-  @Output() sendPost = new EventEmitter<string>();
+  @Output() sendPost = new EventEmitter<{ message: string, location: string }>();
 
   constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private readonly googleApiService: GoogleapiService,
+    private mapsAPILoader: MapsAPILoader
   ) {
     this.text = new FormControl('', [Validators.required, Validators.maxLength(1000)]);
-    this.address = new FormControl('', [Validators.maxLength(100)]);
+    this.location = new FormControl('', [Validators.maxLength(100)]);
   }
 
-  ngOnInit() {
-    console.log('adddd', this.addressRef);
-    
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.place.currentValue) {
+      const newPlace = changes.place.currentValue;
+      this.googleApiService.placesNearPlaces(newPlace.latitude, newPlace.longitude).subscribe(places => {
+        this.addressesNear = places;
+        this.location.updateValueAndValidity({ onlySelf: false, emitEvent: true });
+      });
+    }
+  }
+
+  ngOnInit() {    
     //load Places Autocomplete
     // this.mapsAPILoader.load().then(() => {
-    //   this.geoCoder = new google.maps.Geocoder;
+    //   this.geoCoder = new google.maps.Geocoder();
+
     //   let autocomplete = new google.maps.places.Autocomplete(this.addressRef, {
     //     types: ["address"]
     //   });
@@ -55,29 +68,24 @@ export class PostCreatorComponent implements OnInit {
     //     });
     //   });
     // });
-    this.address.valueChanges.pipe().subscribe(value => console.log(value));
+    this.suggestedLocations$ = this.location.valueChanges.pipe(
+      map((loc: string) => {
+        const searchLocation = loc.trim().toLowerCase();
+
+        if (searchLocation.length === 0) {
+          return this.addressesNear;
+
+        }
+
+        return this.addressesNear.filter(add => add.toLowerCase().includes(searchLocation));
+      }));
+  }
+
+  public selectLocation(location: string): void {
+    this.location.setValue(location);
   }
 
   public handleSendPost(): void {
-    this.sendPost.emit(this.text.value);
+    this.sendPost.emit({ message: this.text.value, location: this.location.value });
   }
-
-  public getAddress(latitude: any, longitude: any) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results: { formatted_address: FormControl; }[], status: string) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK') {
-        if (results[0]) {
-          //this.zoom = 12;
-          //this.address = results[0].formatted_address;
-        } else {
-          window.alert('No results found');
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
-      }
-
-    });
-  }
-
 }

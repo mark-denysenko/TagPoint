@@ -11,13 +11,15 @@ import { debounceTime } from "rxjs/operators";
 })
 export class AppListComponent implements OnInit {
     public userPosts: any[] = [];
-    public keyword!: FormControl;
+    public keyword = new FormControl('');
+
+    public orderByLikes: boolean | null = null;
+    public orderByDate: boolean | null = null;
 
     constructor(private readonly postService: AppPostService, private readonly modalService: AppModalService) {
     }
 
     ngOnInit(): void {
-        this.keyword = new FormControl('');
         this.keyword.valueChanges
             .pipe(debounceTime(800))
             .subscribe(status => this.getPosts());
@@ -31,6 +33,14 @@ export class AppListComponent implements OnInit {
     }
 
     public getPosts(): void {
-        this.postService.getUserPosts(this.keyword.value).subscribe(posts => this.userPosts = posts);
+        this.postService.getUserPosts(this.keyword.value, this.orderByDate, this.orderByLikes)
+            .subscribe(posts => this.userPosts = posts);
+    }
+
+    public sortBy(likes: boolean, date: boolean): void {
+        this.orderByLikes = this.orderByLikes && likes ? !this.orderByLikes : likes;
+        this.orderByDate = this.orderByDate && date ? !this.orderByDate : date;
+
+        this.getPosts();
     }
 }

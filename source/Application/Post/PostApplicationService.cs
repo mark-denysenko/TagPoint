@@ -135,18 +135,18 @@ namespace Application.Post
 
             var postsResult = posts.Select(CreatePostModel);
 
-            if (postsRequest.OrderByDateAsc.HasValue)
+            if (postsRequest.OrderByDateDesc.HasValue)
             {
-                postsResult = postsRequest.OrderByDateAsc.Value
-                    ? postsResult.OrderBy(p => p.CreationDate)
-                    : postsResult.OrderByDescending(p => p.CreationDate);
+                postsResult = postsRequest.OrderByDateDesc.Value
+                    ? postsResult.OrderByDescending(p => p.CreationDate)
+                    : postsResult.OrderBy(p => p.CreationDate);
             }
 
-            if (postsRequest.OrderByLikesAsc.HasValue)
+            if (postsRequest.OrderByLikesDesc.HasValue)
             {
-                postsResult = postsRequest.OrderByLikesAsc.Value
-                    ? postsResult.OrderBy(p => p.Liked)
-                    : postsResult.OrderByDescending(p => p.Liked);
+                postsResult = postsRequest.OrderByLikesDesc.Value
+                    ? postsResult.OrderByDescending(p => p.TimesLiked)
+                    : postsResult.OrderBy(p => p.TimesLiked);
             }
 
             if (!string.IsNullOrWhiteSpace(postsRequest.Keyword))

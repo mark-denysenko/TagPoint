@@ -19,7 +19,7 @@ namespace DotNetCoreArchitecture.Database
 
         public Context(DbContextOptions options) : base(options)
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
             //Database.Migrate();
         }

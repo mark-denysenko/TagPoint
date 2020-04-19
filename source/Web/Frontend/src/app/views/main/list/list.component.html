@@ -7,8 +7,8 @@
                 <!-- <th class="uk-text-center@m">Ідентифікатор запису</th> -->
                 <th class="">Локація</th>
                 <th class="">Запис</th>
-                <th class="">Вподобайки<img class="uk-margin-left filter" src="assets/icons/filter.svg"></th>
-                <th class="">Дата створення<img class="uk-margin-left filter" src="assets/icons/filter.svg"></th>
+                <th class=""><span class="d-flex">Вподобайки<img class="uk-margin-left filter pointer" [ngClass]="{'active': orderByLikes}" (click)="sortBy(true, null)" src="assets/icons/filter.svg"></span></th>
+                <th class=""><span class="d-flex" style="min-width: 180px;" >Дата створення<img class="uk-margin-left filter pointer" [class.active]="orderByDate" (click)="sortBy(null, true)" src="assets/icons/filter.svg"></span></th>
                 <th class="" style="width: 20px;"></th>
             </tr>
         </thead>

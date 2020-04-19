@@ -6,8 +6,8 @@ namespace Model.Models.Post
 {
     public class PostsRequest
     {
-        public bool? OrderByDateAsc { get; set; }
-        public bool? OrderByLikesAsc { get; set; }
+        public bool? OrderByDateDesc { get; set; }
+        public bool? OrderByLikesDesc { get; set; }
         public string Keyword { get; set; }
     }
 }

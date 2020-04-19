@@ -243,6 +243,52 @@ namespace Database.User
                     Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
                     Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
                 });
+
+                x.HasData(new
+                {
+                    Id = 11L,
+                    Username = "Самійло Степан",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Male,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 11L,
+                    Address = "stepan@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 11L,
+                    Login = "stepan",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
+
+                x.HasData(new
+                {
+                    Id = 12L,
+                    Username = "Кришталь Світлана",
+                    PhoneNumber = "0501231231",
+                    Roles = Roles.User,
+                    Gender = Gender.Female,
+                    Status = Status.Active,
+                    CountryId = 232
+                });
+                x.OwnsOne(y => y.Email).HasData(new
+                {
+                    UserEntityId = 12L,
+                    Address = "svitlana@ua.com"
+                });
+                x.OwnsOne(y => y.SignIn).HasData(new
+                {
+                    UserEntityId = 12L,
+                    Login = "svitlana",
+                    Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
+                    Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
+                });
             });
         }
     }

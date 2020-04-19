@@ -29,6 +29,11 @@ export class MapViewComponent implements OnInit {
     ).subscribe((center: Coordinate) => {
       this.postService.getMarkersWithPostsInRadius(center, 5.0).subscribe(response => {
         this.markersOnMap = response;
+        const selectedMarker = this.markersOnMap.find(m => m.id === this.selectedMarker!.id);
+
+        if (selectedMarker) {
+          this.selectedMarker = selectedMarker;
+        }
       });
     });
   }
@@ -68,7 +73,14 @@ export class MapViewComponent implements OnInit {
   public handleToggleLikePost(post: any): void {
     this.postService.toggleLike(post.id)
       .subscribe(timesLiked => 
-        this.markersOnMap.forEach(m => m.posts = m.posts.map(p => p.id === post.id ? { ...p, liked: !p.liked, timesLiked } : p)))
+        this.markersOnMap.forEach(m => m.posts = m.posts.map(p => {
+          if (p.id === post.id) {
+            p.liked = !p.liked;
+            p.timesLiked = timesLiked;
+          }
+
+          return p;
+        })))
   }
 
   private setCurrentPosition(): void {

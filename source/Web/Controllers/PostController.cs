@@ -22,13 +22,13 @@ namespace Web.Controllers
         }
 
         [HttpGet("My")]
-        public async Task<IActionResult> Get([FromQuery]bool? orderByDateAsc, [FromQuery]bool? orderByLikesAsc, [FromQuery]string keyword)
+        public async Task<IActionResult> Get([FromQuery]bool? orderByDateDesc, [FromQuery]bool? orderByLikesDesc, [FromQuery]string keyword)
         {
             return Result(await _postApplicationService.GetUserPosts(UserModel.Id, new PostsRequest
             {
                 Keyword = keyword,
-                OrderByDateAsc = orderByDateAsc,
-                OrderByLikesAsc = orderByLikesAsc
+                OrderByDateDesc = orderByDateDesc,
+                OrderByLikesDesc = orderByLikesDesc
             }));
         }
 

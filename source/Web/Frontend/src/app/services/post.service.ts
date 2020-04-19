@@ -23,11 +23,11 @@ export class AppPostService {
         let request = `${apiUrl}Post/My?`;
 
         if (orderByDateAsc !== null) {
-            request += ('orderByDateAsc=' + orderByDateAsc + '&');
+            request += ('orderByDateDesc=' + orderByDateAsc + '&');
         }
 
         if (orderByLikesAsc !== null) {
-            request += ('orderByLikesAsc=' + orderByLikesAsc + '&');
+            request += ('orderByLikesDesc=' + orderByLikesAsc + '&');
         }
 
         if (keyword !== null) {

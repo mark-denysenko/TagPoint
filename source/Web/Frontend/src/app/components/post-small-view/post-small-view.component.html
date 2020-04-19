@@ -18,8 +18,8 @@
             {{ post.creationDate | date: 'HH:mm dd-MM-yyyy' }}
             <span class="pointer" 
                 uk-icon="heart" 
-                style="color: red; float: right;" 
-                [class.liked]="post.liked" 
+                style="color: red; float: right;"
+                [ngClass]="{'liked': post.liked}"
                 (click)="handleLikePost()">
                 {{ post.timesLiked }}
             </span>

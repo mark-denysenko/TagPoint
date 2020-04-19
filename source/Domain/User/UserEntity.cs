@@ -57,7 +57,6 @@ namespace DotNetCoreArchitecture.Domain
         public ICollection<UserLogEntity> UsersLogs { get; private set; }
         public ICollection<PointEntity> Points { get; private set; }
         public ICollection<PostEntity> Posts { get; private set; }
-        public ICollection<DislikeEntity> Dislikes { get; private set; }
         public ICollection<LikeEntity> Likes { get; private set; }
 
         public void Add()

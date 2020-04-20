@@ -17,7 +17,6 @@ namespace DotNetCoreArchitecture.Application
     {
         private readonly ISignInService _signInService;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserLogApplicationService _userLogApplicationService;
         private readonly IUserRepository _userRepository;
         private readonly ICountryRepository _countryRepository;
         private readonly IUserAvatarRepository _userAvatarRepository;
@@ -26,7 +25,6 @@ namespace DotNetCoreArchitecture.Application
         (
             ISignInService signInService,
             IUnitOfWork unitOfWork,
-            IUserLogApplicationService userLogApplicationService,
             IUserRepository userRepository,
             ICountryRepository countryRepository,
             IUserAvatarRepository userAvatarRepository
@@ -34,7 +32,6 @@ namespace DotNetCoreArchitecture.Application
         {
             _signInService = signInService;
             _unitOfWork = unitOfWork;
-            _userLogApplicationService = userLogApplicationService;
             _userRepository = userRepository;
             _countryRepository = countryRepository;
             _userAvatarRepository = userAvatarRepository;
@@ -108,20 +105,17 @@ namespace DotNetCoreArchitecture.Application
                 return DataResult<TokenModel>.Fail(validation.Message);
             }
 
-            var userLogModel = new UserLogModel(signedInModel.Id, LogType.SignIn);
-
-            await _userLogApplicationService.AddAsync(userLogModel);
+            //var userLogModel = new UserLogModel(signedInModel.Id, LogType.SignIn);
 
             var tokenModel = _signInService.CreateToken(signedInModel);
 
             return DataResult<TokenModel>.Success(tokenModel);
         }
 
-        public async Task SignOutAsync(SignOutModel signOutModel)
+        public Task SignOutAsync(SignOutModel signOutModel)
         {
-            var userLogModel = new UserLogModel(signOutModel.Id, LogType.SignOut);
-
-            await _userLogApplicationService.AddAsync(userLogModel);
+            //var userLogModel = new UserLogModel(signOutModel.Id, LogType.SignOut);
+            return Task.CompletedTask;
         }
 
         public async Task<IResult> UpdateAsync(UpdateUserModel updateUserModel)

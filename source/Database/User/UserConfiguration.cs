@@ -36,7 +36,6 @@ namespace DotNetCoreArchitecture.Database
                 y.HasIndex(x => x.Login).IsUnique();
             });
 
-            builder.HasMany(x => x.UsersLogs).WithOne(x => x.User).HasForeignKey(x => x.UserId);
             //builder.HasOne(x => x.Avatar).WithOne(x => x.User);
         }
     }

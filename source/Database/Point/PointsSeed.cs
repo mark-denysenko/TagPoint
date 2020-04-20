@@ -1,4 +1,5 @@
 using Domain.Point;
+using Domain.Vote;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -375,6 +376,7 @@ namespace Database.Point
                     Latitude = 50.41222302235643,
                     Longitude = 30.52234968645207
                 });
+
             });
         }
     }

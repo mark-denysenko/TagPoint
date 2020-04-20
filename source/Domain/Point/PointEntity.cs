@@ -10,11 +10,13 @@ namespace Domain.Point
 {
     public class PointEntity : Entity
     {
+        public long TotalViews { get; set; }
+
         public Coordinate Coordinate { get; set; }
 
         public UserEntity User { get; set; }
         public long UserId { get; set; }
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
         public ICollection<PostEntity> Posts { get; private set; }
 

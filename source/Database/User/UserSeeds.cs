@@ -1,9 +1,12 @@
+using Domain.User;
 using DotNetCoreArchitecture.Domain;
 using DotNetCoreArchitecture.Model;
 using Microsoft.EntityFrameworkCore;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Database.User
@@ -12,6 +15,27 @@ namespace Database.User
     {
         public static void SeedUsers(this ModelBuilder builder)
         {
+            var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var sysDir = Path.GetDirectoryName(location);
+            var dir = new DirectoryInfo(sysDir + "\\Seeds");
+
+            var avatars = new DirectoryInfo(sysDir + "\\Seeds").GetFiles("user*");
+
+            builder.Entity<UserAvatarEntity>(x =>
+            {
+                foreach (var avatar in avatars)
+                {
+                    var id = long.Parse(avatar.Name.Replace("user", "").Replace(".jpg", ""));
+                    x.HasData(new
+                    {
+                        Avatar = File.ReadAllBytes(avatar.FullName),
+                        Filename = avatar.Name,
+                        UserId = id,
+                        Id = id
+                    });
+                }
+            });
+
             builder.Entity<UserEntity>(x =>
             {
                 x.HasData(new
@@ -132,7 +156,7 @@ namespace Database.User
                 x.HasData(new
                 {
                     Id = 6L,
-                    Username = "Шатровський Андрій",
+                    Username = "Пащевський Руслан",
                     PhoneNumber = "0501231231",
                     Roles = Roles.User,
                     Gender = Gender.Male,
@@ -142,12 +166,12 @@ namespace Database.User
                 x.OwnsOne(y => y.Email).HasData(new
                 {
                     UserEntityId = 6L,
-                    Address = "anedertaker@ua.com"
+                    Address = "pavlo@ua.com"
                 });
                 x.OwnsOne(y => y.SignIn).HasData(new
                 {
                     UserEntityId = 6L,
-                    Login = "anedertaker",
+                    Login = "pavlo",
                     Password = "O34uMN1Vho2IYcSM7nlXEqn57RZ8VEUsJwH++sFr0i3MSHJVx8J3PQGjhLR3s5i4l0XWUnCnymQ/EbRmzvLy8uMWREZu7vZI+BqebjAl5upYKMMQvlEcBeyLcRRTTBpYpv80m/YCZQmpig4XFVfIViLLZY/Kr5gBN5dkQf25rK8=",
                     Salt = "79005744-e69a-4b09-996b-08fe0b70cbb9"
                 });
@@ -247,7 +271,7 @@ namespace Database.User
                 x.HasData(new
                 {
                     Id = 11L,
-                    Username = "Самійло Степан",
+                    Username = "Василенко Олександр",
                     PhoneNumber = "0501231231",
                     Roles = Roles.User,
                     Gender = Gender.Male,

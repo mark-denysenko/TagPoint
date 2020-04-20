@@ -14,6 +14,8 @@ namespace Database.Vote
             builder.ToTable("Likes");
 
             builder.HasKey(dislike => new { dislike.UserId, dislike.PostId }).HasName("COMBINE_PK_LIKE");
+
+            builder.Property(x => x.CreationDate).IsRequired().HasDefaultValueSql("GETDATE()");
         }
     }
 }

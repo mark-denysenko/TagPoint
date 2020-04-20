@@ -12,6 +12,6 @@ namespace Domain.Vote
         public long PostId { get; set; }
         public UserEntity User { get; set; }
         public PostEntity Post { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; } = DateTime.Now;
     }
 }

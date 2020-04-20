@@ -38,8 +38,8 @@ export class AppListComponent implements OnInit {
     }
 
     public sortBy(likes: boolean, date: boolean): void {
-        this.orderByLikes = this.orderByLikes && likes ? !this.orderByLikes : likes;
-        this.orderByDate = this.orderByDate && date ? !this.orderByDate : date;
+        this.orderByLikes = this.orderByLikes && likes ? null : likes;
+        this.orderByDate = this.orderByDate && date ? null : date;
 
         this.getPosts();
     }

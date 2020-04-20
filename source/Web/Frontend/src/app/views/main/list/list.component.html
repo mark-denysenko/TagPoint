@@ -17,7 +17,7 @@
                 <!-- <td class="uk-text-center@m">{{ item?.id }}</td> -->
                 <td class="">{{ item?.location }}</td>
                 <td class="">{{ item?.message }}</td>
-                <td class="">{{ item?.timesLiked }}</td>
+                <td class="uk-text-center@m">{{ item?.timesLiked }}</td>
                 <td class="">{{ item?.creationDate | date:'HH:mm dd-MM-yyyy' }}</td>
                 <td class=""><span class="pointer" style="color: red;" uk-icon="close" (click)="deletePost(item)"></span></td>
             </tr>

@@ -1,4 +1,5 @@
 using Domain.Post;
+using Domain.Vote;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -108,7 +109,7 @@ namespace Database.Post
                     Id = 10L,
                     PointId = 8L,
                     UserId = 3L,
-                    Location = "",
+                    Location = "Центральний вокзал",
                     Message = "Жахливе та неопртяне місце. Досить брудно та смердить. Шкода, що таким є головний вокзал країни."
                 });
                 x.HasData(new
@@ -116,7 +117,7 @@ namespace Database.Post
                     Id = 11L,
                     PointId = 8L,
                     UserId = 4L,
-                    Location = "",
+                    Location = "Площа вокзалу",
                     Message = "Чув багато про аферистів, але не надава ніякої уваги, доки сам не зіштовхнувся."
                 });
                 x.HasData(new
@@ -124,7 +125,7 @@ namespace Database.Post
                     Id = 12L,
                     PointId = 8L,
                     UserId = 5L,
-                    Location = "",
+                    Location = "Площа вокзалу",
                     Message = "Поруч гарнорозвинена інфраструктура. А саме в пішій доступності знаходиться метро, заклади харчування, а також саме місто."
                 });
 
@@ -134,7 +135,7 @@ namespace Database.Post
                     Id = 13L,
                     PointId = 9L,
                     UserId = 6L,
-                    Location = "",
+                    Location = "вул. Крещатик",
                     Message = "Головна вулиця країни, де завжди вирує життя, а молодь гуляє цілодобово"
                 });
                 x.HasData(new
@@ -142,7 +143,7 @@ namespace Database.Post
                     Id = 14L,
                     PointId = 9L,
                     UserId = 7L,
-                    Location = "",
+                    Location = "Фонтани",
                     Message = "Обожнюю фонтани з підсвіткою. Це неймовірна атмосфера, що надихає і підіймає настрій!!!"
                 });
 
@@ -152,7 +153,7 @@ namespace Database.Post
                     Id = 15L,
                     PointId = 10L,
                     UserId = 8L,
-                    Location = "",
+                    Location = "Труханів острів",
                     Message = "Природній закуток у самому центрі міста. Ідеально для пробіжок та активного відпочинку!"
                 });
 
@@ -162,7 +163,7 @@ namespace Database.Post
                     Id = 16L,
                     PointId = 11L,
                     UserId = 9L,
-                    Location = "",
+                    Location = "Червона будівля",
                     Message = "Будівля з віковою історією. Навчила не один десяток поколінь українців та їх дітей"
                 });
 
@@ -172,7 +173,7 @@ namespace Database.Post
                     Id = 17L,
                     PointId = 12L,
                     UserId = 10L,
-                    Location = "",
+                    Location = "Національна Опера",
                     Message = "Архітектура будівлі вражає с першого погляду, а внутрішнє оздоблення просто неперевершене"
                 });
 
@@ -182,7 +183,7 @@ namespace Database.Post
                     Id = 18L,
                     PointId = 13L,
                     UserId = 2L,
-                    Location = "",
+                    Location = "Гідропарк",
                     Message = "Дуже хотілось би, щоб Гідропарк був більш чистим та облаштованим"
                 });
 
@@ -192,7 +193,7 @@ namespace Database.Post
                     Id = 19L,
                     PointId = 14L,
                     UserId = 3L,
-                    Location = "",
+                    Location = "Ринок",
                     Message = "Люблю відвідувати місцевий ринок. Завжди можна знайти щось цікаве. Особоливо великий вибір книг!"
                 });
 
@@ -202,7 +203,7 @@ namespace Database.Post
                     Id = 20L,
                     PointId = 15L,
                     UserId = 4L,
-                    Location = "",
+                    Location = "стадіон \"Олімпійский\"",
                     Message = "Величезний стадіон. Був на матчі Шахтар-Динамо, то дуже сподобалося."
                 });
 
@@ -212,8 +213,8 @@ namespace Database.Post
                     Id = 21L,
                     PointId = 16L,
                     UserId = 5L,
-                    Location = "",
-                    Message = ""
+                    Location = "аеропорт Жуляни",
+                    Message = "Сучасний аеропорт з достатньо кільксть місця та зручним розташуванням. Вже не раз доводилося користуватися, тому суб'єктивно дуже гарно!"
                 });
 
                 // Protasiv
@@ -222,8 +223,8 @@ namespace Database.Post
                     Id = 22L,
                     PointId = 17L,
                     UserId = 6L,
-                    Location = "",
-                    Message = ""
+                    Location = "Протасів Яр",
+                    Message = "Взимку єдине місце, де можна хоча б на мить відчути драйв від катання на лижах або сноуборді!"
                 });
 
                 // NAU
@@ -232,15 +233,15 @@ namespace Database.Post
                     Id = 23L,
                     PointId = 18L,
                     UserId = 7L,
-                    Location = "",
-                    Message = ""
+                    Location = "НАУ",
+                    Message = "Непоганий унівесритет, але якщо хочеш знань, то краще КПІ ..."
                 });
                 x.HasData(new
                 {
                     Id = 24L,
                     PointId = 18L,
                     UserId = 8L,
-                    Location = "",
+                    Location = "Національний Авіаційний Університет",
                     Message = ""
                 });
 
@@ -250,16 +251,16 @@ namespace Database.Post
                     Id = 25L,
                     PointId = 19L,
                     UserId = 9L,
-                    Location = "",
-                    Message = ""
+                    Location = "ЦУМ",
+                    Message = "Найбільший вибір люксових брендів у столиці. ІНколи бувають знижки."
                 });
                 x.HasData(new
                 {
                     Id = 26L,
                     PointId = 19L,
                     UserId = 10L,
-                    Location = "",
-                    Message = ""
+                    Location = "ЦУМ",
+                    Message = "Дуже дорого!!! Не для звичайних людей"
                 });
 
                 // Cycletrack
@@ -268,16 +269,16 @@ namespace Database.Post
                     Id = 27L,
                     PointId = 20L,
                     UserId = 1L,
-                    Location = "",
-                    Message = ""
+                    Location = "Київський велотрек",
+                    Message = "Сучасний велотрек. Постійно тренуються різні покоління гонщиків. Також вдалося споглядати один з чемпіонатів. Можу сказати тільки, що пройшов на найвищому рівні"
                 });
                 x.HasData(new
                 {
                     Id = 28L,
                     PointId = 20L,
                     UserId = 2L,
-                    Location = "",
-                    Message = ""
+                    Location = "Київський велотрек",
+                    Message = "Найулюбленіше місце для прогулянки. Обожнюююю"
                 });
 
                 // Nationa Circus
@@ -286,7 +287,7 @@ namespace Database.Post
                     Id = 29L,
                     PointId = 21L,
                     UserId = 3L,
-                    Location = "",
+                    Location = "Національний цирк України",
                     Message = ""
                 });
 
@@ -296,8 +297,8 @@ namespace Database.Post
                     Id = 30L,
                     PointId = 22L,
                     UserId = 4L,
-                    Location = "",
-                    Message = ""
+                    Location = "Шулявський міст",
+                    Message = "Вічне будівництво, неможливо проїхати без затору =("
                 });
 
                 // Oceanarium
@@ -306,7 +307,7 @@ namespace Database.Post
                     Id = 31L,
                     PointId = 23L,
                     UserId = 5L,
-                    Location = "",
+                    Location = "Океанаріум",
                     Message = ""
                 });
 
@@ -316,7 +317,7 @@ namespace Database.Post
                     Id = 32L,
                     PointId = 24L,
                     UserId = 6L,
-                    Location = "",
+                    Location = "Троєщина",
                     Message = ""
                 });
 
@@ -326,7 +327,7 @@ namespace Database.Post
                     Id = 33L,
                     PointId = 25L,
                     UserId = 7L,
-                    Location = "",
+                    Location = "Києво-Печерська Лавра",
                     Message = ""
                 });
 
@@ -339,6 +340,135 @@ namespace Database.Post
                     Location = "ТРЦ \"Ocean Plaza\"",
                     Message = "Найкраще місце для шопінгу у Києві. Величезна кількість магазинів та гарна ціна!"
                 });
+            });
+
+            // Likes
+            builder.Entity<LikeEntity>(x =>
+            {
+                x.HasData(new { UserId = 1L, PostId = 1L });
+                x.HasData(new { UserId = 1L, PostId = 2L });
+                x.HasData(new { UserId = 1L, PostId = 3L });
+                x.HasData(new { UserId = 1L, PostId = 4L });
+                x.HasData(new { UserId = 1L, PostId = 5L });
+                x.HasData(new { UserId = 1L, PostId = 6L });
+                x.HasData(new { UserId = 1L, PostId = 7L });
+                x.HasData(new { UserId = 1L, PostId = 8L });
+                x.HasData(new { UserId = 1L, PostId = 9L });
+                x.HasData(new { UserId = 1L, PostId = 34L });
+
+                x.HasData(new { UserId = 2L, PostId = 1L });
+                x.HasData(new { UserId = 2L, PostId = 2L });
+                x.HasData(new { UserId = 2L, PostId = 3L });
+                x.HasData(new { UserId = 2L, PostId = 4L });
+                x.HasData(new { UserId = 2L, PostId = 5L });
+                x.HasData(new { UserId = 2L, PostId = 6L });
+                x.HasData(new { UserId = 2L, PostId = 7L });
+                x.HasData(new { UserId = 2L, PostId = 8L });
+                x.HasData(new { UserId = 2L, PostId = 9L });
+                x.HasData(new { UserId = 2L, PostId = 34L });
+
+                x.HasData(new { UserId = 3L, PostId = 1L });
+                x.HasData(new { UserId = 3L, PostId = 2L });
+                x.HasData(new { UserId = 3L, PostId = 3L });
+                x.HasData(new { UserId = 3L, PostId = 4L });
+                x.HasData(new { UserId = 3L, PostId = 5L });
+                x.HasData(new { UserId = 3L, PostId = 6L });
+                x.HasData(new { UserId = 3L, PostId = 7L });
+                x.HasData(new { UserId = 3L, PostId = 8L });
+                x.HasData(new { UserId = 3L, PostId = 9L });
+                x.HasData(new { UserId = 3L, PostId = 34L });
+
+                x.HasData(new { UserId = 4L, PostId = 1L });
+                x.HasData(new { UserId = 4L, PostId = 2L });
+                x.HasData(new { UserId = 4L, PostId = 3L });
+                x.HasData(new { UserId = 4L, PostId = 4L });
+                x.HasData(new { UserId = 4L, PostId = 5L });
+                x.HasData(new { UserId = 4L, PostId = 6L });
+                x.HasData(new { UserId = 4L, PostId = 7L });
+                x.HasData(new { UserId = 4L, PostId = 8L });
+                x.HasData(new { UserId = 4L, PostId = 9L });
+                x.HasData(new { UserId = 4L, PostId = 34L });
+
+                x.HasData(new { UserId = 5L, PostId = 1L });
+                x.HasData(new { UserId = 5L, PostId = 2L });
+                x.HasData(new { UserId = 5L, PostId = 3L });
+                x.HasData(new { UserId = 5L, PostId = 4L });
+                x.HasData(new { UserId = 5L, PostId = 5L });
+                x.HasData(new { UserId = 5L, PostId = 6L });
+                x.HasData(new { UserId = 5L, PostId = 7L });
+                x.HasData(new { UserId = 5L, PostId = 8L });
+                x.HasData(new { UserId = 5L, PostId = 34L });
+
+                x.HasData(new { UserId = 6L, PostId = 1L });
+                x.HasData(new { UserId = 6L, PostId = 2L });
+                x.HasData(new { UserId = 6L, PostId = 3L });
+                x.HasData(new { UserId = 6L, PostId = 4L });
+                x.HasData(new { UserId = 6L, PostId = 5L });
+                x.HasData(new { UserId = 6L, PostId = 6L });
+                x.HasData(new { UserId = 6L, PostId = 7L });
+                x.HasData(new { UserId = 6L, PostId = 8L });
+                x.HasData(new { UserId = 6L, PostId = 34L });
+
+                x.HasData(new { UserId = 7L, PostId = 9L });
+                x.HasData(new { UserId = 7L, PostId = 10L });
+                x.HasData(new { UserId = 7L, PostId = 11L });
+                x.HasData(new { UserId = 7L, PostId = 12L });
+                x.HasData(new { UserId = 7L, PostId = 13L });
+                x.HasData(new { UserId = 7L, PostId = 14L });
+                x.HasData(new { UserId = 7L, PostId = 15L });
+                x.HasData(new { UserId = 7L, PostId = 16L });
+                x.HasData(new { UserId = 7L, PostId = 17L });
+
+                x.HasData(new { UserId = 8L, PostId = 18L });
+                x.HasData(new { UserId = 8L, PostId = 19L });
+                x.HasData(new { UserId = 8L, PostId = 20L });
+                x.HasData(new { UserId = 8L, PostId = 21L });
+                x.HasData(new { UserId = 8L, PostId = 22L });
+                x.HasData(new { UserId = 8L, PostId = 23L });
+                x.HasData(new { UserId = 8L, PostId = 24L });
+                x.HasData(new { UserId = 8L, PostId = 25L });
+                x.HasData(new { UserId = 8L, PostId = 26L });
+
+                x.HasData(new { UserId = 9L, PostId = 27L });
+                x.HasData(new { UserId = 9L, PostId = 28L });
+                x.HasData(new { UserId = 9L, PostId = 29L });
+                x.HasData(new { UserId = 9L, PostId = 30L });
+                x.HasData(new { UserId = 9L, PostId = 31L });
+                x.HasData(new { UserId = 9L, PostId = 32L });
+                x.HasData(new { UserId = 9L, PostId = 33L });
+                x.HasData(new { UserId = 9L, PostId = 34L });
+                x.HasData(new { UserId = 9L, PostId = 9L });
+
+                x.HasData(new { UserId = 10L, PostId = 11L });
+                x.HasData(new { UserId = 10L, PostId = 12L });
+                x.HasData(new { UserId = 10L, PostId = 13L });
+                x.HasData(new { UserId = 10L, PostId = 14L });
+                x.HasData(new { UserId = 10L, PostId = 15L });
+                x.HasData(new { UserId = 10L, PostId = 16L });
+                x.HasData(new { UserId = 10L, PostId = 17L });
+                x.HasData(new { UserId = 10L, PostId = 18L });
+                x.HasData(new { UserId = 10L, PostId = 19L });
+
+                x.HasData(new { UserId = 11L, PostId = 10L });
+                x.HasData(new { UserId = 11L, PostId = 20L });
+                x.HasData(new { UserId = 11L, PostId = 21L });
+                x.HasData(new { UserId = 11L, PostId = 22L });
+                x.HasData(new { UserId = 11L, PostId = 23L });
+                x.HasData(new { UserId = 11L, PostId = 24L });
+                x.HasData(new { UserId = 11L, PostId = 25L });
+                x.HasData(new { UserId = 11L, PostId = 26L });
+                x.HasData(new { UserId = 11L, PostId = 27L });
+
+                x.HasData(new { UserId = 12L, PostId = 28L });
+                x.HasData(new { UserId = 12L, PostId = 29L });
+                x.HasData(new { UserId = 12L, PostId = 30L });
+                x.HasData(new { UserId = 12L, PostId = 31L });
+                x.HasData(new { UserId = 12L, PostId = 32L });
+                x.HasData(new { UserId = 12L, PostId = 33L });
+                x.HasData(new { UserId = 12L, PostId = 34L });
+                x.HasData(new { UserId = 12L, PostId = 17L });
+                x.HasData(new { UserId = 12L, PostId = 18L });
+
             });
         }
     }

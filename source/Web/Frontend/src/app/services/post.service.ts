@@ -30,7 +30,7 @@ export class AppPostService {
             request += ('orderByLikesDesc=' + orderByLikesAsc + '&');
         }
 
-        if (keyword !== null) {
+        if (keyword && keyword.length) {
             request += 'keyword=' + keyword;
         }
 

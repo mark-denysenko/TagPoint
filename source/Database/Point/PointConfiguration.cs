@@ -17,6 +17,7 @@ namespace Database.Point
 
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.Created).IsRequired().HasDefaultValueSql("GETDATE()");
+            builder.Property(x => x.TotalViews).IsRequired().HasDefaultValue(0L);
 
             builder.OwnsOne(point => point.Coordinate, coord =>
             {

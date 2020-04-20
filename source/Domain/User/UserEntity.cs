@@ -52,9 +52,8 @@ namespace DotNetCoreArchitecture.Domain
         public string PhoneNumber { get; private set; }
         public CountryEntity Country { get; set; }
         public UserAvatarEntity Avatar { get; set; }
-        public DateTime RegisterDate { get; set; }
+        public DateTime RegisterDate { get; set; } = DateTime.Now;
 
-        public ICollection<UserLogEntity> UsersLogs { get; private set; }
         public ICollection<PointEntity> Points { get; private set; }
         public ICollection<PostEntity> Posts { get; private set; }
         public ICollection<LikeEntity> Likes { get; private set; }

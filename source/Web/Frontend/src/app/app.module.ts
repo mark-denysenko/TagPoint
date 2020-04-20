@@ -7,6 +7,8 @@ import { AppErrorHandler } from "./core/handlers/error.handler";
 import { AppHttpInterceptor } from "./core/interceptors/http.interceptor";
 import { DirectivesModule } from "./core/directives/directives.module";
 import { APP_BASE_HREF } from "@angular/common";
+import { AgmCoreModule } from "@agm/core";
+import { environment } from "src/environments/environment";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -15,7 +17,14 @@ import { APP_BASE_HREF } from "@angular/common";
         BrowserModule,
         HttpClientModule,
         AppRoutingModule,
-        DirectivesModule
+        DirectivesModule,
+        AgmCoreModule.forRoot({
+          apiKey: environment.keys.gmap,
+          // from documentation - uk (Ukrainian)
+          language: 'uk',
+          region: 'ua',
+          libraries: ["places", "geometry"]
+        })
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },

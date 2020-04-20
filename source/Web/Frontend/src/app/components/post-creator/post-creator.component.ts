@@ -4,7 +4,7 @@ import { AppInputTextComponent } from '../input/text/text.component';
 import { MapsAPILoader, GeocoderResult, GeocoderStatus } from '@agm/core';
 import { Observable } from 'rxjs';
 import { GoogleapiService } from 'src/app/services/googleapi.service';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 declare var google: any;
 

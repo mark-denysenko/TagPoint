@@ -12,13 +12,7 @@ import { environment } from 'src/environments/environment';
     CommonModule,
     FlexLayoutModule,
     MarkerInfoModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.keys.gmap,
-      // from documentation - uk (Ukrainian)
-      language: 'uk',
-      region: 'ua',
-      libraries: ["places", "geometry"]
-    })
+    AgmCoreModule
   ],
   exports: [CustomMapComponent]
 })

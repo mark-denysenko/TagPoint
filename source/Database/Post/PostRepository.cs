@@ -4,6 +4,7 @@ using DotNetCoreArchitecture.Database;
 using NetTopologySuite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Database.Post
@@ -15,7 +16,5 @@ namespace Database.Post
             //var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
             //var currentLocation = geometryFactory.CreatePoint(new NetTopologySuite.Geometries.Coordinate(-122.121512, 47.6739882));
         }
-
-
     }
 }

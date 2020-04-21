@@ -1,12 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Renderer2, ChangeDetectorRef } from "@angular/core";
 import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
 
 declare var google: any;
 
 @Component({ selector: "app-root", templateUrl: "./app.component.html" })
 export class AppComponent implements OnInit {
+    constructor(private readonly router: Router, private readonly renderer: Renderer2, private readonly cd: ChangeDetectorRef) {}
+
     ngOnInit(): void {
-        this.loadScript();
+        this.loadScript().then(_ => {
+            //this.router.navigate([this.router.url])
+            this.cd.markForCheck();
+            this.cd.detectChanges();
+            this.cd.reattach();
+        });
     }
 
     async loadScript() {
@@ -23,6 +31,6 @@ export class AppComponent implements OnInit {
         script.src = 'https://maps.googleapis.com/maps/api/js?v=3&key=' + environment.keys.gmap + '&region=ua&language=uk';
         script.id = "agmGoogleMapsApiScript";
         document.body.appendChild(script);
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 1500));
     } 
 }

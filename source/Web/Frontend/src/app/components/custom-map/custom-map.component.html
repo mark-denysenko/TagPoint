@@ -9,7 +9,15 @@
     <agm-marker
         [zIndex]="100"
         [latitude]="currentMarker?.latitude"
-        [longitude]="currentMarker?.longitude">
+        [longitude]="currentMarker?.longitude"
+        [iconUrl] ="
+        {
+          url: './assets/point.png',
+          scaledSize: {
+              width: 30,
+              height: 30
+          }
+        }">
     </agm-marker>
 
     <agm-marker
@@ -18,6 +26,14 @@
       [longitude]="marker.longitude"
       [label]="marker.label"
       [opacity]="0.5"
+      [iconUrl] ="
+      {
+        url: './assets/point.png',
+        scaledSize: {
+            width: 30,
+            height: 30
+        }
+      }"
       (markerClick)="onMarkerSelect($event, infoWindow, marker)">
       <agm-info-window #infoWindow>
         <div fxLayout="column" fxLayoutAlign="space-between" class="message-container">

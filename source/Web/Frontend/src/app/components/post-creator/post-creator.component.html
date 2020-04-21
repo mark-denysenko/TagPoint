@@ -6,29 +6,33 @@
             <div uk-dropdown="mode: hover" class="uk-overlay">
                 <div *ngFor="let location of suggestedLocations$ | async" 
                     class="pointer" 
-                    (click)="selectLocation(location, dropdown)">
+                    (click)="selectLocation(location)">
                     {{ location }}
                 </div>
                 <div *ngIf="!addressesNear.length">Місць поруч не знайдено</div>
             </div>
         </div>
-        <!-- <input type="text" class="uk-input" class="uk-margin"> -->
-        <textarea 
-            class="uk-textarea" 
-            rows="3"
-            [formControl]="text"
-            placeholder="Опис">
-        </textarea>
+        <div class="uk-overflow-auto" style="max-height: 110px;">
+
+            <textarea 
+                class="uk-textarea" 
+                rows="3"
+                [formControl]="text"
+                placeholder="Опис">
+            </textarea>
+            <div>
+                <div *ngFor="let tag of tags" class="uk-label uk-label-warning uk-margin-right" style="font-size: 12px;">
+                    {{ tag }} 
+                    <button type="button" uk-icon="icon: close; ratio: 0.8" (click)="deleteTag(tag)" style="color: white;"></button>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="uk-margin uk-width-1-4 uk-flex uk-flex-column-reverse">
         <!-- <span class="uk-icon-link uk-icon-button pointer" uk-icon="icon: image"></span> -->
-        <button class="uk-button uk-button-default uk-margin-small-right" (click)="handleSendPost()">Відправити</button>
-        <input class="uk-input uk-margin" placeholder="тег">
-        <div style="display: flex;">
-            <span class="uk-label uk-label-warning">краса</span>
-            <span class="uk-label uk-label-warning">краєвид</span>
-        </div>
-
+        <button class="uk-button uk-button-default uk-margin-small-right uk-margin-top" (click)="handleSendPost()">Відправити</button>
+        <input class="uk-input uk-margin uk-border-pill uk-width-small" placeholder="тег" [formControl]="tagInput">
     </div>
 </div>
 <!-- (keydown.enter)="handleSendPost()" -->

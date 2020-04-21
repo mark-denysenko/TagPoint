@@ -24,19 +24,25 @@ namespace Application.Post
         private readonly IPointRepository _pointRepository;
         private readonly IUserRepository _userRepository;
         private readonly ILikeRepository _likesRepository;
+        private readonly ITagRepository _tagRepository; 
+        private readonly IPostTagRepository _postTagRepository; 
 
         public PostApplicationService(
             IUnitOfWork unitOfWork,
             IPostRepository postRepository,
             IPointRepository pointRepository,
             IUserRepository userRepository,
-            ILikeRepository likesRepository)
+            ILikeRepository likesRepository,
+            ITagRepository tagRepository,
+            IPostTagRepository postTagRepository)
         {
             _unitOfWork = unitOfWork;
             _postRepository = postRepository;
             _pointRepository = pointRepository;
             _userRepository = userRepository;
             _likesRepository = likesRepository;
+            _tagRepository = tagRepository;
+            _postTagRepository = postTagRepository;
         }
 
         public async Task<IDataResult<long>> CreatePostAsync(PostModel post)
@@ -67,6 +73,17 @@ namespace Application.Post
             await _postRepository.AddAsync(newPost);
             newPost.Point = point;
             newPost.User = user;
+
+            _tagRepository.CreateTags(post.Tags, user.Id);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            var postTags = _tagRepository.GetTagsByNames(post.Tags);
+            await _postTagRepository.AddRangeAsync(postTags.Select(t => new PostTagEntity
+            {
+                PostId = newPost.Id,
+                TagId = t.Id
+            }));
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -102,7 +119,7 @@ namespace Application.Post
             var markersInRadius = await _pointRepository.GetPointsInRadius(center, radius);
 
             var postsIds = markersInRadius.SelectMany(m => m.Posts.Select(p => p.Id)).ToList();
-            var posts = await _postRepository.ListWhereIncludeAsync(p => postsIds.Contains(p.Id), p => p.Point, p => p.User, p => p.Likes);
+            var posts = await _postRepository.ListWhereIncludeAsync(p => postsIds.Contains(p.Id), p => p.Point, p => p.User, p => p.Likes, p  => p.Tags);
             var usersIds = posts.Select(p => p.User.Id);
             var users = await _userRepository.ListWhereIncludeAsync(u => usersIds.Contains(u.Id), u => u.Avatar);
             foreach (var post in posts)
@@ -110,6 +127,7 @@ namespace Application.Post
                 post.User = users.First(u => u.Id == post.User.Id);
             }
 
+            var existedTags = await _tagRepository.ListAsync();
             return DataResult<IEnumerable<MarkerModel>>.Success(markersInRadius.Select(m =>
                 new MarkerModel
                 {
@@ -123,6 +141,7 @@ namespace Application.Post
                             returnPost.Liked = p.Likes.Any(like => like.UserId == userId);
                             returnPost.TimesLiked = p.Likes.Count;
                             returnPost.Editable = p.User.Id == userId;
+                            returnPost.Tags = existedTags.Where(t => p.Tags.Any(pt => pt.TagId == t.Id)).Select(t => t.Tag);
 
                             return returnPost;
                         })

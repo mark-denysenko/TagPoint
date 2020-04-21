@@ -1,3 +1,7 @@
 textarea {
     min-width: 150px;
 }
+
+::ng-deep.uk-input {
+    background-color: transparent !important;
+}

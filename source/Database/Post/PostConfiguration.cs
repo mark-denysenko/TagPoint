@@ -20,6 +20,8 @@ namespace Database.Post
             builder.Property(x => x.Location).IsRequired().HasDefaultValue(string.Empty);
             builder.Property(x => x.PostDate).IsRequired().HasDefaultValueSql("GETDATE()");
             builder.Property(x => x.TotalViews).IsRequired().HasDefaultValue(0L);
+
+            builder.HasMany(x => x.Tags);
         }
     }
 }

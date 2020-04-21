@@ -19,5 +19,6 @@ namespace Model.Models.Post
         public long UserId { get; set; }
         public string Username { get; set; }
         public byte[] UserAvatar { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
 }

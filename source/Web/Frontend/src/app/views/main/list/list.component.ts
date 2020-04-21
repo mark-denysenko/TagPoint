@@ -37,7 +37,7 @@ export class AppListComponent implements OnInit {
             .subscribe(posts => this.userPosts = posts);
     }
 
-    public sortBy(likes: boolean, date: boolean): void {
+    public sortBy(likes: boolean | null, date: boolean | null): void {
         this.orderByLikes = this.orderByLikes && likes ? null : likes;
         this.orderByDate = this.orderByDate && date ? null : date;
 

@@ -17,5 +17,6 @@ namespace Domain.Post
         public PointEntity Point { get; set; }
         public long TotalViews { get; set; }
         public ICollection<LikeEntity> Likes { get; set; }
+        public ICollection<PostTagEntity> Tags { get; set; }
     }
 }

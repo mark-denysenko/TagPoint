@@ -12,6 +12,11 @@
         <div class="uk-margin uk-text-middle">
             {{ post.message }}
         </div>
+        <div>
+            <div *ngFor="let tag of post.tags" class="uk-label uk-label-warning" style="font-size: 12px; margin-right: 8px;">
+                {{ tag }} 
+            </div>
+        </div>
     </div>
     <div>
         <div style="font-size: 12px;">

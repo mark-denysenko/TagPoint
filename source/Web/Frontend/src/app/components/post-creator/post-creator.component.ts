@@ -16,21 +16,21 @@ declare var google: any;
 export class PostCreatorComponent implements OnInit, OnChanges {
 
   @Input() place!: Marker;
-  public text: FormControl;
-  public location: FormControl;
+  public text = new FormControl('', [Validators.required, Validators.maxLength(1000)]);
+  public location = new FormControl('', [Validators.maxLength(100)]);
+  public tagInput = new FormControl('', [Validators.maxLength(30)]);
+
+  public tags: string[] = [];
 
   public addressesNear: string[] = [];
   public suggestedLocations$!: Observable<string[]>;
 
-  @Output() sendPost = new EventEmitter<{ message: string, location: string }>();
+  @Output() sendPost = new EventEmitter<{ message: string, location: string, tags: string[] }>();
 
   constructor(
     private readonly googleApiService: GoogleapiService,
     private mapsAPILoader: MapsAPILoader
-  ) {
-    this.text = new FormControl('', [Validators.required, Validators.maxLength(1000)]);
-    this.location = new FormControl('', [Validators.maxLength(100)]);
-  }
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.place.currentValue) {
@@ -42,8 +42,44 @@ export class PostCreatorComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit() {    
-    //load Places Autocomplete
+  ngOnInit() {
+    this.tagInput.valueChanges.pipe()
+      .subscribe((value: string) => {
+        if (value.length > 1 && value.endsWith(' ')) {
+          const trimmedValue = value.trim();
+          if (this.tags.every(t => t !== trimmedValue)) {
+            this.tags = [...this.tags, trimmedValue];
+          }
+          
+          this.tagInput.setValue('', { emitEvent: false });
+        }
+      });
+    this.suggestedLocations$ = this.location.valueChanges.pipe(
+      map((loc: string) => {
+        const searchLocation = loc.trim().toLowerCase();
+
+        if (searchLocation.length === 0) {
+          return this.addressesNear;
+
+        }
+
+        return this.addressesNear.filter(add => add.toLowerCase().includes(searchLocation));
+      }));
+  }
+
+  public selectLocation(location: string): void {
+    this.location.setValue(location);
+  }
+
+  public handleSendPost(): void {
+    this.sendPost.emit({ message: this.text.value, location: this.location.value, tags: this.tags });
+  }
+
+  public deleteTag(tag: string): void {
+    this.tags = this.tags.filter(t => t !== tag);
+  }
+
+    // load Places Autocomplete
     // this.mapsAPILoader.load().then(() => {
     //   this.geoCoder = new google.maps.Geocoder();
 
@@ -68,24 +104,4 @@ export class PostCreatorComponent implements OnInit, OnChanges {
     //     });
     //   });
     // });
-    this.suggestedLocations$ = this.location.valueChanges.pipe(
-      map((loc: string) => {
-        const searchLocation = loc.trim().toLowerCase();
-
-        if (searchLocation.length === 0) {
-          return this.addressesNear;
-
-        }
-
-        return this.addressesNear.filter(add => add.toLowerCase().includes(searchLocation));
-      }));
-  }
-
-  public selectLocation(location: string): void {
-    this.location.setValue(location);
-  }
-
-  public handleSendPost(): void {
-    this.sendPost.emit({ message: this.text.value, location: this.location.value });
-  }
 }

@@ -18,6 +18,8 @@ namespace Database.Post
             builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.Tag).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Created).IsRequired().HasDefaultValueSql("GETDATE()");
+
+            builder.HasIndex(x => x.Tag).IsUnique();
         }
     }
 }

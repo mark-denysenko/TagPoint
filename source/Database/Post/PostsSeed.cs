@@ -11,6 +11,8 @@ namespace Database.Post
     {
         public static void SeedPosts(this ModelBuilder builder)
         {
+            SeedTags(builder);
+
             builder.Entity<PostEntity>(x =>
             {
                 // KPI
@@ -70,7 +72,7 @@ namespace Database.Post
                     PointId = 6L,
                     UserId = 4L,
                     Location = "Львів",
-                    Message = "Мабуть єдине місце у світі, що наскрізь пропахло кавоя та шоколадом. Обожнюю!"
+                    Message = "Мабуть єдине місце у світі, що наскрізь пропахло кавою та шоколадом. Обожнюю!"
                 });
 
                 // Black Sea Treasure
@@ -242,7 +244,7 @@ namespace Database.Post
                     PointId = 18L,
                     UserId = 8L,
                     Location = "Національний Авіаційний Університет",
-                    Message = ""
+                    Message = "Вищий навчальний заклад без особливих відзнак, є й кращі!"
                 });
 
                 // TSUM
@@ -468,6 +470,93 @@ namespace Database.Post
                 x.HasData(new { UserId = 12L, PostId = 34L });
                 x.HasData(new { UserId = 12L, PostId = 17L });
                 x.HasData(new { UserId = 12L, PostId = 18L });
+
+            });
+        }
+
+        private static void SeedTags(ModelBuilder builder)
+        {
+            builder.Entity<TagEntity>(x =>
+            {
+                x.HasData(new { Id = 1L, CreatedById = 1L, Tag = "чисто" });
+                x.HasData(new { Id = 2L, CreatedById = 1L, Tag = "брудно" });
+                x.HasData(new { Id = 3L, CreatedById = 1L, Tag = "неймовірно" });
+                x.HasData(new { Id = 4L, CreatedById = 1L, Tag = "гарно" });
+                x.HasData(new { Id = 5L, CreatedById = 1L, Tag = "романтично" });
+                x.HasData(new { Id = 6L, CreatedById = 1L, Tag = "прогрес" });
+                x.HasData(new { Id = 7L, CreatedById = 1L, Tag = "історія" });
+                x.HasData(new { Id = 8L, CreatedById = 1L, Tag = "монумент" });
+                x.HasData(new { Id = 9L, CreatedById = 1L, Tag = "пам'ятник" });
+                x.HasData(new { Id = 10L, CreatedById = 1L, Tag = "креативно" });
+                x.HasData(new { Id = 11L, CreatedById = 1L, Tag = "відпочинок" });
+                x.HasData(new { Id = 12L, CreatedById = 1L, Tag = "робота" });
+                x.HasData(new { Id = 13L, CreatedById = 1L, Tag = "площа" });
+                x.HasData(new { Id = 14L, CreatedById = 1L, Tag = "харчування" });
+                x.HasData(new { Id = 15L, CreatedById = 1L, Tag = "навчання" });
+                x.HasData(new { Id = 16L, CreatedById = 1L, Tag = "університет" });
+                x.HasData(new { Id = 17L, CreatedById = 1L, Tag = "стадіон" });
+                x.HasData(new { Id = 18L, CreatedById = 1L, Tag = "вбиральня" });
+                x.HasData(new { Id = 19L, CreatedById = 1L, Tag = "басейн" });
+                x.HasData(new { Id = 20L, CreatedById = 1L, Tag = "зал" });
+                x.HasData(new { Id = 21L, CreatedById = 1L, Tag = "спорт" });
+                x.HasData(new { Id = 22L, CreatedById = 1L, Tag = "бар" });
+                x.HasData(new { Id = 23L, CreatedById = 1L, Tag = "трц" });
+                x.HasData(new { Id = 24L, CreatedById = 1L, Tag = "аеропорт" });
+                x.HasData(new { Id = 25L, CreatedById = 1L, Tag = "вокзал" });
+                x.HasData(new { Id = 26L, CreatedById = 1L, Tag = "магазин" });
+                x.HasData(new { Id = 27L, CreatedById = 1L, Tag = "парк" });
+                x.HasData(new { Id = 28L, CreatedById = 1L, Tag = "ліс" });
+                x.HasData(new { Id = 29L, CreatedById = 1L, Tag = "море" });
+                x.HasData(new { Id = 30L, CreatedById = 1L, Tag = "океан" });
+            });
+
+            builder.Entity<PostTagEntity>(x =>
+            {
+                x.HasData(new { PostId = 1L, TagId = 7L });
+                x.HasData(new { PostId = 1L, TagId = 16L });
+                x.HasData(new { PostId = 2L, TagId = 2L });
+                x.HasData(new { PostId = 3L, TagId = 9L });
+                x.HasData(new { PostId = 3L, TagId = 11L });
+                x.HasData(new { PostId = 4L, TagId = 1L });
+                x.HasData(new { PostId = 4L, TagId = 3L });
+                x.HasData(new { PostId = 5L, TagId = 4L });
+                x.HasData(new { PostId = 5L, TagId = 29L });
+                x.HasData(new { PostId = 6L, TagId = 3L });
+                x.HasData(new { PostId = 6L, TagId = 13L });
+                x.HasData(new { PostId = 7L, TagId = 29L });
+                x.HasData(new { PostId = 8L, TagId = 1L });
+                x.HasData(new { PostId = 8L, TagId = 7L });
+                x.HasData(new { PostId = 9L, TagId = 2L });
+                x.HasData(new { PostId = 10L, TagId = 2L });
+                x.HasData(new { PostId = 11L, TagId = 2L });
+                x.HasData(new { PostId = 12L, TagId = 13L });
+                x.HasData(new { PostId = 13L, TagId = 3L });
+                x.HasData(new { PostId = 13L, TagId = 13L });
+                x.HasData(new { PostId = 14L, TagId = 3L });
+                x.HasData(new { PostId = 14L, TagId = 8L });
+                x.HasData(new { PostId = 15L, TagId = 5L });
+                x.HasData(new { PostId = 15L, TagId = 11L });
+                x.HasData(new { PostId = 16L, TagId = 7L });
+                x.HasData(new { PostId = 17L, TagId = 7L });
+                x.HasData(new { PostId = 18L, TagId = 27L });
+                x.HasData(new { PostId = 19L, TagId = 10L });
+                x.HasData(new { PostId = 20L, TagId = 17L });
+                x.HasData(new { PostId = 21L, TagId = 24L });
+                x.HasData(new { PostId = 22L, TagId = 11L });
+                x.HasData(new { PostId = 23L, TagId = 16L });
+                x.HasData(new { PostId = 24L, TagId = 16L });
+                x.HasData(new { PostId = 25L, TagId = 11L });
+                x.HasData(new { PostId = 25L, TagId = 23L });
+                x.HasData(new { PostId = 26L, TagId = 4L });
+                x.HasData(new { PostId = 27L, TagId = 21L });
+                x.HasData(new { PostId = 28L, TagId = 1L });
+                x.HasData(new { PostId = 29L, TagId = 11L });
+                x.HasData(new { PostId = 30L, TagId = 2L });
+                x.HasData(new { PostId = 31L, TagId = 1L });
+                x.HasData(new { PostId = 31L, TagId = 11L });
+                x.HasData(new { PostId = 32L, TagId = 6L });
+                x.HasData(new { PostId = 33L, TagId = 7L });
+                x.HasData(new { PostId = 34L, TagId = 23L });
 
             });
         }

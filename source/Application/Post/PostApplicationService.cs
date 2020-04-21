@@ -118,6 +118,9 @@ namespace Application.Post
         {
             var markersInRadius = await _pointRepository.GetPointsInRadius(center, radius);
 
+            _pointRepository.IncrementPointViews(markersInRadius.Select(p => p.Id));
+            await _unitOfWork.SaveChangesAsync();
+
             var postsIds = markersInRadius.SelectMany(m => m.Posts.Select(p => p.Id)).ToList();
             var posts = await _postRepository.ListWhereIncludeAsync(p => postsIds.Contains(p.Id), p => p.Point, p => p.User, p => p.Likes, p  => p.Tags);
             var usersIds = posts.Select(p => p.User.Id);

@@ -28,8 +28,7 @@ export class PostCreatorComponent implements OnInit, OnChanges {
   @Output() sendPost = new EventEmitter<{ message: string, location: string, tags: string[] }>();
 
   constructor(
-    private readonly googleApiService: GoogleapiService,
-    private mapsAPILoader: MapsAPILoader
+    private readonly googleApiService: GoogleapiService
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,7 +49,7 @@ export class PostCreatorComponent implements OnInit, OnChanges {
           if (this.tags.every(t => t !== trimmedValue)) {
             this.tags = [...this.tags, trimmedValue];
           }
-          
+
           this.tagInput.setValue('', { emitEvent: false });
         }
       });
@@ -73,6 +72,14 @@ export class PostCreatorComponent implements OnInit, OnChanges {
 
   public handleSendPost(): void {
     this.sendPost.emit({ message: this.text.value, location: this.location.value, tags: this.tags });
+
+    this.tagInput.setValue('', { emitEvent: false});
+    this.tagInput.markAsUntouched();
+    this.text.setValue('', { emitEvent: false});
+    this.text.markAsUntouched();
+    this.location.setValue('', { emitEvent: false});
+    this.location.markAsUntouched();
+    this.tags = [];
   }
 
   public deleteTag(tag: string): void {

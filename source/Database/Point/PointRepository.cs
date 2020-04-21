@@ -4,6 +4,7 @@ using DotNetCore.EntityFrameworkCore;
 using DotNetCoreArchitecture.Database;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,18 @@ namespace Database.Point
                 => (Math.Pow(point.Coordinate.Latitude - center.Latitude, 2) + Math.Pow(point.Coordinate.Longitude - center.Longitude, 2)) < (radius * radius),
                 p => p.Posts,
                 m => m.User);
+        }
+
+        public void IncrementPointViews(IEnumerable<long> pointIds)
+        {
+            var points = ListWhereInclude(p => pointIds.Contains(p.Id));
+
+            foreach (var point in points)
+            {
+                point.TotalViews++;
+                Update(point.Id, point);
+            }
+
         }
     }
 }

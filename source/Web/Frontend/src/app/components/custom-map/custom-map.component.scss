@@ -30,3 +30,7 @@ agm-map {
     position: relative;
     top: -50px;
 }
+
+::ng-deep.agm-map-container-inner {
+    background-color: blanchedalmond;
+}

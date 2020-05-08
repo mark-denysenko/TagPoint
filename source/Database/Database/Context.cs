@@ -21,6 +21,7 @@ namespace DotNetCoreArchitecture.Database
         {
             //Database.EnsureDeleted();
             Database.EnsureCreated();
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             //Database.Migrate();
         }
 

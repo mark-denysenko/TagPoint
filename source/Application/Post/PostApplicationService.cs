@@ -7,6 +7,7 @@ using Domain.ValueObjects;
 using DotNetCore.Objects;
 using DotNetCoreArchitecture.Database;
 using DotNetCoreArchitecture.Domain;
+using Microsoft.EntityFrameworkCore;
 using Model.Models.Map;
 using Model.Models.Post;
 using System;
@@ -67,6 +68,8 @@ namespace Application.Post
             var newPost = new PostEntity
             {
                 Message = post.Message,
+                Recommended = post.Recommended,
+                PostDate = DateTime.UtcNow,
                 Location = post.Location
             };
 
@@ -118,17 +121,19 @@ namespace Application.Post
         {
             var markersInRadius = await _pointRepository.GetPointsInRadius(center, radius);
 
-            _pointRepository.IncrementPointViews(markersInRadius.Select(p => p.Id));
+            await _pointRepository.IncrementPointViews(markersInRadius.Select(p => p.Id));
             await _unitOfWork.SaveChangesAsync();
 
             var postsIds = markersInRadius.SelectMany(m => m.Posts.Select(p => p.Id)).ToList();
-            var posts = await _postRepository.ListWhereIncludeAsync(p => postsIds.Contains(p.Id), p => p.Point, p => p.User, p => p.Likes, p  => p.Tags);
-            var usersIds = posts.Select(p => p.User.Id);
-            var users = await _userRepository.ListWhereIncludeAsync(u => usersIds.Contains(u.Id), u => u.Avatar);
-            foreach (var post in posts)
-            {
-                post.User = users.First(u => u.Id == post.User.Id);
-            }
+            var posts = await _postRepository.Posts
+                .AsNoTracking()
+                .Include(p => p.Likes)
+                .Include(p => p.Point)
+                .Include(p => p.Tags)
+                .Include(p => p.User)
+                .ThenInclude(u => u.Avatar)
+                .Where(p => postsIds.Contains(p.Id))
+                .ToListAsync();
 
             var existedTags = await _tagRepository.ListAsync();
             return DataResult<IEnumerable<MarkerModel>>.Success(markersInRadius.Select(m =>
@@ -216,11 +221,12 @@ namespace Application.Post
                 Id = post.Id,
                 Message = post.Message,
                 Location = post.Location,
+                Recommended = post.Recommended,
                 CreationDate = post.PostDate.ToUniversalTime(),
                 TimesLiked = post.Likes.Count,
                 UserId = post.User.Id,
                 Username = post.User.Username,
-                UserAvatar = post.User.Avatar?.Avatar
+                UserAvatar = post.User.Avatar?.Avatar,
             };
         }
     }

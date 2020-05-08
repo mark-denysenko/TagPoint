@@ -1,7 +1,7 @@
 using Domain.Point;
 using Domain.ValueObjects;
-using DotNetCore.EntityFrameworkCore;
 using DotNetCoreArchitecture.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +10,28 @@ using System.Threading.Tasks;
 
 namespace Database.Point
 {
-    public class PointRepository : EntityFrameworkCoreRelationalRepository<PointEntity>, IPointRepository
+    public class PointRepository : DotNetCore.EntityFrameworkCore.EntityFrameworkCoreRelationalRepository<PointEntity>, IPointRepository
     {
+        private Context Context { get; set; }
         public PointRepository(Context context) : base(context)
         {
+            Context = context;
         }
 
         public async Task<IEnumerable<PointEntity>> GetPointsInRadius(Coordinate center, double radius)
         {
-            return await ListWhereIncludeAsync(point
-                => (Math.Pow(point.Coordinate.Latitude - center.Latitude, 2) + Math.Pow(point.Coordinate.Longitude - center.Longitude, 2)) < (radius * radius),
-                p => p.Posts,
-                m => m.User);
+            return await Context.Points
+                .AsNoTracking()
+                .Include(p => p.User)
+                .Include(p => p.Posts)
+                .Where(point
+                => (Math.Pow(point.Coordinate.Latitude - center.Latitude, 2) + Math.Pow(point.Coordinate.Longitude - center.Longitude, 2)) < (radius * radius))
+                .ToListAsync();
         }
 
-        public void IncrementPointViews(IEnumerable<long> pointIds)
+        public async Task IncrementPointViews(IEnumerable<long> pointIds)
         {
-            var points = ListWhereInclude(p => pointIds.Contains(p.Id));
-
-            foreach (var point in points)
-            {
-                point.TotalViews++;
-                Update(point.Id, point);
-            }
+            await Context.Points.AsNoTracking().Where(p => pointIds.Contains(p.Id)).ForEachAsync(p => p.TotalViews++);
 
         }
     }

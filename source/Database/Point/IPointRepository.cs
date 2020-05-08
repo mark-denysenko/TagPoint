@@ -11,6 +11,6 @@ namespace Database.Point
     public interface IPointRepository : IRelationalRepository<PointEntity>
     {
         Task<IEnumerable<PointEntity>> GetPointsInRadius(Coordinate center, double radius);
-        void IncrementPointViews(IEnumerable<long> pointIds);
+        Task IncrementPointViews(IEnumerable<long> pointIds);
     }
 }

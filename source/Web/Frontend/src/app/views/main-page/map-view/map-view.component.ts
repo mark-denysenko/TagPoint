@@ -25,7 +25,7 @@ export class MapViewComponent implements OnInit {
 
     this.mapCenter$.pipe(
       filter(c => !!c),
-      debounceTime(400)
+      debounceTime(1200)
     ).subscribe((center: Coordinate) => {
       this.postService.getMarkersWithPostsInRadius(center, 5.0).subscribe(response => {
         this.markersOnMap = response;
@@ -50,12 +50,12 @@ export class MapViewComponent implements OnInit {
     this.mapZoom$.next(zoom);
   }
 
-  public handleSendPost({ message, location, tags }: {message: string, location: string, tags: string[]}): void {
+  public handleSendPost({ message, location, tags, recommended }: {message: string, location: string, tags: string[], recommended: boolean}): void {
     if(!this.selectedMarker) {
       return;
     }
 
-    const post = { message, location, tags, marker: this.selectedMarker, id: 0 };
+    const post = { message, location, tags, marker: this.selectedMarker, id: 0, recommended };
     this.postService.add(post).subscribe(markers => {
       this.selectedMarker = markers[0];
       this.markersOnMap = [...this.markersOnMap, ...markers];

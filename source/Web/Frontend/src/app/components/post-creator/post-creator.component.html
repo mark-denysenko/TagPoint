@@ -1,5 +1,5 @@
 <div uk-grid>
-    <div class="uk-margin uk-width-3-4 uk-flex" fxLayout="column" fxLayoutAlign="space-between">
+    <div class="uk-margin uk-width-3-4 uk-flex" fxLayout="column" >
         <!-- <app-input-text class="uk-margin" text="Місце" [formControl]="location"></app-input-text> -->
         <div class="uk-inline">
             <input #addressInput class="uk-input uk-margin" placeholder="Місце" [formControl]="location">
@@ -15,7 +15,6 @@
             </div>
         </div>
         <div class="uk-overflow-auto" style="max-height: 110px;">
-
             <textarea 
                 class="uk-textarea" 
                 rows="3"
@@ -31,10 +30,14 @@
         </div>
 
     </div>
-    <div class="uk-margin uk-width-1-4 uk-flex uk-flex-column-reverse">
+    <div class="uk-width-1-4 uk-flex uk-flex-column">
         <!-- <span class="uk-icon-link uk-icon-button pointer" uk-icon="icon: image"></span> -->
-        <button class="uk-button uk-button-default uk-margin-small-right uk-margin-top" (click)="handleSendPost()">Відправити</button>
+        <div class="uk-flex uk-flex-around">
+            <img class="pointer" (click)="changeRecommendation(true)" [ngClass]="{'opacity-05': !recommended}" src="assets/icons/thumb_up.svg">
+            <img class="pointer" (click)="changeRecommendation(false)" [ngClass]="{'opacity-05': recommended}" src="assets/icons/thumb_down.svg">
+        </div>    
         <input class="uk-input uk-margin uk-border-pill uk-width-small" placeholder="тег" [formControl]="tagInput">
+        <button class="uk-button uk-button-default uk-margin-small-right" (click)="handleSendPost()">Відправити</button>
     </div>
 </div>
 <!-- (keydown.enter)="handleSendPost()" -->

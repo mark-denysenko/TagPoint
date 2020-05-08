@@ -10,4 +10,5 @@ export class PostModel {
     timesLiked!: number;
     editable!: boolean;
     userAvatar!: string;
+    tags!: string[];
 }

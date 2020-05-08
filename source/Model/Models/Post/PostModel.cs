@@ -10,6 +10,7 @@ namespace Model.Models.Post
     {
         public long Id { get; set; }
         public string Message { get; set; }
+        public bool Recommended { get; set; }
         public string Location { get; set; }
         public DateTime CreationDate { get; set; }
         public MarkerModel Marker { get; set; }

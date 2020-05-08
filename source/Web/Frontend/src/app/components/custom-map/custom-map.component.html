@@ -3,6 +3,7 @@
     [longitude]="initialPlace?.longitude" 
     [zoom]="zoom"
     [backgroundColor]="'black'"
+    [style]="mapStyle"
     (zoomChange)="handleZoomChange($event)"
     (centerChange)="handleCenterChange($event)"
     (mapClick)="handleMapClick($event)">

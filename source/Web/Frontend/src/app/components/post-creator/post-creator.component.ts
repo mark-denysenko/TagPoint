@@ -19,13 +19,14 @@ export class PostCreatorComponent implements OnInit, OnChanges {
   public text = new FormControl('', [Validators.required, Validators.maxLength(1000)]);
   public location = new FormControl('', [Validators.maxLength(100)]);
   public tagInput = new FormControl('', [Validators.maxLength(30)]);
+  public recommended = true;
 
   public tags: string[] = [];
 
   public addressesNear: string[] = [];
   public suggestedLocations$!: Observable<string[]>;
 
-  @Output() sendPost = new EventEmitter<{ message: string, location: string, tags: string[] }>();
+  @Output() sendPost = new EventEmitter<{ message: string, location: string, tags: string[], recommended: boolean }>();
 
   constructor(
     private readonly googleApiService: GoogleapiService
@@ -71,7 +72,12 @@ export class PostCreatorComponent implements OnInit, OnChanges {
   }
 
   public handleSendPost(): void {
-    this.sendPost.emit({ message: this.text.value, location: this.location.value, tags: this.tags });
+    this.sendPost.emit({ 
+      message: this.text.value,
+      location: this.location.value,
+      tags: this.tags,
+      recommended: this.recommended
+    });
 
     this.tagInput.setValue('', { emitEvent: false});
     this.tagInput.markAsUntouched();
@@ -80,10 +86,15 @@ export class PostCreatorComponent implements OnInit, OnChanges {
     this.location.setValue('', { emitEvent: false});
     this.location.markAsUntouched();
     this.tags = [];
+    this.recommended = true;
   }
 
   public deleteTag(tag: string): void {
     this.tags = this.tags.filter(t => t !== tag);
+  }
+
+  public changeRecommendation(recommendation: boolean): void {
+    this.recommended = recommendation;
   }
 
     // load Places Autocomplete

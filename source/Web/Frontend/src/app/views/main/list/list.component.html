@@ -7,6 +7,7 @@
                 <!-- <th class="uk-text-center@m">Ідентифікатор запису</th> -->
                 <th class="">Локація</th>
                 <th class="">Запис</th>
+                <th class="">Перегляди</th>
                 <th class=""><span class="d-flex">Вподобайки<img class="uk-margin-left filter pointer" [ngClass]="{'active': orderByLikes}" (click)="sortBy(true, null)" src="assets/icons/filter.svg"></span></th>
                 <th class=""><span class="d-flex" style="min-width: 180px;" >Дата створення<img class="uk-margin-left filter pointer" [class.active]="orderByDate" (click)="sortBy(null, true)" src="assets/icons/filter.svg"></span></th>
                 <th class="" style="width: 20px;"></th>
@@ -17,6 +18,7 @@
                 <!-- <td class="uk-text-center@m">{{ item?.id }}</td> -->
                 <td class="">{{ item?.location }}</td>
                 <td class="">{{ item?.message }}</td>
+                <td class="">{{ item?.views }}</td>
                 <td class="uk-text-center@m">{{ item?.timesLiked }}</td>
                 <td class="">{{ item?.creationDate | date:'HH:mm dd-MM-yyyy' }}</td>
                 <td class=""><span class="pointer" style="color: red;" uk-icon="close" (click)="deletePost(item)"></span></td>

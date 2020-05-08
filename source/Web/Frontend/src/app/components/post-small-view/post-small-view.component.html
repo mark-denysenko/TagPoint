@@ -1,4 +1,4 @@
-<div class="uk-card uk-card-default uk-card-body uk-margin uk-card-small">
+<div class="uk-card uk-card-default uk-card-body uk-margin uk-card-small" [ngClass]="{'recommended': post.recommended, 'not-recommended': !post.recommended}">
     <div class="uk-margin">
         <div *ngIf="post.editable" class="pointer" style="color: red; float: right;" uk-icon="close" (click)="handleDeletePost()"></div>
         <div class="uk-flex" style="align-items: center;">

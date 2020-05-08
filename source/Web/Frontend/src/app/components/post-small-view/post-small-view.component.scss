@@ -10,3 +10,15 @@
         }
     }
 }
+
+.recommended {
+    -webkit-box-shadow: 0px 0px 5px 8px rgba(98, 243, 106, 0.75);
+    -moz-box-shadow: 0px 0px 5px 8px rgba(98, 243, 106,0.75);
+    box-shadow: 0px 0px 5px 8px rgba(98, 243, 106,0.75);
+}
+
+.not-recommended {
+    -webkit-box-shadow: 0px 0px 5px 8px rgba(255,105,105,0.75);
+    -moz-box-shadow: 0px 0px 5px 8px rgba(255,105,105,0.75);
+    box-shadow: 0px 0px 5px 8px rgba(255,105,105,0.75);
+}

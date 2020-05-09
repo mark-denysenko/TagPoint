@@ -3,6 +3,7 @@ import { AppPostService } from 'src/app/services/post.service';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { Coordinate, MarkerWithPosts } from 'src/typing';
+import { GoogleapiService } from 'src/app/services/googleapi.service';
 
 @Component({
   selector: 'app-map-view',
@@ -18,7 +19,9 @@ export class MapViewComponent implements OnInit {
   public mapCenter$ = new BehaviorSubject<Coordinate>({ latitude: 0, longitude: 0});
   public mapZoom$ = new BehaviorSubject<number>(10);
 
-  constructor(private readonly postService: AppPostService) { }
+  public recommendations: any[] = [];
+
+  constructor(private readonly postService: AppPostService, private readonly googleApiService: GoogleapiService) { }
 
   ngOnInit() {
     this.setCurrentPosition();
@@ -83,6 +86,32 @@ export class MapViewComponent implements OnInit {
         })))
   }
 
+  public getRecommendations(): void {
+    this.googleApiService.placesNearPlaces(this.mapCenter$.value.latitude, this.mapCenter$.value.longitude)
+      .subscribe(places => {
+        const filteredValues = places.filter((p: any) => p.types.some((t: string) => p.photos && relaxTypes.indexOf(t) != -1)).slice(0, 3);
+        this.recommendations = filteredValues
+          .map(p => ({
+            name: p.name,
+            photoLink: this.googleApiService.getPhotoLinkByReference(p.photos[0].photo_reference),
+            address: p.vicinity,
+            type: this.translate(p.types.find((t: string) => relaxTypes.indexOf(t) != -1)),
+            location: { 
+              latitude: p.geometry.location.lat, 
+              longitude: p.geometry.location.lng
+            },
+            distance: p.geometry.location // meters
+          }));
+
+      });
+  }
+
+  public selectRecommendation(recommendation: any): void {
+    this.mapCenter$.next(recommendation.location);
+    this.selectedMarker = recommendation.location;
+    this.initialPlace = recommendation.location;
+  }
+
   private setCurrentPosition(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -99,4 +128,65 @@ export class MapViewComponent implements OnInit {
     }
   }
 
+  private translate(key: string): string {
+    return translations[key];
+  }
+
 }
+
+const translations: {
+  [key: string]: string,
+ } = {
+  amusement_park: '',
+  aquarium: '',
+  art_gallery: '',
+  bakery: '',
+  bar: '',
+  bicycle_store: '',
+  book_store: '',
+  bowling_alley: '',
+  cafe: '',
+  campground: '',
+  casino: '',
+  city_hall: '',
+  clothing_store: '',
+  convenience_store: '',
+  department_store: '',
+  electronics_store: '',
+  florist: '',
+  furniture_store: '',
+  grocery_or_supermarket: '',
+  gym: '',
+  hardware_store: '',
+  hindu_temple: '',
+  home_goods_store: '',
+  jewelry_store: '',
+  library: '',
+  light_rail_station: '',
+  liquor_store: '',
+  lodging: '',
+  meal_delivery: '',
+  meal_takeaway: '',
+  mosque: '',
+  movie_rental: '',
+  movie_theater: '',
+  moving_company: '',
+  museum: '',
+  night_club: '',
+  painter: '',
+  park: '',
+  pet_store: '',
+  restaurant: '',
+  roofing_contractor: '',
+  rv_park: '',
+  shoe_store: '',
+  shopping_mall: '',
+  spa: '',
+  stadium: '',
+  supermarket: '',
+  synagogue: '',
+  tourist_attraction: '',
+  zoo: '',  
+};
+
+const relaxTypes = Object.keys(translations);

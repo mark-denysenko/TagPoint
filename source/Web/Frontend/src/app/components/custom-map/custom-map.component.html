@@ -45,9 +45,9 @@
     </agm-marker>
 
     <!-- <agm-circle 
-      [latitude]="currentMarker?.latitude + 0.003" 
-      [longitude]="currentMarker?.longitude" 
-      [radius]="500"
+      [latitude]="currentCenter?.latitude" 
+      [longitude]="currentCenter?.longitude" 
+      [radius]="20000/zoom"
       [fillColor]="'red'"
       [circleDraggable]="true"
       [editable]="true">

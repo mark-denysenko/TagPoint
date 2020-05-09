@@ -3,8 +3,22 @@
 }
 
 .posts-container {
-    max-height: 560px;
+    max-height: 485px;
     .post-card {
 
     }
+}
+
+.place-card {
+    width: min-content;
+    width: 170px;
+}
+
+.place-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.place-card:hover {
+    background-color: gainsboro;
 }

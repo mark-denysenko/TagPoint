@@ -25,8 +25,8 @@ namespace Application.Post
         private readonly IPointRepository _pointRepository;
         private readonly IUserRepository _userRepository;
         private readonly ILikeRepository _likesRepository;
-        private readonly ITagRepository _tagRepository; 
-        private readonly IPostTagRepository _postTagRepository; 
+        private readonly ITagRepository _tagRepository;
+        private readonly IPostTagRepository _postTagRepository;
 
         public PostApplicationService(
             IUnitOfWork unitOfWork,
@@ -158,9 +158,15 @@ namespace Application.Post
 
         public async Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId, PostsRequest postsRequest)
         {
-            var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId, p => p.User, p => p.User, p => p.Likes);
+            var posts = await _postRepository.ListWhereIncludeAsync(post => post.User.Id == userId, p => p.User, p => p.User, p => p.Likes, p => p.Point);
 
-            var postsResult = posts.Select(CreatePostModel);
+            var postsResult = posts.Select(p =>
+            {
+                var post = CreatePostModel(p);
+                post.Views = p.Point.TotalViews;
+
+                return post;
+            });
 
             if (postsRequest.OrderByDateDesc.HasValue)
             {
@@ -226,7 +232,7 @@ namespace Application.Post
                 TimesLiked = post.Likes.Count,
                 UserId = post.User.Id,
                 Username = post.User.Username,
-                UserAvatar = post.User.Avatar?.Avatar,
+                UserAvatar = post.User.Avatar?.Avatar
             };
         }
     }

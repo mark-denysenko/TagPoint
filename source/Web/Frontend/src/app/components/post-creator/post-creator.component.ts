@@ -36,7 +36,7 @@ export class PostCreatorComponent implements OnInit, OnChanges {
     if (changes.place.currentValue) {
       const newPlace = changes.place.currentValue;
       this.googleApiService.placesNearPlaces(newPlace.latitude, newPlace.longitude).subscribe(places => {
-        this.addressesNear = places;
+        this.addressesNear = places.map((p: any) => p.name);
         this.location.updateValueAndValidity({ onlySelf: false, emitEvent: true });
       });
     }

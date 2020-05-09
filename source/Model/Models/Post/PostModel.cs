@@ -15,6 +15,7 @@ namespace Model.Models.Post
         public DateTime CreationDate { get; set; }
         public MarkerModel Marker { get; set; }
         public bool Liked { get; set; }
+        public long Views { get; set; }
         public int TimesLiked { get; set; }
         public bool Editable { get; set; }
         public long UserId { get; set; }

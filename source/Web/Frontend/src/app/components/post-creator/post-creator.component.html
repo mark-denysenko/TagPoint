@@ -36,8 +36,10 @@
             <img class="pointer" (click)="changeRecommendation(true)" [ngClass]="{'opacity-05': !recommended}" src="assets/icons/thumb_up.svg">
             <img class="pointer" (click)="changeRecommendation(false)" [ngClass]="{'opacity-05': recommended}" src="assets/icons/thumb_down.svg">
         </div>    
-        <input class="uk-input uk-margin uk-border-pill uk-width-small" placeholder="тег" [formControl]="tagInput">
-        <button class="uk-button uk-button-default uk-margin-small-right" (click)="handleSendPost()">Відправити</button>
+        <input class="uk-input uk-margin uk-border-pill uk-width-small uk-text-center uk-margin-auto" placeholder="тег" [formControl]="tagInput">
+        <button class="uk-button uk-button-default" (click)="handleSendPost()" style="overflow: hidden;">
+            Відправити
+        </button>
     </div>
 </div>
 <!-- (keydown.enter)="handleSendPost()" -->

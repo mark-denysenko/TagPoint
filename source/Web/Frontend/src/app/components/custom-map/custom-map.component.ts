@@ -18,6 +18,8 @@ export class CustomMapComponent implements OnInit {
   @Output() public centerChange = new EventEmitter<Coordinate>();
   @Output() public zoomChange = new EventEmitter<number>();
 
+  public currentCenter!: { longitude: number, latitude: number };
+
   private currentIW: AgmInfoWindow | null = null;
   private previousIW: AgmInfoWindow | null = null;
 
@@ -38,7 +40,8 @@ export class CustomMapComponent implements OnInit {
   }
 
   public handleCenterChange({ lng, lat }: any): void {
-    this.centerChange.emit({ longitude: lng, latitude: lat });
+    this.currentCenter = { longitude: lng, latitude: lat };
+    this.centerChange.emit(this.currentCenter);
   }
 
   public handleZoomChange(zoom: number): void {

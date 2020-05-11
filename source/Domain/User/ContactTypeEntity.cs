@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Domain.User
 {
-    public class ContactTypeEntity : Entity
-    {
-        public string ContactType { get; set; }
-    }
+    //public class ContactTypeEntity : Entity
+    //{
+    //    public string ContactType { get; set; }
+    //}
 }

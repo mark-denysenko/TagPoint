@@ -36,6 +36,9 @@ namespace DotNetCoreArchitecture.Database
                 y.HasIndex(x => x.Login).IsUnique();
             });
 
+            builder.HasMany(x => x.TagSelections).WithOne(s => s.User).OnDelete(DeleteBehavior.NoAction);
+
+
             //builder.HasOne(x => x.Avatar).WithOne(x => x.User);
         }
     }

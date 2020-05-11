@@ -44,14 +44,21 @@
     <div class="uk-modal-dialog uk-modal-body">
         <h2 class="uk-modal-title">Рекомендації</h2>
         <div class="uk-flex uk-flex-around">
+            <div *ngIf="!recommendations.length && isRecommendationsLoad">
+                <img src="/assets/spinner.gif" >
+            </div>
+            <div *ngIf="!recommendations.length && !isRecommendationsLoad">
+                Місць поруч не знайдено!
+            </div>
             <div *ngFor="let recommendation of recommendations"
                 (click)="selectRecommendation(recommendation)"
-                class="uk-modal-close place-card pointer uk-card uk-card-small uk-card-secondary">
+                class="uk-modal-close place-card pointer uk-card uk-card-small uk-card-secondary uk-margin-right">
                 <div class="uk-card-media-top uk-text-center">
                     <img [src]="recommendation.photoLink" alt="">
                 </div>
                 <div class="uk-card-body">
                     <h3 class="uk-card-title">{{ recommendation.name }}</h3>
+                    <p><span class="uk-text-capitalize">{{ recommendation.type }}</span> {{ recommendation.distance }} м</p>
                     <p>{{ recommendation.address }}</p>
                 </div>
             </div>

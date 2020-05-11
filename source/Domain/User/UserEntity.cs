@@ -57,6 +57,7 @@ namespace DotNetCoreArchitecture.Domain
         public ICollection<PointEntity> Points { get; private set; }
         public ICollection<PostEntity> Posts { get; private set; }
         public ICollection<LikeEntity> Likes { get; private set; }
+        public ICollection<TagSelectionEntity> TagSelections { get; set; }
 
         public void Add()
         {

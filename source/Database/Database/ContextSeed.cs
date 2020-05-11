@@ -16,7 +16,7 @@ namespace DotNetCoreArchitecture.Database
         {
             builder.SeedCountries();
             builder.SeedUsers();
-            builder.SeedContactTypes();
+            //builder.SeedContactTypes();
             builder.SeedPoints();
             builder.SeedPosts();
         }

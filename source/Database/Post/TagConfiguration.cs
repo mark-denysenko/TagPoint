@@ -20,6 +20,8 @@ namespace Database.Post
             builder.Property(x => x.Created).IsRequired().HasDefaultValueSql("GETDATE()");
 
             builder.HasIndex(x => x.Tag).IsUnique();
+
+            builder.HasMany(x => x.TagSelections).WithOne(s => s.Tag).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

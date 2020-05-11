@@ -11,7 +11,7 @@
 
 .place-card {
     width: min-content;
-    width: 170px;
+    min-width: 170px;
 }
 
 .place-card img {
@@ -21,4 +21,9 @@
 
 .place-card:hover {
     background-color: gainsboro;
+}
+
+.uk-modal-dialog {
+    width: fit-content;
+    min-width: 600px;
 }

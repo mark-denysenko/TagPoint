@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { Coordinate, MarkerWithPosts } from 'src/typing';
 import { GoogleapiService } from 'src/app/services/googleapi.service';
+import { RecommendationService } from 'src/app/services/recommendation.service';
 
 @Component({
   selector: 'app-map-view',
@@ -20,8 +21,12 @@ export class MapViewComponent implements OnInit {
   public mapZoom$ = new BehaviorSubject<number>(10);
 
   public recommendations: any[] = [];
+  public isRecommendationsLoad = false;
 
-  constructor(private readonly postService: AppPostService, private readonly googleApiService: GoogleapiService) { }
+  constructor(
+    private readonly postService: AppPostService,
+    private readonly googleApiService: GoogleapiService,
+    private readonly recommendationService: RecommendationService) { }
 
   ngOnInit() {
     this.setCurrentPosition();
@@ -30,7 +35,7 @@ export class MapViewComponent implements OnInit {
       filter(c => !!c),
       debounceTime(1200)
     ).subscribe((center: Coordinate) => {
-      this.postService.getMarkersWithPostsInRadius(center, 5.0).subscribe(response => {
+      this.postService.getMarkersWithPostsInRadius(center).subscribe(response => {
         this.markersOnMap = response;
         const selectedMarker = this.markersOnMap.find(m => m.id === this.selectedMarker!.id);
 
@@ -39,6 +44,8 @@ export class MapViewComponent implements OnInit {
         }
       });
     });
+
+    this.recommendationService.getUserPreferredTypes();
   }
 
   public handleMarkerSelect(marker: Marker): void {
@@ -87,10 +94,12 @@ export class MapViewComponent implements OnInit {
   }
 
   public getRecommendations(): void {
+    this.isRecommendationsLoad = true;
+    this.recommendations = [];
+
     this.googleApiService.placesNearPlaces(this.mapCenter$.value.latitude, this.mapCenter$.value.longitude)
       .subscribe(places => {
-        const filteredValues = places.filter((p: any) => p.types.some((t: string) => p.photos && relaxTypes.indexOf(t) != -1)).slice(0, 3);
-        this.recommendations = filteredValues
+        const filteredValues = places.filter((p: any) => p.types.some((t: string) => p.photos && relaxTypes.indexOf(t) != -1))
           .map(p => ({
             name: p.name,
             photoLink: this.googleApiService.getPhotoLinkByReference(p.photos[0].photo_reference),
@@ -100,9 +109,22 @@ export class MapViewComponent implements OnInit {
               latitude: p.geometry.location.lat, 
               longitude: p.geometry.location.lng
             },
-            distance: p.geometry.location // meters
+            distance: Math.round(this.distance(
+              p.geometry.location.lat,
+              p.geometry.location.lng,
+              this.mapCenter$.value.latitude,
+              this.mapCenter$.value.longitude
+            ))
           }));
 
+        // popular places will be placed in the end
+        filteredValues.sort((place1, place2) => {
+          return this.recommendationService.preferredTypes$.value.indexOf(place2.type) - this.recommendationService.preferredTypes$.value.indexOf(place1.type);
+        });
+        filteredValues.reverse();
+
+        this.recommendations = filteredValues.slice(0, 3);
+        this.isRecommendationsLoad = false;
       });
   }
 
@@ -110,6 +132,8 @@ export class MapViewComponent implements OnInit {
     this.mapCenter$.next(recommendation.location);
     this.selectedMarker = recommendation.location;
     this.initialPlace = recommendation.location;
+
+    this.recommendationService.selectRecommendation(recommendation.type).subscribe();
   }
 
   private setCurrentPosition(): void {
@@ -132,61 +156,66 @@ export class MapViewComponent implements OnInit {
     return translations[key];
   }
 
+  private distance(lat1: number, lon1: number, lat2: number, lon2: number): number
+  {
+    const R = 6371e3; // metres
+    const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+    const φ2 = lat2 * Math.PI/180;
+    const Δφ = (lat2-lat1) * Math.PI/180;
+    const Δλ = (lon2-lon1) * Math.PI/180;
+
+    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+              Math.cos(φ1) * Math.cos(φ2) *
+              Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return R * c; // in metres
+  }
+
 }
 
 const translations: {
   [key: string]: string,
  } = {
-  amusement_park: '',
-  aquarium: '',
-  art_gallery: '',
-  bakery: '',
-  bar: '',
-  bicycle_store: '',
-  book_store: '',
-  bowling_alley: '',
-  cafe: '',
-  campground: '',
-  casino: '',
-  city_hall: '',
-  clothing_store: '',
-  convenience_store: '',
-  department_store: '',
-  electronics_store: '',
-  florist: '',
-  furniture_store: '',
-  grocery_or_supermarket: '',
-  gym: '',
-  hardware_store: '',
-  hindu_temple: '',
-  home_goods_store: '',
-  jewelry_store: '',
-  library: '',
-  light_rail_station: '',
-  liquor_store: '',
-  lodging: '',
-  meal_delivery: '',
-  meal_takeaway: '',
-  mosque: '',
-  movie_rental: '',
-  movie_theater: '',
-  moving_company: '',
-  museum: '',
-  night_club: '',
-  painter: '',
-  park: '',
-  pet_store: '',
-  restaurant: '',
-  roofing_contractor: '',
-  rv_park: '',
-  shoe_store: '',
-  shopping_mall: '',
-  spa: '',
-  stadium: '',
-  supermarket: '',
-  synagogue: '',
-  tourist_attraction: '',
-  zoo: '',  
+  amusement_park: 'парк',
+  aquarium: 'акваріум',
+  art_gallery: 'галерея',
+  bakery: 'пекарня',
+  bar: 'бар',
+  book_store: 'книжний',
+  bowling_alley: 'боулінг',
+  cafe: 'кафе',
+  campground: 'кемпінг',
+  casino: 'казино',
+  city_hall: 'ратуша',
+  clothing_store: 'одяг',
+  florist: 'квіти',
+  gym: 'спортзал',
+  hindu_temple: 'храм',
+  home_goods_store: 'затишок',
+  library: 'бібліотека',
+  liquor_store: 'алкоголь',
+  meal_delivery: 'їжа',
+  meal_takeaway: 'їжа',
+  mosque: 'мечеть',
+  movie_rental: 'кіно',
+  movie_theater: 'театр',
+  moving_company: 'кіно',
+  museum: 'музей',
+  night_club: 'клуб',
+  painter: 'мистецтво',
+  park: 'парк',
+  pet_store: 'зоомагазин',
+  restaurant: 'ресторан',
+  rv_park: 'парк',
+  shoe_store: 'взуття',
+  shopping_mall: 'трц',
+  spa: 'спа',
+  stadium: 'стадіон',
+  //supermarket: 'супермаркет',
+  synagogue: 'синагога',
+  tourist_attraction: 'пам\'ятка',
+  zoo: 'зоопарк',  
 };
 
 const relaxTypes = Object.keys(translations);

@@ -16,12 +16,13 @@ namespace DotNetCoreArchitecture.Database
         public DbSet<LikeEntity> Likes { get; set; }
         public DbSet<CountryEntity> Countries { get; set; }
         public DbSet<PointEntity> Points { get; set; }
+        public DbSet<TagSelectionEntity> TagSelections { get; set; }
 
         public Context(DbContextOptions options) : base(options)
         {
             //Database.EnsureDeleted();
             Database.EnsureCreated();
-            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             //Database.Migrate();
         }
 

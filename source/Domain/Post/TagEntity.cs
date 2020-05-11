@@ -14,5 +14,6 @@ namespace Domain.Post
         public long CreatedById { get; set; }
 
         public ICollection<PostTagEntity> Posts { get; set; }
+        public ICollection<TagSelectionEntity> TagSelections { get; set; }
     }
 }

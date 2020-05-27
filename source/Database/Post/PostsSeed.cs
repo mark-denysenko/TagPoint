@@ -21,6 +21,7 @@ namespace Database.Post
                     Id = 1L,
                     PointId = 1L,
                     UserId = 2L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "КПІ",
                     Message = "Один з найкращих навчальних закладів України! Дуже пишаюся своє альма-матер."
@@ -32,6 +33,7 @@ namespace Database.Post
                     Id = 2L,
                     PointId = 2L,
                     UserId = 3L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Гуртожиток 20",
                     Message = "Гуртожиток для студентів КПІ різних факультетів. Одна з трьох так званих \"книжок\". Не найсприятливіші умови для проживання, але обирати не доводиться."
@@ -43,6 +45,7 @@ namespace Database.Post
                     Id = 3L,
                     PointId = 3L,
                     UserId = 4L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Сквер Поляна",
                     Message = "Одне з найвідоміших місць для відпочинку студентів! Але потрібно бути обережним з відпочинком та не втрачати голову! Дівчатам краще не ходити тут вночі! Бережіть себе!"
@@ -54,6 +57,7 @@ namespace Database.Post
                     Id = 4L,
                     PointId = 4L,
                     UserId = 2L,
+                    TotalViews = 67L,
                     Recommended = true,
                     Location = "Полтава",
                     Message = "Рідне місто! Завжди залишає тільки теплі враження та допомгає відпочити!"
@@ -65,6 +69,7 @@ namespace Database.Post
                     Id = 5L,
                     PointId = 5L,
                     UserId = 3L,
+                    TotalViews = 234L,
                     Recommended = true,
                     Location = "Одеса",
                     Message = "Колоритне місто біля Чорного моря. Дуже смачна риба та пиво!"
@@ -76,6 +81,7 @@ namespace Database.Post
                     Id = 6L,
                     PointId = 6L,
                     UserId = 4L,
+                    TotalViews = 43L,
                     Recommended = true,
                     Location = "Львів",
                     Message = "Мабуть єдине місце у світі, що наскрізь пропахло кавою та шоколадом. Обожнюю!"
@@ -87,6 +93,7 @@ namespace Database.Post
                     Id = 7L,
                     PointId = 7L,
                     UserId = 2L,
+                    TotalViews = 85L,
                     Recommended = true,
                     Location = "Води Чорного моря",
                     Message = "Гарне місце для дайвінгу! Вода дуже чиста та велике різноманіття риб."
@@ -98,6 +105,7 @@ namespace Database.Post
                     Id = 8L,
                     PointId = 4L,
                     UserId = 3L,
+                    TotalViews = 56L,
                     Recommended = true,
                     Location = "Полтава",
                     Message = "Тут готують найсмачніші галушки!!! Варто хоча б раз спробувати"
@@ -109,6 +117,7 @@ namespace Database.Post
                     Id = 9L,
                     PointId = 2L,
                     UserId = 1L,
+                    TotalViews = 366L,
                     Recommended = false,
                     Location = "Гуртожиток 20 (5 поверх)",
                     Message = "Живу у цьому гуртожитку вже достатньо довго і можу скзазати, що умови спартанські ..."
@@ -120,6 +129,7 @@ namespace Database.Post
                     Id = 10L,
                     PointId = 8L,
                     UserId = 3L,
+                    TotalViews = 93L,
                     Recommended = false,
                     Location = "Центральний вокзал",
                     Message = "Жахливе та неопртяне місце. Досить брудно та смердить. Шкода, що таким є головний вокзал країни."
@@ -129,6 +139,7 @@ namespace Database.Post
                     Id = 11L,
                     PointId = 8L,
                     UserId = 4L,
+                    TotalViews = 36L,
                     Recommended = true,
                     Location = "Площа вокзалу",
                     Message = "Чув багато про аферистів, але не надавав ніякої уваги, доки сам не зіштовхнувся."
@@ -138,6 +149,7 @@ namespace Database.Post
                     Id = 12L,
                     PointId = 8L,
                     UserId = 5L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Площа вокзалу",
                     Message = "Поруч гарнорозвинена інфраструктура. А саме в пішій доступності знаходиться метро, заклади харчування, а також саме місто."
@@ -158,6 +170,7 @@ namespace Database.Post
                     Id = 14L,
                     PointId = 9L,
                     UserId = 7L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Фонтани",
                     Message = "Обожнюю фонтани з підсвіткою. Це неймовірна атмосфера, що надихає і підіймає настрій!!!"
@@ -169,6 +182,7 @@ namespace Database.Post
                     Id = 15L,
                     PointId = 10L,
                     UserId = 8L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Труханів острів",
                     Message = "Природній закуток у самому центрі міста. Ідеально для пробіжок та активного відпочинку!"
@@ -180,6 +194,7 @@ namespace Database.Post
                     Id = 16L,
                     PointId = 11L,
                     UserId = 9L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Червона будівля",
                     Message = "Будівля з віковою історією. Навчила не один десяток поколінь українців та їх дітей"
@@ -191,6 +206,7 @@ namespace Database.Post
                     Id = 17L,
                     PointId = 12L,
                     UserId = 10L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Національна Опера",
                     Message = "Архітектура будівлі вражає с першого погляду, а внутрішнє оздоблення просто неперевершене"
@@ -202,6 +218,7 @@ namespace Database.Post
                     Id = 18L,
                     PointId = 13L,
                     UserId = 2L,
+                    TotalViews = 78L,
                     Recommended = false,
                     Location = "Гідропарк",
                     Message = "Дуже хотілось би, щоб Гідропарк був більш чистим та облаштованим"
@@ -213,6 +230,7 @@ namespace Database.Post
                     Id = 19L,
                     PointId = 14L,
                     UserId = 3L,
+                    TotalViews = 90L,
                     Recommended = true,
                     Location = "Ринок",
                     Message = "Люблю відвідувати місцевий ринок. Завжди можна знайти щось цікаве. Особоливо великий вибір книг!"
@@ -224,6 +242,7 @@ namespace Database.Post
                     Id = 20L,
                     PointId = 15L,
                     UserId = 4L,
+                    TotalViews = 48L,
                     Recommended = true,
                     Location = "стадіон \"Олімпійский\"",
                     Message = "Величезний стадіон. Був на матчі Шахтар-Динамо, то дуже сподобалося."
@@ -235,6 +254,7 @@ namespace Database.Post
                     Id = 21L,
                     PointId = 16L,
                     UserId = 5L,
+                    TotalViews = 146L,
                     Recommended = true,
                     Location = "аеропорт Жуляни",
                     Message = "Сучасний аеропорт з достатньо кільксть місця та зручним розташуванням. Вже не раз доводилося користуватися, тому суб'єктивно дуже гарно!"
@@ -246,6 +266,7 @@ namespace Database.Post
                     Id = 22L,
                     PointId = 17L,
                     UserId = 6L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "Протасів Яр",
                     Message = "Взимку єдине місце, де можна хоча б на мить відчути драйв від катання на лижах або сноуборді!"
@@ -277,6 +298,7 @@ namespace Database.Post
                     Id = 25L,
                     PointId = 19L,
                     UserId = 9L,
+                    TotalViews = 105L,
                     Recommended = true,
                     Location = "ЦУМ",
                     Message = "Найбільший вибір люксових брендів у столиці. Інколи бувають знижки."
@@ -286,6 +308,7 @@ namespace Database.Post
                     Id = 26L,
                     PointId = 19L,
                     UserId = 10L,
+                    TotalViews = 105L,
                     Recommended = false,
                     Location = "ЦУМ",
                     Message = "Дуже дорого!!! Не для звичайних людей"
@@ -297,6 +320,7 @@ namespace Database.Post
                     Id = 27L,
                     PointId = 20L,
                     UserId = 1L,
+                    TotalViews = 155L,
                     Recommended = true,
                     Location = "Київський велотрек",
                     Message = "Сучасний велотрек. Постійно тренуються різні покоління гонщиків. Також вдалося споглядати один з чемпіонатів. Можу сказати тільки, що пройшов на найвищому рівні"
@@ -306,6 +330,7 @@ namespace Database.Post
                     Id = 28L,
                     PointId = 20L,
                     UserId = 2L,
+                    TotalViews = 387L,
                     Recommended = true,
                     Location = "Київський велотрек",
                     Message = "Найулюбленіше місце для прогулянки. Обожнюююю"
@@ -317,6 +342,7 @@ namespace Database.Post
                     Id = 29L,
                     PointId = 21L,
                     UserId = 3L,
+                    TotalViews = 79L,
                     Recommended = true,
                     Location = "Національний цирк України",
                     Message = "Був приємно вражений рівнем видовища. Українські артисти були на висоті!"
@@ -328,6 +354,7 @@ namespace Database.Post
                     Id = 30L,
                     PointId = 22L,
                     UserId = 4L,
+                    TotalViews = 26L,
                     Recommended = false,
                     Location = "Шулявський міст",
                     Message = "Вічне будівництво, неможливо проїхати без затору =("
@@ -339,6 +366,7 @@ namespace Database.Post
                     Id = 31L,
                     PointId = 23L,
                     UserId = 5L,
+                    TotalViews = 138L,
                     Recommended = true,
                     Location = "Океанаріум",
                     Message = "Захоплююча місце, де можна помилуватися мешканцями як прісних, так і морських водойм з різних куточків нашої планети. Крім того, що є можливість порадувати око, також ви зможете дізнатися цікаві факти про різних телефонах риб та інших мешканців водних глибин. Діти не залишаться байдужими від відвідування Океанаріума."
@@ -361,6 +389,7 @@ namespace Database.Post
                     Id = 33L,
                     PointId = 25L,
                     UserId = 7L,
+                    TotalViews = 145L,
                     Recommended = true,
                     Location = "Києво-Печерська Лавра",
                     Message = "Один з перших по часу заснування монастирів Київської Русі. Одна з найважливіших православних святинь, третій Доля Богородиці. Печерський монастир був заснований в 1051 році при Ярославі Мудрому монахом Антонієм, родом з Любеча, і його учнем Феодосієм"
@@ -372,9 +401,83 @@ namespace Database.Post
                     Id = 34L,
                     PointId = 26L,
                     UserId = 1L,
+                    TotalViews = 38L,
                     Recommended = true,
                     Location = "ТРЦ \"Ocean Plaza\"",
                     Message = "Найкраще місце для шопінгу у Києві. Величезна кількість магазинів та гарна ціна!"
+                });
+
+
+                // Mark
+                x.HasData(new
+                {
+                    Id = 35L,
+                    PointId = 4L,
+                    UserId = 1L,
+                    TotalViews = 173L,
+                    Recommended = true,
+                    Location = "Полтавський парк",
+                    Message = "Непоганий та доглянутий парк, можна сходити на пікнік."
+                });
+                x.HasData(new
+                {
+                    Id = 36L,
+                    PointId = 5L,
+                    UserId = 1L,
+                    TotalViews = 45L,
+                    Recommended = true,
+                    Location = "Одеса центр",
+                    Message = "Колорит Одеси можна відчути саме тут!!!"
+                });
+                x.HasData(new
+                {
+                    Id = 37L,
+                    PointId = 9L,
+                    UserId = 1L,
+                    TotalViews = 78L,
+                    Recommended = true,
+                    Location = "Крещатик",
+                    Message = "Центр міста наповнює емоціями та надає нових вражень. Супер заряд."
+                });
+                x.HasData(new
+                {
+                    Id = 38L,
+                    PointId = 10L,
+                    UserId = 1L,
+                    TotalViews = 15L,
+                    Recommended = true,
+                    Location = "Труханів острів",
+                    Message = "Найкраще місце для прогулянок, на мою думку"
+                });
+                x.HasData(new
+                {
+                    Id = 39L,
+                    PointId = 12L,
+                    UserId = 1L,
+                    TotalViews = 159L,
+                    Recommended = true,
+                    Location = "Національна Опера",
+                    Message = "Дуже високий рівень підготовки вистав та багато вражень!"
+                });
+                x.HasData(new
+                {
+                    Id = 40L,
+                    PointId = 13L,
+                    UserId = 1L,
+                    TotalViews = 79L,
+                    Recommended = true,
+                    Location = "Гідропарк",
+                    Message = "Влітку дуже класно відпочивати з друзями. Можна пограти в волейбол."
+                });
+                x.HasData(new
+                {
+                    Id = 41L,
+                    PointId = 17L,
+                    UserId = 1L,
+                    TotalViews = 21L,
+                    Recommended = true,
+                    Location = "Протасів Яр",
+                    Message = "Супер місце для зимнього відпочинку!!!"
                 });
             });
 

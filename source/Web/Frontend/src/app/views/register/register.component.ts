@@ -12,12 +12,12 @@ import { Country } from 'src/typing';
 export class AppRegisterComponent implements OnInit {
 
   public form = this.formBuilder.group({
-    username: ["Username", Validators.required],
+    username: ["", Validators.required],
     signIn: this.formBuilder.group({
-      login: ["admin", Validators.required],
-      password: ["admin", Validators.required],
+      login: ["", Validators.required],
+      password: ["", Validators.required],
     }),
-    email: ["admin@email.com", [Validators.required, Validators.email]],
+    email: ["", [Validators.required, Validators.email]],
     phone: ["", Validators.pattern('')],
     gender: [null, Validators.required],
     country: [null, Validators.required]

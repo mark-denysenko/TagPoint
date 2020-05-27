@@ -3,11 +3,11 @@
         <fieldset class="uk-fieldset">
             <div class="uk-margin">
                 <app-label for="login" text="Логін"></app-label>
-                <app-input-text formControlName="login" text="Login" [autofocus]="true"></app-input-text>
+                <app-input-text formControlName="login" text="Логін" [autofocus]="true"></app-input-text>
             </div>
             <div class="uk-margin">
                 <app-label for="password" text="Пароль"></app-label>
-                <app-input-password formControlName="password" text="Password"></app-input-password>
+                <app-input-password formControlName="password" text="Пароль"></app-input-password>
             </div>
             <div class="uk-margin uk-text-center">
                 <app-button text="Увійти" [disabled]="form.invalid" (click)="signIn()"></app-button>

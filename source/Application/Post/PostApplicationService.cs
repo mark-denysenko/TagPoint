@@ -163,7 +163,7 @@ namespace Application.Post
             var postsResult = posts.Select(p =>
             {
                 var post = CreatePostModel(p);
-                post.Views = p.Point.TotalViews;
+                //post.Views = p.Point.TotalViews;
 
                 return post;
             });
@@ -232,7 +232,8 @@ namespace Application.Post
                 TimesLiked = post.Likes.Count,
                 UserId = post.User.Id,
                 Username = post.User.Username,
-                UserAvatar = post.User.Avatar?.Avatar
+                UserAvatar = post.User.Avatar?.Avatar,
+                Views = post.TotalViews,
             };
         }
     }

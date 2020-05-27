@@ -5,8 +5,8 @@ import { AppUserService } from "src/app/services/user.service";
 @Component({ selector: "app-login", templateUrl: "./login.component.html" })
 export class AppLoginComponent {
     form = this.formBuilder.group({
-        login: ["mark", Validators.required],
-        password: ["admin", Validators.required]
+        login: ["", Validators.required],
+        password: ["", Validators.required]
     });
 
     constructor(

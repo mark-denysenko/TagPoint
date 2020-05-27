@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Application.Statistic
 {
     public interface IStatisticService
     {
-        void IncrementPointViews(IEnumerable<long> pointIds);
+        Task IncrementPointViews(IEnumerable<long> pointIds);
+        Task IncrementPostViews(long postId);
     }
 }

@@ -69,7 +69,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 1
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {
@@ -92,7 +92,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 151
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {
@@ -115,7 +115,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 180
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {
@@ -138,7 +138,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 180
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {
@@ -161,7 +161,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 215
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {
@@ -184,7 +184,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Female,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 1
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {
@@ -207,7 +207,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Female,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 151
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {
@@ -230,7 +230,7 @@ namespace Database.User
                     Roles = Roles.User,
                     Gender = Gender.Male,
                     Status = Status.Active,
-                    CountryId = 232
+                    CountryId = 180
                 });
                 x.OwnsOne(y => y.Email).HasData(new
                 {

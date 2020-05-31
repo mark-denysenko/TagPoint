@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Web.Controllers.PostController">
+    <Position X="11" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAACAEAAAAAAAAAAAgAQAA=</HashCode>
+      <FileName>Controllers\PostController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="depends" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Application.Post.PostApplicationService">
+    <Position X="7.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.242" />
+  </Class>
+  <Class Name="Domain.Post.PostEntity">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Database.Post.PostRepository">
+    <Position X="4" Y="2.25" Width="2.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DotNetCore.EntityFrameworkCore.EntityFrameworkCoreRelationalRepository&lt;T&gt;">
+    <Position X="4" Y="4.5" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="DotNetCoreArchitecture.Web.BaseController">
+    <Position X="11" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DotNetCoreArchitecture.Database.UnitOfWork">
+    <Position X="11" Y="8.25" Width="2.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DotNetCoreArchitecture.Database.Context">
+    <Position X="7.5" Y="6.25" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Domain.Post.TagEntity">
+    <Position X="0.5" Y="4" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Domain.Point.PointEntity">
+    <Position X="0.5" Y="7" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="Application.Post.IPostApplicationService">
+    <Position X="7.5" Y="3.75" Width="2.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="Database.Post.IPostRepository">
+    <Position X="4" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="DotNetCoreArchitecture.Database.IUnitOfWork">
+    <Position X="11" Y="6.25" Width="2.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

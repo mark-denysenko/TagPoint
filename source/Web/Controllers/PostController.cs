@@ -66,12 +66,6 @@ namespace Web.Controllers
                 UserModel.Id));
         }
 
-        //// PUT api/<controller>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
@@ -82,6 +76,12 @@ namespace Web.Controllers
         public async Task<int> ToggleLike([FromBody] VoteModel vote)
         {
             return await _postApplicationService.ToggleLikePostAync(vote.PostId, UserModel.Id);
+        }
+
+        [HttpGet("tags")]
+        public async Task<IEnumerable<TagModel>> GetTags()
+        {
+            return await _postApplicationService.GetTagsAsync();
         }
     }
 }

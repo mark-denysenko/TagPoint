@@ -1,3 +1,5 @@
+@import '@core/../../../../styles/variables.scss';
+
 agm-map { 
     height: 100%; 
 }
@@ -28,9 +30,37 @@ agm-map {
 
 ::ng-deep .selected-marker-container {
     position: relative;
-    top: -50px;
+    top: -60px;
 }
 
 ::ng-deep.agm-map-container-inner {
     background-color: blanchedalmond;
+}
+
+::ng-deep .tag-dropdown {
+    position: relative;
+    top: -355px;
+    left: -220px;
+    border-radius: 20px;
+    max-height: 60px;
+}
+
+::ng-deep .mat-form-field-flex {
+    background-color: white;
+}
+
+.example-panel-custom.mat-select-panel {
+    max-width: 100px;
+    // background: rgba(0, 0, 255, 0.5);
+}
+
+::ng-deep.mat-primary .mat-pseudo-checkbox-checked {
+    background: $main-theme-color !important;
+}
+
+.clear-selection {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    align-items: center;
 }

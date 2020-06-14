@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppPostService } from 'src/app/services/post.service';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { Coordinate, MarkerWithPosts } from 'src/typing';
+import { Coordinate, MarkerWithPosts, TagModel } from 'src/typing';
 import { GoogleapiService } from 'src/app/services/googleapi.service';
 import { RecommendationService } from 'src/app/services/recommendation.service';
 
@@ -23,6 +23,9 @@ export class MapViewComponent implements OnInit {
   public recommendations: any[] = [];
   public isRecommendationsLoad = false;
 
+  public tags: TagModel[] = [];
+  public selectedTags: TagModel[] = [];
+
   constructor(
     private readonly postService: AppPostService,
     private readonly googleApiService: GoogleapiService,
@@ -36,6 +39,11 @@ export class MapViewComponent implements OnInit {
       debounceTime(1200)
     ).subscribe((center: Coordinate) => {
       this.postService.getMarkersWithPostsInRadius(center).subscribe(response => {
+        if (this.selectedTags.length > 0) {
+          response.forEach(m => m.posts = m.posts.filter(p => this.selectedTags.some(t => p.tags.indexOf(t.tag) != -1)));
+          response = response.filter(m => m.posts.length > 0);
+        }
+        
         this.markersOnMap = response;
         const selectedMarker = this.markersOnMap.find(m => m.id === this.selectedMarker!.id);
 
@@ -46,6 +54,7 @@ export class MapViewComponent implements OnInit {
     });
 
     this.recommendationService.getUserPreferredTypes();
+    this.postService.getTags().subscribe(t => this.tags = t);
   }
 
   public handleMarkerSelect(marker: Marker): void {
@@ -58,6 +67,12 @@ export class MapViewComponent implements OnInit {
 
   public handleZoomChange(zoom: number): void {
     this.mapZoom$.next(zoom);
+  }
+
+  public handleSelectedTagsChange(tags: TagModel[]): void {
+    this.markersOnMap = [];
+    this.selectedTags = tags;
+    this.mapCenter$.next(this.mapCenter$.value);
   }
 
   public handleSendPost({ message, location, tags, recommended }: {message: string, location: string, tags: string[], recommended: boolean}): void {

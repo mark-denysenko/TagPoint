@@ -3,12 +3,9 @@
   <Class Name="Web.Controllers.PostController">
     <Position X="11" Y="3.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAAAAAAAACAEAAAAAAAAAAAgAQAA=</HashCode>
+      <HashCode>AAAAAAAAAEAAAABAAAAAAAAACAEAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>Controllers\PostController.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="depends" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Application.Post.PostApplicationService">
     <Position X="7.5" Y="0.5" Width="2.5" />
@@ -23,10 +20,6 @@
     <Position X="4" Y="2.25" Width="2.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="DotNetCore.EntityFrameworkCore.EntityFrameworkCoreRelationalRepository&lt;T&gt;">
-    <Position X="4" Y="4.5" Width="2.5" />
-    <TypeIdentifier />
   </Class>
   <Class Name="DotNetCoreArchitecture.Web.BaseController">
     <Position X="11" Y="0.5" Width="2.5" />

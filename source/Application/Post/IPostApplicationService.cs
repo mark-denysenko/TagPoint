@@ -17,6 +17,6 @@ namespace Application.Post
         Task<IDataResult<IEnumerable<MarkerModel>>> GetMarkerWithPostsNearAsync(Coordinate center, double radius, long userId);
         Task<IDataResult<IEnumerable<PostModel>>> GetUserPosts(long userId, PostsRequest postsRequest);
         Task<int> ToggleLikePostAync(long postId, long userId);
-
+        Task<IEnumerable<TagModel>> GetTagsAsync();
     }
 }

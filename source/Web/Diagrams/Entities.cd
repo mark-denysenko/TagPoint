@@ -52,9 +52,5 @@
       <Property Name="Post" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="DotNetCore.Objects.Entity">
-    <Position X="5" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

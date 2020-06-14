@@ -54,10 +54,11 @@
     </agm-circle> -->
 </agm-map>
 <app-marker-info class="selected-marker-container" [marker]="currentMarker"></app-marker-info>
-<!-- [iconUrl] ="
-  {
-    url: '../../../assets/icons/selected-marker.png',
-    scaledSize: {
-        width: 40,
-        height: 60
-    } -->
+
+<mat-form-field class="tag-dropdown">
+  <mat-label>Фільтр за тегами</mat-label>
+  <mat-select panelClass="example-panel-custom" (selectionChange)="onTagSelectionChange($event)"  multiple>
+    <!-- <div *ngIf="selectedItems.length" class="clear-selection pointer" (click)="unselectAllTags()">Зняти усе</div> -->
+    <mat-option *ngFor="let tag of tags" [value]="tag">{{ tag.tag }}</mat-option>
+  </mat-select>
+</mat-form-field>

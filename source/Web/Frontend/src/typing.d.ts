@@ -24,3 +24,10 @@ interface Country {
     country: string,
     countryCode: string
 }
+
+interface TagModel {
+    id: number,
+    tag: string,
+    created: string,
+    cretedBy: number
+}

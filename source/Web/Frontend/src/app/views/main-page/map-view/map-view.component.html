@@ -6,8 +6,11 @@
                 [zoom]="mapZoom$ | async"
                 [currentMarker]="selectedMarker"
                 [initialPlace]="initialPlace"
+                [tags]="tags"
+                [selectedItems]="selectedTags"
                 (centerChange)="handleCenterChange($event)"
                 (zoomChange)="handleZoomChange($event)"
+                (changeSelectedTags)="handleSelectedTagsChange($event)"
                 (selectMarker)="handleMarkerSelect($event)">
             </app-custom-map>
         </div>

@@ -48,4 +48,8 @@ export class AppPostService {
     public toggleLike(postId: number): Observable<any> {
         return this.http.post<any>(`${apiUrl}Post/toggleLike`, {postId});
     }
+    
+    public getTags(): Observable<any> {
+        return this.http.get<any>(`${apiUrl}Post/tags`);
+    }
 }

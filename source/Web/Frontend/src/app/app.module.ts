@@ -9,6 +9,7 @@ import { DirectivesModule } from "./core/directives/directives.module";
 import { APP_BASE_HREF } from "@angular/common";
 import { AgmCoreModule } from "@agm/core";
 import { environment } from "src/environments/environment";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -24,7 +25,8 @@ import { environment } from "src/environments/environment";
           language: 'uk',
           region: 'ua',
           libraries: ["places", "geometry"]
-        })
+        }),
+        NoopAnimationsModule
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },

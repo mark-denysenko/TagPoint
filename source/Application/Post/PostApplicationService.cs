@@ -236,5 +236,18 @@ namespace Application.Post
                 Views = post.TotalViews,
             };
         }
+
+        public async Task<IEnumerable<TagModel>> GetTagsAsync()
+        {
+            var dbTags = await _tagRepository.ListAsync();
+
+            return dbTags.OrderBy(t => t.Tag).Select(t => new TagModel
+            {
+                Id = t.Id,
+                Tag = t.Tag,
+                Created = t.Created,
+                CreatedById = t.CreatedById
+            });
+        }
     }
 }

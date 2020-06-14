@@ -4,7 +4,10 @@ import { CustomMapComponent } from './custom-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MarkerInfoModule } from '../marker-info/marker-info.module';
-import { environment } from 'src/environments/environment';
+import { AppDropdownModule } from '../dropdown/dropdown.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CustomMapComponent],
@@ -12,7 +15,11 @@ import { environment } from 'src/environments/environment';
     CommonModule,
     FlexLayoutModule,
     MarkerInfoModule,
-    AgmCoreModule
+    AgmCoreModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    AppDropdownModule
   ],
   exports: [CustomMapComponent]
 })

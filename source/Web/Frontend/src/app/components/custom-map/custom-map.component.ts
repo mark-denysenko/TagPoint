@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AgmInfoWindow } from '@agm/core';
-import { Coordinate, MarkerWithPosts } from 'src/typing';
-
+import { Coordinate, MarkerWithPosts, TagModel } from 'src/typing';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-map',
@@ -13,10 +13,14 @@ export class CustomMapComponent implements OnInit {
   @Input() public currentMarker?: Marker;
   @Input() public zoom!: number;
   @Input() public markers!: MarkerWithPosts[];
+  @Input() public tags!: TagModel[];
+  @Input() public selectedItems!: TagModel[];
 
   @Output() public selectMarker = new EventEmitter<Marker>();
   @Output() public centerChange = new EventEmitter<Coordinate>();
   @Output() public zoomChange = new EventEmitter<number>();
+  @Output() public changeSelectedTags = new EventEmitter<TagModel>();
+
 
   public currentCenter!: { longitude: number, latitude: number };
 
@@ -26,6 +30,7 @@ export class CustomMapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   public handleMapClick(event: any): void {
@@ -59,9 +64,18 @@ export class CustomMapComponent implements OnInit {
     this.selectMarker.emit(marker);
   }
 
+  public unselectAllTags(): void {
+    this.onTagSelectionChange({ value: []});
+  }
+
+  public onTagSelectionChange(data: any): void {
+    this.changeSelectedTags.emit(data.value);
+  }
+
   public trackById(_index: any, item: Marker): number | undefined {
     return item.id;
   }
+
   public mapStyle = 
 [
   {
